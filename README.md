@@ -5,3 +5,4 @@ E-Learning application repository for SOEN 341 team 5 tutorial A.
 
 * Jacob Gagné
 * Simon Bourque
+* Pablo Gonzalez
