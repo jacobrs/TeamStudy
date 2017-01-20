@@ -10,4 +10,3 @@ Authors: Jacob Gagné, Martin Spasov
 * Martin Spasov
 * Simon Bourque
 * Pablo Gonzalez
-
