@@ -9,5 +9,6 @@ E-Learning application repository for SOEN 341 team 5 tutorial A.
 * Pablo Gonzalez
 * Olivier Nourry
 * Philippe Li
+* Dylan Fernandes
 
 
