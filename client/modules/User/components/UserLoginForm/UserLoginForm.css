@@ -1,0 +1,33 @@
+.formContainer{
+  background-color:transparent;
+  text-align: center;
+  padding:30px;
+}
+.cap{
+  padding-top:2%;
+  font-size:6em;
+  margin-bottom:.3em;
+}
+.center {
+  text-align: center;
+}
+a{
+  color: #FFF;
+}
+a:hover {
+  color: rgba(255,255,255, 0.8);
+}
+.btnOutlineSecondary:hover, .btnOutlineSecondary {
+  border-color: #FFF;
+  color: #FFF;
+  cursor: pointer;
+}
+.logInButton{
+  margin-top:.25em;
+}
+.btnOutlineSecondary:hover {
+  background-color: rgba(255,255,255,.5);
+}
+.title{
+  margin-bottom:.5em;
+}
