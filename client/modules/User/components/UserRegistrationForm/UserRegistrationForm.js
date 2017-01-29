@@ -8,7 +8,7 @@ import styles from './UserRegistrationForm.css';
 export class UserRegistrationForm extends Component {
   constructor(props){
     super(props);
-    this.state = {nickname: '', email:'', password:''};
+    this.state = {nickname: '', studentId:'', email:'', password:''};
     this.handleInputChange = this.handleInputChange.bind(this);
     this.addUser = this.addUser.bind(this);
   }
@@ -44,7 +44,7 @@ export class UserRegistrationForm extends Component {
             </div>
             <div className="form-group row">
               <label className="input-labels">Student ID</label>
-              <input type="text" className="form-control" name="studentId" placeholder="Student ID" />
+              <input type="text" className="form-control" name="studentId" placeholder="Student ID" onChange={this.handleInputChange}/>
             </div>
             <div className="form-group row">
               <label className="input-labels">Email</label>
