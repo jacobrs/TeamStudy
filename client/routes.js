@@ -2,6 +2,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import App from './modules/App/App';
+import UserProfilePage from './modules/User/pages/UserProfilePage/UserProfilePage';
 
 // require.ensure polyfill for node
 if (typeof require.ensure !== 'function') {
@@ -31,5 +32,6 @@ export default (
       }}
     />
     <Route path="/register" component={UserRegistrationPage} />
+    <Route path="/profile" component={UserProfilePage} />
   </Route>
 );
