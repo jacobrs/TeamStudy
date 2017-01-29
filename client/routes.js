@@ -27,10 +27,11 @@ export default (
     <IndexRoute
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require('./modules/User/pages/UserRegistrationPage/UserRegistrationPage').default);
+          cb(null, require('./modules/User/pages/UserLoginPage/UserLoginPage').default);
         });
       }}
     />
+    <Route path="/register" component={UserRegistrationPage} />
     <Route path="/profile" component={UserProfilePage} />
   </Route>
 );
