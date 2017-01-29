@@ -30,6 +30,10 @@ export class UserRegistrationForm extends Component {
               <input type="text" className="form-control" name="nickname" placeholder="Full Name" />
             </div>
             <div className="form-group row">
+              <label className="input-labels">Student ID</label>
+              <input type="text" className="form-control" name="studentId" placeholder="Student ID" />
+            </div>
+            <div className="form-group row">
               <label className="input-labels">Email</label>
               <input type="email" className="form-control" name="email" placeholder="Email" />
             </div>
