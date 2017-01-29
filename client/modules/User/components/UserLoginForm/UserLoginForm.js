@@ -37,7 +37,7 @@ export class UserLoginForm extends Component {
               <button className={styles.btnOutlineSecondary + " btn btn-outline-secondary " + styles.logInButton}
                       type="button" onClick={this.verifyUser}>
                 Log In!</button><br/><br/>
-              <a href="http://localhost:8000/register">Don't have an account yet? Register Here</a>
+              <Link to="/register">Don't have an account yet? Register Here</Link>
             </div>
           </form>
         </div>
