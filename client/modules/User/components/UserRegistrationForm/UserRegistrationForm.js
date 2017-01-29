@@ -6,6 +6,19 @@ import { Link } from 'react-router';
 import styles from './UserRegistrationForm.css';
 
 export class UserRegistrationForm extends Component {
+  constructor(props){
+    super(props);
+    this.state = {nickname: '', email:'', password:''};
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.addUser = this.addUser.bind(this);
+  }
+
+  handleInputChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
   addUser = () => {
     const firstNameRef = this.refs.firstName;
     const lastNameRef = this.refs.lastName;
@@ -27,15 +40,15 @@ export class UserRegistrationForm extends Component {
           <form method="POST" className="col-lg-4 push-lg-4 col-md-6 push-md-3 col-xs-8 push-xs-2">
             <div className="form-group row">
               <label className="input-labels">Full Name</label>
-              <input type="text" className="form-control" name="nickname" placeholder="Full Name" />
+              <input type="text" className="form-control" name="nickname" placeholder="Full Name" onChange={this.handleInputChange}/>
             </div>
             <div className="form-group row">
               <label className="input-labels">Email</label>
-              <input type="email" className="form-control" name="email" placeholder="Email" />
+              <input type="email" className="form-control" name="email" placeholder="Email" onChange={this.handleInputChange}/>
             </div>
             <div className="form-group row">
               <label className="input-labels">Password</label>
-              <input type="password" className="form-control" name="password" placeholder="Password" />
+              <input type="password" className="form-control" name="password" placeholder="Password" onChange={this.handleInputChange}/>
             </div>
             <div className={styles.center}>
               <button
