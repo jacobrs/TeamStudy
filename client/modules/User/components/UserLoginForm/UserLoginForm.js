@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { Link } from 'react-router';
 
 // Import Style
 import styles from './UserLoginForm.css';
