@@ -13,7 +13,7 @@ export class App extends Component {
   }
 
   componentDidMount() {
-    this.setState({isMounted: true});
+    this.setState({ isMounted: true });
   }
 
   render() {

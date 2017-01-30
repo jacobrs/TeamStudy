@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 // Import Components
 import RegistrationForm from '../../components/UserRegistrationForm/UserRegistrationForm';
@@ -8,13 +9,16 @@ import RegistrationForm from '../../components/UserRegistrationForm/UserRegistra
 import { addUserRequest } from '../../UserActions';
 
 class UserRegistrationPage extends Component {
-  // we aren't loading any data yet.
-  //componentDidMount() {
-  //  this.props.dispatch([]);
-  //}
+  constructor(props) {
+    super(props);
+    this.handleAddUser = this.handleAddUser.bind(this);
+  }
 
-  handleAddUser = (firstName, lastName, email) => {
-    this.props.dispatch(addUserRequest({ firstName, lastName, email }));
+  handleAddUser = (nickname, studentId, email, password) => {
+    const fullname = nickname.split(' ');
+    const firstName = fullname.shift();
+    const lastName = fullname.shift() || '';
+    this.props.addUserRequest({ firstName, lastName, studentId, email, password });
   };
 
   render() {
@@ -27,21 +31,23 @@ class UserRegistrationPage extends Component {
 }
 
 // Retrieve data from store as props
-function mapStateToProps() {
-  return {};
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ addUserRequest }, dispatch);
 }
 
 UserRegistrationPage.propTypes = {
   users: PropTypes.arrayOf(PropTypes.shape({
     firstName: PropTypes.string.isRequired,
     lastName: PropTypes.string.isRequired,
+    studentId: PropTypes.number.isRequired,
     email: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
   })),
-  dispatch: PropTypes.func.isRequired,
+  addUserRequest: PropTypes.func.isRequired,
 };
 
 UserRegistrationPage.contextTypes = {
   router: React.PropTypes.object,
 };
 
-export default connect(mapStateToProps)(UserRegistrationPage);
+export default connect(null, mapDispatchToProps)(UserRegistrationPage);

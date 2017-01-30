@@ -9,9 +9,9 @@ import { verifyUserRequest } from '../../UserActions';
 
 class UserLoginPage extends Component {
   // we aren't loading any data yet.
-  //componentDidMount() {
+  // componentDidMount() {
   //  this.props.dispatch([]);
-  //}
+  // }
 
   // Need to verify that user exists using form input (see UserActions)
   handleVerifyUser = (email, password) => {

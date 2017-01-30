@@ -6,27 +6,23 @@ import { Link } from 'react-router';
 import styles from './UserRegistrationForm.css';
 
 export class UserRegistrationForm extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state = {nickname: '', studentId:'', email:'', password:''};
+    this.state = { nickname: '', studentId: '', email: '', password: '' };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.addUser = this.addUser.bind(this);
   }
 
   handleInputChange(event) {
     this.setState({
-      [event.target.name]: event.target.value
-    })
+      [event.target.name]: event.target.value,
+    });
   }
 
   addUser = () => {
-    const firstNameRef = this.refs.firstName;
-    const lastNameRef = this.refs.lastName;
-    const emailRef = this.refs.email;
-
-    if (firstNameRef.value && lastNameRef.value && emailRef.value) {
-      this.props.addUser(firstNameRef.value, lastNameRef.value, emailRef.value);
-      firstNameRef.value = lastNameRef.value = emailRef.value = '';
+    if (this.state.nickname && this.state.studentId && this.state.email && this.state.password) {
+      this.props.addUser(this.state.nickname, this.state.studentId, this.state.email, this.state.password);
+      this.setState({ nickname: null, studentId: null, email: null, password: null });
     }
   };
 
@@ -40,19 +36,19 @@ export class UserRegistrationForm extends Component {
           <form method="POST" className="col-lg-4 push-lg-4 col-md-6 push-md-3 col-xs-8 push-xs-2">
             <div className="form-group row">
               <label className="input-labels">Full Name</label>
-              <input type="text" className="form-control" name="nickname" placeholder="Full Name" onChange={this.handleInputChange}/>
+              <input type="text" className="form-control" name="nickname" placeholder="Full Name" onChange={this.handleInputChange} />
             </div>
             <div className="form-group row">
               <label className="input-labels">Student ID</label>
-              <input type="text" className="form-control" name="studentId" placeholder="Student ID" onChange={this.handleInputChange}/>
+              <input type="text" className="form-control" name="studentId" placeholder="Student ID" onChange={this.handleInputChange} />
             </div>
             <div className="form-group row">
               <label className="input-labels">Email</label>
-              <input type="email" className="form-control" name="email" placeholder="Email" onChange={this.handleInputChange}/>
+              <input type="email" className="form-control" name="email" placeholder="Email" onChange={this.handleInputChange} />
             </div>
             <div className="form-group row">
               <label className="input-labels">Password</label>
-              <input type="password" className="form-control" name="password" placeholder="Password" onChange={this.handleInputChange}/>
+              <input type="password" className="form-control" name="password" placeholder="Password" onChange={this.handleInputChange} />
             </div>
             <div className={styles.center}>
               <button

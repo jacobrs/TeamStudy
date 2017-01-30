@@ -1,6 +1,5 @@
-import user from '../models/user';
+import User from '../models/user';
 import cuid from 'cuid';
-import slug from 'limax';
 import sanitizeHtml from 'sanitize-html';
 
 /**
@@ -10,7 +9,7 @@ import sanitizeHtml from 'sanitize-html';
  * @returns void
  */
 export function getUsers(req, res) {
-  user.find().sort('-dateAdded').exec((err, users) => {
+  User.find().sort('-dateAdded').exec((err, users) => {
     if (err) {
       res.status(500).send(err);
     }
@@ -19,7 +18,7 @@ export function getUsers(req, res) {
 }
 
 /**
- * Save a post
+ * Create new user
  * @param req
  * @param res
  * @returns void
@@ -30,11 +29,11 @@ export function addUser(req, res) {
     res.status(403).end();
   }
 
-  const newUser = new User(req.body.post);
+  const newUser = new User(req.body.user);
 
   // Let's sanitize inputs
-  newUser.firstName = sanitizeHtml(newUser.title);
-  newUser.lastName = sanitizeHtml(newUser.name);
+  newUser.firstName = sanitizeHtml(newUser.firstName);
+  newUser.lastName = sanitizeHtml(newUser.lastName);
   newUser.studentId = sanitizeHtml(newUser.studentId);
   newUser.email = sanitizeHtml(newUser.email);
 
@@ -48,13 +47,13 @@ export function addUser(req, res) {
 }
 
 /**
- * Get a single post
+ * Get user
  * @param req
  * @param res
  * @returns void
  */
 export function getUser(req, res) {
-  Post.findOne({ cuid: req.params.cuid }).exec((err, user) => {
+  User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
     if (err) {
       res.status(500).send(err);
     }
@@ -63,13 +62,13 @@ export function getUser(req, res) {
 }
 
 /**
- * Delete a post
+ * Delete user
  * @param req
  * @param res
  * @returns void
  */
 export function deleteUser(req, res) {
-  Post.findOne({ cuid: req.params.cuid }).exec((err, user) => {
+  User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
     if (err) {
       res.status(500).send(err);
     }

@@ -14,19 +14,21 @@ export function addUser(user) {
 
 export function addUserRequest(user) {
   return (dispatch) => {
-    return callApi('users', 'user', {
+    return callApi('users', 'post', {
       user: {
         firstName: user.firstName,
         lastName: user.lastName,
+        studentId: user.studentId,
         email: user.email,
+        password: user.password,
       },
     }).then(res => dispatch(addUser(res.user)));
   };
 }
 
 // Need to validate that user exists - retrieve data
-export function verifyUserRequest(user) {
-  /*return (dispatch) => {
+// export function verifyUserRequest(user) {
+  /* return (dispatch) => {
     return callApi('users', 'user', {
       user: {
         email: user.email,
@@ -34,4 +36,4 @@ export function verifyUserRequest(user) {
       },
     }).then(res => dispatch(verifyUser(res.user)));
   };*/
-}
+// }
