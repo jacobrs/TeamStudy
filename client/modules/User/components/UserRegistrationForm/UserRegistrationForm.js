@@ -22,7 +22,7 @@ export class UserRegistrationForm extends Component {
   addUser = () => {
     if (this.state.nickname && this.state.studentId && this.state.email && this.state.password) {
       this.props.addUser(this.state.nickname, this.state.studentId, this.state.email, this.state.password);
-      this.setState({ nickname: null, studentId: null, email: null, password: null });
+      this.setState({ nickname: '', studentId: '', email: '', password: '' });
     }
   };
 
@@ -36,19 +36,19 @@ export class UserRegistrationForm extends Component {
           <form method="POST" className="col-lg-4 push-lg-4 col-md-6 push-md-3 col-xs-8 push-xs-2">
             <div className="form-group row">
               <label className="input-labels">Full Name</label>
-              <input type="text" className="form-control" name="nickname" placeholder="Full Name" onChange={this.handleInputChange} />
+              <input value={this.state.nickname} type="text" className="form-control" name="nickname" placeholder="Full Name" onChange={this.handleInputChange} />
             </div>
             <div className="form-group row">
               <label className="input-labels">Student ID</label>
-              <input type="text" className="form-control" name="studentId" placeholder="Student ID" onChange={this.handleInputChange} />
+              <input value={this.state.studentId} type="text" className="form-control" name="studentId" placeholder="Student ID" onChange={this.handleInputChange} />
             </div>
             <div className="form-group row">
               <label className="input-labels">Email</label>
-              <input type="email" className="form-control" name="email" placeholder="Email" onChange={this.handleInputChange} />
+              <input value={this.state.email} type="email" className="form-control" name="email" placeholder="Email" onChange={this.handleInputChange} />
             </div>
             <div className="form-group row">
               <label className="input-labels">Password</label>
-              <input type="password" className="form-control" name="password" placeholder="Password" onChange={this.handleInputChange} />
+              <input value={this.state.password} type="password" className="form-control" name="password" placeholder="Password" onChange={this.handleInputChange} />
             </div>
             <div className={styles.center}>
               <button

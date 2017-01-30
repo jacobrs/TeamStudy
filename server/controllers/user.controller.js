@@ -11,9 +11,9 @@ import sanitizeHtml from 'sanitize-html';
 export function getUsers(req, res) {
   User.find().sort('-dateAdded').exec((err, users) => {
     if (err) {
-      res.status(500).send(err);
+      return res.status(500).send(err);
     }
-    res.json({ users });
+    return res.json({ users });
   });
 }
 
@@ -26,7 +26,7 @@ export function getUsers(req, res) {
 export function addUser(req, res) {
   if (!req.body.user.firstName || !req.body.user.lastName || !req.body.user.email || !req.body.user.password ||
     !req.body.user.studentId) {
-    res.status(403).end();
+    return res.status(403).end();
   }
 
   const newUser = new User(req.body.user);
@@ -40,9 +40,9 @@ export function addUser(req, res) {
   newUser.cuid = cuid();
   newUser.save((err, saved) => {
     if (err) {
-      res.status(500).send(err);
+      return res.status(500).send(err);
     }
-    res.json({ user: saved });
+    return res.json({ user: saved });
   });
 }
 
@@ -55,9 +55,9 @@ export function addUser(req, res) {
 export function getUser(req, res) {
   User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
     if (err) {
-      res.status(500).send(err);
+      return res.status(500).send(err);
     }
-    res.json({ user });
+    return res.json({ user });
   });
 }
 
@@ -70,11 +70,11 @@ export function getUser(req, res) {
 export function deleteUser(req, res) {
   User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
     if (err) {
-      res.status(500).send(err);
+      return res.status(500).send(err);
     }
 
     user.remove(() => {
-      res.status(200).end();
+      return res.status(200).end();
     });
   });
 }
