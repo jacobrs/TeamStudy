@@ -1,4 +1,6 @@
 import Express from 'express';
+import session from 'express-session';
+import passport from 'passport';
 import compression from 'compression';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
@@ -10,6 +12,8 @@ import webpack from 'webpack';
 import config from '../webpack.config.dev';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+
+const MongoStore = require('connect-mongo')(session);
 
 // Initialize the Express App
 const app = new Express();
@@ -33,7 +37,6 @@ import Helmet from 'react-helmet';
 import routes from '../client/routes';
 import { fetchComponentData } from './util/fetchData';
 import users from './routes/user.routes';
-import dummyData from './dummyData';
 import serverConfig from './config';
 
 // Set native promises as mongoose promise
@@ -45,9 +48,6 @@ mongoose.connect(serverConfig.mongoURL, (error) => {
     console.error('Please make sure Mongodb is installed and running!'); // eslint-disable-line no-console
     throw error;
   }
-
-  // feed some dummy data in DB.
-  dummyData();
 });
 
 // Apply body Parser and server public assets and routes
@@ -56,6 +56,14 @@ app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 app.use(Express.static(path.resolve(__dirname, '../dist')));
 app.use('/api', users);
+app.use(session({
+  store: new MongoStore({ mongooseConnection: mongoose.connection }),
+  secret: serverConfig.secret,
+  resave: false,
+  saveUninitialized: false,
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
@@ -148,7 +156,7 @@ app.use((req, res, next) => {
 // start app
 app.listen(serverConfig.port, (error) => {
   if (!error) {
-    console.log(`MERN is running on port: ${serverConfig.port}! Build something amazing!`); // eslint-disable-line
+    console.log(`Studee is up and running on port: ${serverConfig.port}! Happy Testing!`); // eslint-disable-line
   }
 });
 

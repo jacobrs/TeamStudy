@@ -1,5 +1,6 @@
 import User from '../models/user';
 import cuid from 'cuid';
+import sha512 from 'sha512';
 import sanitizeHtml from 'sanitize-html';
 
 /**
@@ -36,6 +37,7 @@ export function addUser(req, res) {
   newUser.lastName = sanitizeHtml(newUser.lastName);
   newUser.studentId = sanitizeHtml(newUser.studentId);
   newUser.email = sanitizeHtml(newUser.email);
+  newUser.password = sha512(newUser.password).toString('hex');
 
   newUser.cuid = cuid();
   newUser.save((err, saved) => {
@@ -53,12 +55,18 @@ export function addUser(req, res) {
  * @returns void
  */
 export function getUser(req, res) {
-  User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
-    if (err) {
-      return res.status(500).send(err);
-    }
-    return res.json({ user });
-  });
+  if(req.params.password == undefined || req.params.password == ""){
+    // just get the user information
+    User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      return res.json({ user });
+    });
+  }else{
+    // log the user in
+
+  }
 }
 
 /**

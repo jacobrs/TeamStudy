@@ -1,4 +1,4 @@
-import { ADD_USER } from './UserActions';
+import { ADD_USER, LOGIN_USER } from './UserActions';
 
 // Initial State
 const initialState = { data: [] };
@@ -8,6 +8,11 @@ const UserReducer = (state = initialState, action) => {
     case ADD_USER :
       return {
         data: [action.user, ...state.data],
+      };
+
+    case LOGIN_USER:
+      return {
+        data: [...state, action.user],
       };
 
     default:
