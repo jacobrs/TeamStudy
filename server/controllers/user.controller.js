@@ -1,6 +1,5 @@
-import user from '../models/user';
+import User from '../models/user';
 import cuid from 'cuid';
-import slug from 'limax';
 import sanitizeHtml from 'sanitize-html';
 
 /**
@@ -10,16 +9,16 @@ import sanitizeHtml from 'sanitize-html';
  * @returns void
  */
 export function getUsers(req, res) {
-  user.find().sort('-dateAdded').exec((err, users) => {
+  User.find().sort('-dateAdded').exec((err, users) => {
     if (err) {
-      res.status(500).send(err);
+      return res.status(500).send(err);
     }
-    res.json({ users });
+    return res.json({ users });
   });
 }
 
 /**
- * Save a post
+ * Create new user
  * @param req
  * @param res
  * @returns void
@@ -27,55 +26,55 @@ export function getUsers(req, res) {
 export function addUser(req, res) {
   if (!req.body.user.firstName || !req.body.user.lastName || !req.body.user.email || !req.body.user.password ||
     !req.body.user.studentId) {
-    res.status(403).end();
+    return res.status(403).end();
   }
 
-  const newUser = new User(req.body.post);
+  const newUser = new User(req.body.user);
 
   // Let's sanitize inputs
-  newUser.firstName = sanitizeHtml(newUser.title);
-  newUser.lastName = sanitizeHtml(newUser.name);
+  newUser.firstName = sanitizeHtml(newUser.firstName);
+  newUser.lastName = sanitizeHtml(newUser.lastName);
   newUser.studentId = sanitizeHtml(newUser.studentId);
   newUser.email = sanitizeHtml(newUser.email);
 
   newUser.cuid = cuid();
   newUser.save((err, saved) => {
     if (err) {
-      res.status(500).send(err);
+      return res.status(500).send(err);
     }
-    res.json({ user: saved });
+    return res.json({ user: saved });
   });
 }
 
 /**
- * Get a single post
+ * Get user
  * @param req
  * @param res
  * @returns void
  */
 export function getUser(req, res) {
-  Post.findOne({ cuid: req.params.cuid }).exec((err, user) => {
+  User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
     if (err) {
-      res.status(500).send(err);
+      return res.status(500).send(err);
     }
-    res.json({ user });
+    return res.json({ user });
   });
 }
 
 /**
- * Delete a post
+ * Delete user
  * @param req
  * @param res
  * @returns void
  */
 export function deleteUser(req, res) {
-  Post.findOne({ cuid: req.params.cuid }).exec((err, user) => {
+  User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
     if (err) {
-      res.status(500).send(err);
+      return res.status(500).send(err);
     }
 
     user.remove(() => {
-      res.status(200).end();
+      return res.status(200).end();
     });
   });
 }

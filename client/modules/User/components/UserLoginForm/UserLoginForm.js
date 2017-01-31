@@ -20,24 +20,25 @@ export class UserLoginForm extends Component {
   // Display form
   render() {
     return (
-      <div className={styles.formContainer + " " + styles.center}>
-        <i className={styles.cap + " fa fa-graduation-cap"}/>
-        <h1 className={styles.title}><FormattedMessage id="siteTitle"/></h1>
+      <div className={styles.formContainer + ' ' + styles.center}>
+        <i className={styles.cap + ' fa fa-graduation-cap'} />
+        <h1 className={styles.title}><FormattedMessage id="siteTitle" /></h1>
 
         <div className="row">
           <form method="POST" className="col-lg-4 push-lg-4 col-md-6 push-md-3 col-xs-8 push-xs-2">
             <div className="form-group row">
               <label className="input-labels">Email</label>
-              <input type="email" className="form-control" name="email" placeholder="Email"/>
+              <input type="email" className="form-control" name="email" placeholder="Email" />
             </div>
             <div className="form-group row">
               <label className="input-labels">Password</label>
-              <input type="password" className="form-control" name="password" placeholder="Password"/>
+              <input type="password" className="form-control" name="password" placeholder="Password" />
             </div>
             <div className={styles.center}>
-              <button className={styles.btnOutlineSecondary + " btn btn-outline-secondary " + styles.logInButton}
-                      type="button" onClick={this.verifyUser}>
-                Log In!</button><br/><br/>
+              <button className={styles.btnOutlineSecondary + ' btn btn-outline-secondary ' + styles.logInButton}
+                type="button" onClick={this.verifyUser}
+              >
+                Log In!</button><br /><br />
               <Link to="/register">Don't have an account yet? Register Here</Link>
             </div>
           </form>
