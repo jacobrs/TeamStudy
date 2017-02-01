@@ -11,8 +11,14 @@ const UserReducer = (state = initialState, action) => {
       };
 
     case LOGIN_USER:
+      let data = [...state.data];
+      if(action.status == 200){
+        data.user = action.user;
+      }else{
+        data.user = null;
+      }
       return {
-        data: [...state, action.user],
+          data: data,
       };
 
     default:
