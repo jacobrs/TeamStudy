@@ -6,14 +6,23 @@ import { Link } from 'react-router';
 import styles from './UserLoginForm.css';
 
 export class UserLoginForm extends Component {
-  verifyUser = () => {
-    const emailRef = this.refs.email;
-    const passwordRef = this.refs.password;
+  constructor(props){
+    super(props);
+    this.state = {email: "", password:""};
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.loginUser = this.loginUser.bind(this);
+  }
 
-    // Verify if given input for all fields
-    if (emailRef.value && passwordRef.value) {
-      this.props.verifyUser(emailRef.value, passwordRef.value);   // verifyUser given values.
-      emailRef.value = passwordRef.value = '';  // Reset values
+  handleInputChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  loginUser = () => {
+    if(this.state.email && this.state.password){
+      this.props.loginUser(this.state.email, this.state.password);
+      this.setState({email:"", password:""});
     }
   };
 
@@ -25,18 +34,20 @@ export class UserLoginForm extends Component {
         <h1 className={styles.title}><FormattedMessage id="siteTitle" /></h1>
 
         <div className="row">
-          <form method="POST" className="col-lg-4 push-lg-4 col-md-6 push-md-3 col-xs-8 push-xs-2">
+          <form id="login" method="POST" className="col-lg-4 push-lg-4 col-md-6 push-md-3 col-xs-8 push-xs-2">
             <div className="form-group row">
               <label className="input-labels">Email</label>
-              <input type="email" className="form-control" name="email" placeholder="Email" />
+              <input type="email" className="form-control" name="email" placeholder="Email" value={this.state.email}
+                     onChange={this.handleInputChange}/>
             </div>
             <div className="form-group row">
               <label className="input-labels">Password</label>
-              <input type="password" className="form-control" name="password" placeholder="Password" />
+              <input type="password" className="form-control" name="password" placeholder="Password"
+                     value={this.state.password} onChange={this.handleInputChange}/>
             </div>
             <div className={styles.center}>
               <button className={styles.btnOutlineSecondary + ' btn btn-outline-secondary ' + styles.logInButton}
-                type="button" onClick={this.verifyUser}
+                type="button" onClick={this.loginUser}
               >
                 Log In!</button><br /><br />
               <Link to="/register">Don't have an account yet? Register Here</Link>
@@ -50,7 +61,7 @@ export class UserLoginForm extends Component {
 
 // Warning issued if prop not provided
 UserLoginForm.propTypes = {
-  verifyUser: PropTypes.func.isRequired,
+  loginUser: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
 };
 

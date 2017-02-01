@@ -1,44 +1,42 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 // Import Components
 import LoginForm from '../../components/UserLoginForm/UserLoginForm';
 
 // Import Actions
-import { verifyUserRequest } from '../../UserActions';
+import { loginUserRequest } from '../../UserActions';
 
 class UserLoginPage extends Component {
-  // we aren't loading any data yet.
-  // componentDidMount() {
-  //  this.props.dispatch([]);
-  // }
+  constructor(props){
+    super(props);
+    this.handleLoginUser = this.handleLoginUser.bind(this);
+  }
 
-  // Need to verify that user exists using form input (see UserActions)
-  handleVerifyUser = (email, password) => {
-    this.props.dispatch(verifyUserRequest({ email, password }));
+  handleLoginUser = (email, password) => {
+    this.props.dispatch(loginUserRequest({ email, password }));
   };
 
   render() {
     return (
       <div>
-          <LoginForm verifyUser={this.handleVerifyUser} />
+          <LoginForm loginUser={this.handleLoginUser} />
       </div>
     );
   }
 }
 
 // Retrieve data from store as props
-function mapStateToProps() {
-  return {};
+function mapStateToProps(dispatch) {
+  return bindActionCreators({ loginUserRequest }, dispatch);
 }
 
 // Warning issued if prop not provided
 UserLoginPage.propTypes = {
-  users: PropTypes.arrayOf(PropTypes.shape({
-    email: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-  })),
-  dispatch: PropTypes.func.isRequired,
+  email: PropTypes.string,
+  password: PropTypes.string,
+  loginUserRequest: PropTypes.func.isRequired,
 };
 
 UserLoginPage.contextTypes = {

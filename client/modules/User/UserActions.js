@@ -1,8 +1,9 @@
 import callApi from '../../util/apiCaller';
+import { browserHistory } from 'react-router';
 
 // Export Constants
 export const ADD_USER = 'ADD_USER';
-export const VERIFY_USER = 'VERIFY_USER';
+export const LOGIN_USER = 'LOGIN_USER';
 
 // Export Actions
 export function addUser(user) {
@@ -26,14 +27,23 @@ export function addUserRequest(user) {
   };
 }
 
-// Need to validate that user exists - retrieve data
-// export function verifyUserRequest(user) {
-  /* return (dispatch) => {
-    return callApi('users', 'user', {
-      user: {
-        email: user.email,
-        password: user.password,
-      },
-    }).then(res => dispatch(verifyUser(res.user)));
-  };*/
-// }
+export function loginUser(response) {
+  console.log(response);
+  if(response.statusCode == 200){
+
+    browserHistory.replace('/profile');
+  }
+  return {
+    type: LOGIN_USER,
+    response
+  }
+}
+
+export function loginUserRequest(user) {
+  return (dispatch) => {
+    return callApi('users/login', 'post', {
+      password: user.password,
+      email: user.email,
+    }).then(res => dispatch(loginUser(res)));
+  }
+}
