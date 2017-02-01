@@ -12,11 +12,12 @@ const UserReducer = (state = initialState, action) => {
 
     case LOGIN_USER:
       let data = [...state.data];
-      if(action.status == 200){
-        data.user = action.user;
+      if(action.response.statusCode == 200){
+        data.user = action.response.user;
       }else{
         data.user = null;
       }
+      console.log(data);
       return {
           data: data,
       };
