@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import * as UserController from '../controllers/user.controller';
-import ensureAuthenticated from "../util/passportUtils";
+import ensureAuthenticated from '../util/passportUtils';
 const router = new Router();
 const passport = require('passport');
 

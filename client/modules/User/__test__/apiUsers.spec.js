@@ -1,15 +1,15 @@
 import test from 'ava';
-import callApi, { API_URL } from '../../util/apiCaller';
+import callApi, { API_URL } from '../../../util/apiCaller';
 import nock from 'nock';
 
 test('sends the body', t => {
   const body = { id: 5 };
-  const user = { nickname: "foo bar", studentId: "12345678", email: "test@test.com", password: "password123" };
+  const user = { nickname: 'foo bar', studentId: '12345678', email: 'test@test.com', password: 'password123' };
   nock(API_URL)
-    .post('/registration', users)
-    .reply(200, reply);
+    .post('/registration', user)
+    .reply(200, user);
   return callApi('user', 'post', user).then(response => {
-    t.deepEqual(response, reply);
+    t.deepEqual(response, user);
   });
 });
 
