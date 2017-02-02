@@ -14,8 +14,21 @@ export function getUsers(req, res) {
 }
 
 export function addUser(req, res) {
+  // Check for empty fields
   if (!req.body.user.firstName || !req.body.user.lastName || !req.body.user.email || !req.body.user.password ||
     !req.body.user.studentId) {
+    return res.status(403).end();
+  }
+
+  // Chek for invalid student ID format
+  const studentIDRegEx = /^[0-9]*$/;
+  if (!req.body.user.studentId.match(studentIDRegEx)) {
+    return res.status(403).end();
+  }
+
+  // Check for invalid email format
+  const emailRegEx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if (!req.body.user.email.match(emailRegEx)) {
     return res.status(403).end();
   }
 
