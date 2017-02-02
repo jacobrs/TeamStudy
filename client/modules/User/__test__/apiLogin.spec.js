@@ -11,6 +11,6 @@ const user = {  'email': 'dylangfernandes@gmail.com', 'password': 'bed4efa1d4fdb
 test('should return the correct type for loginUser', actionTest(
   loginUser,
   user,
-  { type: LOGIN_USER, response: user },
+  { type: LOGIN_USER, response: user }
 ));
 

@@ -11,7 +11,7 @@ const user = { '_id': '589201f691293665a65538df', 'cuid': 'piyn4gkh900002us7yyn1
 test('should return the correct type for addUser', actionTest(
   addUser,
   user,
-  { type: ADD_USER, user },
+  { type: ADD_USER, user }
 
 ));
 
