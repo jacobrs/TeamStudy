@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Header } from './components/Header/Header';
 
 // Import Style
 import styles from './App.css';
@@ -17,6 +18,9 @@ export class App extends Component {
   }
 
   render() {
+    // Show nav bar only if user is logged in
+    const header = (this.props.users.loggedIn) ? <Header /> : null;
+
     return (
       <div>
         <div>
@@ -35,6 +39,7 @@ export class App extends Component {
               },
             ]}
           />
+          {header}
           <div className={styles.container}>
             {this.props.children}
           </div>
@@ -53,6 +58,7 @@ App.propTypes = {
 function mapStateToProps(store) {
   return {
     intl: store.intl,
+    users: store.users,
   };
 }
 

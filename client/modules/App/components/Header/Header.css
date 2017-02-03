@@ -1,6 +1,12 @@
 .hidden {
   display: none;
 }
+
 .appear {
   display: inline-block;
+}
+
+.cap {
+  font-size: 2em;
+  margin-right: .35em;
 }
