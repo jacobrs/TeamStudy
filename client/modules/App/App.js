@@ -13,13 +13,9 @@ export class App extends Component {
     super(props);
   }
 
-  componentDidMount() {
-    this.setState({ isMounted: true });
-  }
-
   render() {
     // Show nav bar only if user is logged in
-    const header = (this.props.users.loggedIn) ? <Header /> : null;
+    const header = (this.props.users.user != null) ? <Header /> : null;
 
     return (
       <div>
@@ -52,6 +48,7 @@ export class App extends Component {
 App.propTypes = {
   children: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
+  users: PropTypes.object.isRequired,
 };
 
 // Retrieve data from store as props
