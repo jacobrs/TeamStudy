@@ -1,7 +1,7 @@
 import { ADD_USER, LOGIN_USER } from './UserActions';
 
 // Initial State
-const initialState = { data: [] };
+const initialState = { data: [], loggedIn: false };
 
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -14,12 +14,16 @@ const UserReducer = (state = initialState, action) => {
       let data = [...state.data];
       if (action.response.statusCode == 200) {
         data.user = action.response.user;
-      } else {
+        state.loggedIn = true;
+      }else{
+
         data.user = null;
+        state.loggedIn = false;
       }
       console.log(data);
       return {
-        data,
+          data: data,
+          loggedIn: state.loggedIn,
       };
 
     default:
