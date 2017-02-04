@@ -1,0 +1,161 @@
+body{
+  font-family: Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;
+}
+
+#navbar{
+  background-color: #446CB3;
+  width: 98%;
+  height: 60px;
+  text-align: left;
+  margin: 0;
+  padding: 10px;
+}
+
+#navbar ul li{
+  display: inline-block;
+  padding: 0 10px;
+  margin: 0 20px;
+}
+
+
+#navbar ul li a{
+  color: #fff;
+}
+
+#sidebar{
+  background-color: #fff;
+  width: 20%;
+  height: 100%;
+  float: left;
+  padding: 20px;
+  color: #555;
+  text-align: center;
+  font-size: 12px;
+  border-right: 1px solid #a1a1a1;
+}
+
+#sidebar ul{
+  list-style-type: none;
+  background-color: #fff;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#sidebar ul li a{
+  display: block;
+  color: #a1a1a1;
+  background-color: #f1f1f1;
+  padding: 8px 16px;
+  margin-bottom: 10px;
+  text-decoration: none;
+}
+
+#sidebar ul li a:hover{
+  background-color: #555;
+  color: #fff;
+}
+
+#studee{
+  font-size: 22px;
+  margin-right: 10px;
+  float: left;
+  color: #fff;
+}
+
+#navbar ul a{
+  color: #fff;
+  font-size: 16px;
+}
+
+#container{
+  background-color: #fff;
+  text-align: center;
+  width: 50%;
+  height: auto;
+  padding: 0;
+  float: left;
+  position: relative;
+  margin: 100px 20px 0 20px;
+  border: 2px solid #f1f1f1;
+  font-size: 12px;
+}
+
+#containerlinks{
+  background-color: #f1f1f1;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+}
+
+#containerlinks ul li{
+  display: inline-block;
+  padding-right: 40px;
+  margin: 0;
+  color: #555;
+}
+
+#content{
+  background-color: #fff;
+  width: 90%;
+  height: auto;
+  padding: 0;
+  float: left;
+  margin: 20px;
+  border: 1px solid #f1f1f1;
+}
+
+#rightcontainer{
+  background-color: #fff;
+  width: 20%;
+  height:100%;
+  overflow: auto;
+  float: right;
+  padding: 20px;
+  text-align: center;
+  color: #555;
+  font-size: 12px;
+}
+
+.img-circle{
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+}
+
+#calendarlisting{
+  margin-left: 10px;
+  }
+
+.calendardate{
+  background-color: #446CB3;
+  color: #fff;
+  padding: 10px;
+}
+
+a{
+  color: #555;
+  font-size: 14px;
+  text-decoration: none;
+  text-transform: none;
+}
+
+h2{
+  border-left: 5px solid #446CB3;
+  color: #555;
+  margin: 0;
+  text-align: left;
+  padding: 5px 0 0 10px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #a1a1a1;
+}
+
+h3{
+  margin: -5px 0 0 0;
+}
+
+h4{
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
