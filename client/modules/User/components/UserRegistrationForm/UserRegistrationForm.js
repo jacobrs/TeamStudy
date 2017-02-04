@@ -58,7 +58,6 @@ export class UserRegistrationForm extends Component {
               >
               Register and Start Studying!
               </button><br /><br />
-              <Link to="/profile"><button className="btn btn-info" type="button">Temp Button to Profile Page</button></Link><br /><br />
               <Link to="/">Already have an account? Sign in Here</Link>
             </div>
           </form>
