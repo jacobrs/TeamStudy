@@ -4,7 +4,7 @@ import sha512 from 'sha512';
 import sanitizeHtml from 'sanitize-html';
 
 export function getUsers(req, res) {
-  console.log((req.user == undefined)?"No user":req.user.email);
+  console.log((req.user == undefined) ? 'No user' : req.user.email);
   User.find().sort('-dateAdded').exec((err, users) => {
     if (err) {
       return res.status(500).send(err);
@@ -71,7 +71,7 @@ export function deleteUser(req, res) {
   });
 }
 
-export function loginUser(req, res){
+export function loginUser(req, res) {
   res.status(200);
-  return res.json({user: req.user, statusCode: 200});
+  return res.json({ user: req.user, statusCode: 200 });
 }

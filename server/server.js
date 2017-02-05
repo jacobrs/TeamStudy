@@ -72,37 +72,37 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(new LocalStrategy({
-    usernameField: 'email',
-    passwordField: 'password'
-  },
-  function(email, password, done) {
+  usernameField: 'email',
+  passwordField: 'password',
+},
+  function (email, password, done) {
     findUser(email, function (err, user) {
       if (err) {
-        return done(err)
+        return done(err);
       }
       if (!user) {
-        return done(null, false, { message: 'Incorrect Login' })
+        return done(null, false, { message: 'Incorrect Login' });
       }
-      if (sha512(password).toString("hex") !== user.password) {
-        return done(null, false, { message: 'Incorrect Login' })
+      if (sha512(password).toString('hex') !== user.password) {
+        return done(null, false, { message: 'Incorrect Login' });
       }
-      return done(null, user)
-    })
+      return done(null, user);
+    });
   }
 ));
 
-function findUser(email, callback){
-  User.findOne({ email: email }).exec((err, user) => {
+function findUser(email, callback) {
+  User.findOne({ email }).exec((err, user) => {
     return callback(err, user);
   });
 }
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
   done(null, user.cuid);
 });
 
-passport.deserializeUser(function(id, done) {
-  User.findOne({'cuid': id}, function(err, user) {
+passport.deserializeUser(function (id, done) {
+  User.findOne({ 'cuid': id }, function (err, user) {
     done(err, user);
   });
 });

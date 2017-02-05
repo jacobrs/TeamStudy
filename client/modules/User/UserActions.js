@@ -29,14 +29,13 @@ export function addUserRequest(user) {
 
 export function loginUser(response) {
   console.log(response);
-  if(response.statusCode == 200){
-
+  if (response.statusCode == 200) {
     browserHistory.replace('/profile');
   }
   return {
     type: LOGIN_USER,
-    response
-  }
+    response,
+  };
 }
 
 export function loginUserRequest(user) {
@@ -45,5 +44,5 @@ export function loginUserRequest(user) {
       password: user.password,
       email: user.email,
     }).then(res => dispatch(loginUser(res)));
-  }
+  };
 }
