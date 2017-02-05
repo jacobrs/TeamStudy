@@ -2,81 +2,162 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="UserDashboard.css" />
+
   <title>Dashboard</title>
 </head>
+
 <body>
-  <div id="navbar">
-    <table>
-      <tr>
-        <td><img src="http://i65.tinypic.com/2j1lpxz.png" width="70px" /></td>
-        <td><a id="studee" href="#">Studee eLearning</a></td>
-        <td>
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Calendar</a></li>
-            <li><a href="#">Documents</a></li>
-          </ul>
-        </td>
-      </tr>
-    </table>
+  <nav class="navbar navbar-toggleable-md navbar-light bg-faded" id="navbar">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#"><img src="http://i65.tinypic.com/2j1lpxz.png" width="60px" />Studee eLearning</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Calendar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Documents</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3" id="sidebar">
+        <img class="img-circle" src="https://static.independent.co.uk/s3fs-public/thumbnails/image/2015/06/15/09/jon-snow.jpg" />
+        <h3>John Snow</h3>
+        <p>iknownothing@westerosmail.com <br>10101010<br><br></p>
+        <ul>
+          <li><a href="#">Course 1</a></li>
+          <li><a href="#">Course 2</a></li>
+          <li><a href="#">Course 3</a></li>
+          <li><a href="#">Course 4</a></li>
+          <li><a href="#">Course 5</a></li>
+        </ul>
+      </div>
+      <div class="col-md-6" id="content">
+        <div class="card text-center">
+          <div class="card-header">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs card-header-tabs" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#studygroup" role="tab">Study Groups</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#messages" role="tab">Messages</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#meetings" role="tab">Meetings</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#scratchpad" role="tab">Scratch Pad</a>
+              </li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div class="tab-pane active" id="studygroup" role="tabpanel">
+                <div class="card">
+                  <div class="card-header">
+                    <h2>Study Group 1</h2>
+                  </div>
+                  <div class="card-block">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header">
+                    <h2>Study Group 2</h2>
+                  </div>
+                  <div class="card-block">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="messages" role="tabpanel">
+                <div class="card">
+                  <div class="card-header">
+                    <h2>Message 1</h2>
+                  </div>
+                  <div class="card-block">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header">
+                    <h2>Message 2</h2>
+                  </div>
+                  <div class="card-block">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="meetings" role="tabpanel">
+                <div class="card">
+                  <div class="card-header">
+                    <h2>Meeting 1</h2>
+                  </div>
+                  <div class="card-block">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header">
+                    <h2>Meeting 2</h2>
+                  </div>
+                  <div class="card-block">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="scratchpad" role="tabpanel">
+                <div class="card">
+                  <div class="card-block">
+                    Scratch pad feature.
+                  </div>
+                  <div class="card-footer">
+                    <a href="#" class="card-link btn btn-primary">Save</a>
+                    <a href="#" class="card-link btn btn-primary">Clear</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3" id="rightcontainer">
+        <img src="http://www.wpexplorer.com/wp-content/uploads/wordpress-calendar.png" width="100%"/>
+        <table id="calendarlisting">
+          <tr>
+            <td class="calendardate">10</td>
+            <td class="calendarevent"><h4>Event Name</h4> 9:00AM</td>
+          </tr>
+          <tr>
+            <td class="calendardate">11</td>
+            <td class="calendarevent"><h4>Event Name</h4> 10:00AM</td>
+          </tr>
+          <tr>
+            <td class="calendardate">12</td>
+            <td class="calendarevent"><h4>Event Name</h4> 9:00AM</td>
+          </tr>
+        </table>
+      </div>
+    </div>
   </div>
 
-  <div id ="sidebar">
-    <img class="img-circle" src="https://static.independent.co.uk/s3fs-public/thumbnails/image/2015/06/15/09/jon-snow.jpg" />
-    <h3>John Snow</h3>
-    <p>iknownothing@westerosmail.com <br>10101010<br><br></p>
-    <ul>
-      <li><a href="#">Course 1</a></li>
-      <li><a href="#">Course 2</a></li>
-      <li><a href="#">Course 3</a></li>
-      <li><a href="#">Course 4</a></li>
-      <li><a href="#">Course 5</a></li>
-    </ul>
-  </div>
-
-  <div id="container">
-    <div id="containerlinks">
-      <table>
-        <td>
-          <ul>
-            <li><a href="#">Study Groups</a></li>
-            <li><a href="#">Messages</a></li>
-            <li><a href="#">Meetings</a></li>
-            <li><a href="#">Scratch Pad</a></li>
-          </ul>
-      </table>
-    </div>
-    <div id="content">
-      <h2>Study Group 1</h2>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </div>
-    <div id="content">
-      <h2>Study Group 2</h2>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </div>
-    <div id="content">
-      <h2>Study Group 3</h2>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </div>
-  </div>
-
-  <div id="rightcontainer">
-    <img src="http://www.wpexplorer.com/wp-content/uploads/wordpress-calendar.png" />
-    <table id="calendarlisting">
-      <tr>
-        <td class="calendardate">10</td>
-        <td><h4>Event Name</h4> 9:00AM</td>
-      </tr>
-      <tr>
-        <td class="calendardate">11</td>
-        <td><h4>Event Name</h4> 10:00AM</td>
-      </tr>
-      <tr>
-        <td class="calendardate">12</td>
-        <td><h4>Event Name</h4> 9:00AM</td>
-      </tr>
-    </table>
-  </div>
-</body>
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+  </body>
 </html>

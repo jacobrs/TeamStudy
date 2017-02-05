@@ -12,17 +12,17 @@ const UserReducer = (state = initialState, action) => {
 
     case LOGIN_USER:
       let data = [...state.data];
-      if(action.response.statusCode == 200){
+      if (action.response.statusCode == 200) {
         data.user = action.response.user;
         state.loggedIn = true;
-      }else{
+      } else {
         data.user = null;
         state.loggedIn = false;
       }
       console.log(data);
       return {
-          data: data,
-          loggedIn: state.loggedIn,
+        data,
+        loggedIn: state.loggedIn,
       };
 
     default:

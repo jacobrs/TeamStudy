@@ -6,9 +6,9 @@ import { Link } from 'react-router';
 import styles from './UserLoginForm.css';
 
 export class UserLoginForm extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state = {email: "", password:""};
+    this.state = { email: '', password: '' };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.loginUser = this.loginUser.bind(this);
   }
@@ -17,12 +17,12 @@ export class UserLoginForm extends Component {
     this.setState({
       [event.target.name]: event.target.value,
     });
-  };
+  }
 
   loginUser = () => {
-    if(this.state.email && this.state.password){
+    if (this.state.email && this.state.password) {
       this.props.loginUser(this.state.email, this.state.password);
-      this.setState({email:"", password:""});
+      this.setState({ email: '', password: '' });
     }
   };
 
@@ -38,12 +38,14 @@ export class UserLoginForm extends Component {
             <div className="form-group row">
               <label className="input-labels">Email</label>
               <input type="email" className="form-control" name="email" placeholder="Email" value={this.state.email}
-                     onChange={this.handleInputChange}/>
+                onChange={this.handleInputChange}
+              />
             </div>
             <div className="form-group row">
               <label className="input-labels">Password</label>
               <input type="password" className="form-control" name="password" placeholder="Password"
-                     value={this.state.password} onChange={this.handleInputChange}/>
+                value={this.state.password} onChange={this.handleInputChange}
+              />
             </div>
             <div className={styles.center}>
               <button className={styles.btnOutlineSecondary + ' btn btn-outline-secondary ' + styles.logInButton}

@@ -9,7 +9,7 @@ import LoginForm from '../../components/UserLoginForm/UserLoginForm';
 import { loginUserRequest } from '../../UserActions';
 
 class UserLoginPage extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.handleLoginUser = this.handleLoginUser.bind(this);
   }
