@@ -16,14 +16,13 @@ const UserReducer = (state = initialState, action) => {
         data.user = action.response.user;
         state.loggedIn = true;
       }else{
-
         data.user = null;
         state.loggedIn = false;
       }
       console.log(data);
       return {
-          data: data,
-          loggedIn: state.loggedIn,
+        data,
+        loggedIn: state.loggedIn,
       };
 
     default:
