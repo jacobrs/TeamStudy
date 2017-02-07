@@ -7,7 +7,7 @@ import callApi from '../../../../util/apiCaller';
 import RegistrationForm from '../../components/UserRegistrationForm/UserRegistrationForm';
 
 // Import Actions
-import { addUser } from '../../UserActions';
+import { addUserRequest } from '../../UserActions';
 
 class UserRegistrationPage extends Component {
   constructor(props) {
@@ -20,15 +20,13 @@ class UserRegistrationPage extends Component {
     const firstName = fullname.shift();
     const lastName = fullname.shift() || '';
 
-    callApi('users', 'post', {
-      user: {
-        firstName,
-        lastName,
-        studentId,
-        email,
-        password,
-      },
-    }).then(res => this.props.addUser(res.user));
+    this.props.addUserRequest({
+      firstName,
+      lastName,
+      studentId,
+      email,
+      password,
+    });
   };
 
   render() {
@@ -42,7 +40,7 @@ class UserRegistrationPage extends Component {
 
 // Retrieve data from store as props
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ addUser }, dispatch);
+  return bindActionCreators({ addUserRequest }, dispatch);
 }
 
 UserRegistrationPage.propTypes = {
@@ -53,7 +51,7 @@ UserRegistrationPage.propTypes = {
     email: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
   })),
-  addUser: PropTypes.func.isRequired,
+  addUserRequest: PropTypes.func.isRequired,
 };
 
 UserRegistrationPage.contextTypes = {

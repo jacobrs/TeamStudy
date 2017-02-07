@@ -1,3 +1,4 @@
+import callApi from '../../util/apiCaller';
 import { browserHistory } from 'react-router';
 
 // Export Constants
@@ -12,6 +13,20 @@ export function addUser(user) {
   };
 }
 
+export function addUserRequest(user) {
+  return (dispatch) => {
+    return callApi('users', 'post', {
+      user: {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        studentId: user.studentId,
+        email: user.email,
+        password: user.password,
+      },
+    }).then(res => dispatch(addUser(res.user)));
+  };
+}
+
 export function loginUser(response) {
   console.log(response);
   if (response.statusCode === 200) {
@@ -20,6 +35,15 @@ export function loginUser(response) {
 
   return {
     type: LOGIN_USER,
-    response
+    response,
+  };
+}
+
+export function loginUserRequest(user) {
+  return (dispatch) => {
+    return callApi('users/login', 'post', {
+      password: user.password,
+      email: user.email,
+    }).then(res => dispatch(loginUser(res)));
   };
 }

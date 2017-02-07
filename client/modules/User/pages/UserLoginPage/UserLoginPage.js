@@ -1,13 +1,12 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import callApi from '../../../../util/apiCaller';
 
 // Import Components
 import LoginForm from '../../components/UserLoginForm/UserLoginForm';
 
 // Import Actions
-import { loginUser } from '../../UserActions';
+import { loginUserRequest } from '../../UserActions';
 
 class UserLoginPage extends Component {
   constructor(props) {
@@ -16,10 +15,7 @@ class UserLoginPage extends Component {
   }
 
   handleLoginUser = (email, password) => {
-    callApi('users/login', 'post', {
-      password,
-      email,
-    }).then(res => this.props.loginUser(res));
+    this.props.loginUserRequest({ password, email });
   };
 
   render() {
@@ -33,14 +29,14 @@ class UserLoginPage extends Component {
 
 // Bind actions to props
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ loginUser }, dispatch);
+  return bindActionCreators({ loginUserRequest }, dispatch);
 }
 
 // Warning issued if prop not provided
 UserLoginPage.propTypes = {
   email: PropTypes.string,
   password: PropTypes.string,
-  loginUser: PropTypes.func.isRequired,
+  loginUserRequest: PropTypes.func.isRequired,
 };
 
 UserLoginPage.contextTypes = {
