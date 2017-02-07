@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import callApi from '../../../../util/apiCaller';
 
 // Import Components
 import RegistrationForm from '../../components/UserRegistrationForm/UserRegistrationForm';
@@ -18,7 +19,14 @@ class UserRegistrationPage extends Component {
     const fullname = nickname.split(' ');
     const firstName = fullname.shift();
     const lastName = fullname.shift() || '';
-    this.props.addUserRequest({ firstName, lastName, studentId, email, password });
+
+    this.props.addUserRequest({
+      firstName,
+      lastName,
+      studentId,
+      email,
+      password,
+    });
   };
 
   render() {

@@ -15,20 +15,20 @@ class UserLoginPage extends Component {
   }
 
   handleLoginUser = (email, password) => {
-    this.props.dispatch(loginUserRequest({ email, password }));
+    this.props.loginUserRequest({ password, email });
   };
 
   render() {
     return (
       <div>
-          <LoginForm loginUser={this.handleLoginUser} />
+        <LoginForm loginUser={this.handleLoginUser} />
       </div>
     );
   }
 }
 
-// Retrieve data from store as props
-function mapStateToProps(dispatch) {
+// Bind actions to props
+function mapDispatchToProps(dispatch) {
   return bindActionCreators({ loginUserRequest }, dispatch);
 }
 
@@ -43,4 +43,4 @@ UserLoginPage.contextTypes = {
   router: React.PropTypes.object,
 };
 
-export default connect(mapStateToProps)(UserLoginPage);
+export default connect(null, mapDispatchToProps)(UserLoginPage);
