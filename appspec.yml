@@ -1,0 +1,18 @@
+version: 0.0.1
+os: linux
+files:
+  - source: ./
+    destination: /var/apps/teamstudy
+hooks:
+  AfterInstall:
+    - location: deploy/install_dependencies
+      timeout: 600
+      runas: root
+  ApplicationStart:
+    - location: deploy/start_app
+      timeout: 180
+      runas: root
+  ApplicationStop:
+    - location: deploy/stop_app
+      timeout: 180
+      runas: root
