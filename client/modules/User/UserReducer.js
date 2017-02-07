@@ -15,7 +15,7 @@ const UserReducer = (state = initialState, action) => {
       if (action.response.statusCode == 200) {
         data.user = action.response.user;
         state.loggedIn = true;
-      } else {
+      }else{
         data.user = null;
         state.loggedIn = false;
       }
