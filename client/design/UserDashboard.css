@@ -1,0 +1,164 @@
+/*Universal box sizing with inheritance - includes older browser versions*/
+html {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+body{
+  font-size: .75em;
+}
+
+#navbar{
+  background-color: #446CB3;
+}
+#navbar ul a{
+  font-size: 1.33em;
+  margin: 0 10px 0 40px;
+}
+#navbar a{
+  color: #fff;
+}
+
+#sidebar{
+  background-color: #fff;
+  color: #555;
+  text-align: center;
+}
+
+#sidebar ul{
+  list-style-type: none;
+  background-color: #fff;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#sidebar ul li a{
+  display: block;
+  color: #a1a1a1;
+  background-color: #f1f1f1;
+  padding: 8px 16px;
+  margin-bottom: 10px;
+  text-decoration: none;
+}
+
+#sidebar ul li a:hover{
+  background-color: #555;
+  color: #fff;
+}
+
+.navbar-brand{
+  font-size: 2em;
+  margin-right: 40px;
+  float: left;
+}
+
+#content{
+  background-color: #fff;
+  text-align: center;
+  height: auto;
+  padding: 20px;
+  border-left: 1px solid #a1a1a1;
+}
+
+#containerlinks{
+  background-color: #f1f1f1;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+}
+
+#containerlinks ul li{
+  display: inline-block;
+  padding-right: 40px;
+  margin: 0;
+  color: #555;
+}
+
+#cards{
+  background-color: #fff;
+  width: 90%;
+  height: auto;
+  padding: 0;
+  float: left;
+  margin: 20px;
+  border: 1px solid #f1f1f1;
+}
+
+#rightcontainer{
+  background-color: #fff;
+  text-align: center;
+  color: #555;
+  padding: 30px;
+}
+
+.img-circle{
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  margin-top: 30px;
+}
+
+#calendarlisting{
+  margin-left: 10px;
+  text-align: left;
+  }
+
+.calendardate{
+  background-color: #446CB3;
+  border-bottom: 3px solid #fff;
+  color: #fff;
+  padding: 10px;
+}
+
+.calendarevent{
+  padding-left: 20px;
+}
+
+.card{
+  margin-bottom: 10px;
+}
+
+.card-header{
+  background-color: #f1f1f1;
+}
+
+.btn-primary{
+  background-color: #446CB3;
+  font-size: 1em;
+}
+
+a{
+  color: #555;
+  font-size: 1.1667em;
+  text-decoration: none;
+  text-transform: none;
+}
+
+h2{
+  border-left: 5px solid #446CB3;
+  font-size: 1.5em;
+  color: #555;
+  margin: 0;
+  text-align: left;
+  padding: 5px 0 0 10px;
+  border-bottom: 1px solid #a1a1a1;
+}
+
+h3{
+  margin-top: 5px;
+  font-size: 1.5em;
+}
+
+h4{
+  font-size: 1.1667em;
+  margin-bottom: 0;
+  margin-left: -10px;
+}
