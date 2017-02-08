@@ -7,12 +7,12 @@ hooks:
   AfterInstall:
     - location: deploy/install_dependencies
       timeout: 600
-      runas: root
+      runas: ubuntu
   ApplicationStart:
     - location: deploy/start_app
       timeout: 180
-      runas: root
+      runas: ubuntu
   ApplicationStop:
     - location: deploy/stop_app
       timeout: 180
-      runas: root
+      runas: ubuntu
