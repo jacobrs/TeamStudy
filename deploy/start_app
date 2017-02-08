@@ -1,0 +1,3 @@
+#!/bin/bash
+cd /var/apps/teamstudy
+pm2 start ./deploy/pm2_kickstart.sh --name teamstudy
