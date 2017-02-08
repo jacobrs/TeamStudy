@@ -1,3 +1,3 @@
 #!/bin/bash
 cd /var/apps/teamstudy
-pm2 start npm --name teamstudy -- start
+pm2 start npm --name teamstudy -- startdeploy
