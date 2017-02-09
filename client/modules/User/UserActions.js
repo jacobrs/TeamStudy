@@ -3,6 +3,7 @@ import { browserHistory } from 'react-router';
 
 // Export Constants
 export const ADD_USER = 'ADD_USER';
+export const UPDATE_USER = 'UPDATE_USER';
 export const LOGIN_USER = 'LOGIN_USER';
 
 // Export Actions
@@ -24,6 +25,27 @@ export function addUserRequest(user) {
         password: user.password,
       },
     }).then(res => dispatch(addUser(res.user)));
+  };
+}
+
+export function updateUser(user) {
+  return {
+    type: UPDATE_USER,
+    user,
+  };
+}
+
+export function updateUserRequest(user) {
+  return (dispatch) => {
+    return callApi('users', 'put', {
+      user: {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        studentId: user.studentId,
+        email: user.email,
+        password: user.password,
+      },
+    }).then(res => dispatch(updateUser(res.user)));
   };
 }
 
