@@ -9,20 +9,21 @@ import styles from './UserRegistrationForm.css';
 export class UserRegistrationForm extends Component {
   constructor(props) {
     super(props);
+    this.state = {nickname: '', studentId: '', email: '', password: ''}
     this.addUser = this.addUser.bind(this);
+    this.updateState = this.updateState.bind(this);
   }
 
-
-  handleSubmit(){
-        event.preventDefault();
-        console.log(this.state);
-        console.log(this.form)
-    };
+  updateState(event){
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  }
 
   removeApiError = (event) => {
-      const name = event.target.name;
-        this.form.hideError(name);
-    };
+    const name = event.target.name;
+    this.form.hideError(name);
+  };
 
   addUser = () => {
     console.log(this.state);
@@ -39,22 +40,22 @@ export class UserRegistrationForm extends Component {
             <h1 className={styles.title}><FormattedMessage id="siteTitle" /></h1>
 
           <div className="row">
-          <Validation.components.Form method="POST" ref={c => { this.form = c }} onSubmit={this.handleSubmit.bind(this)} className="col-lg-4 push-lg-4 col-md-6 push-md-3 col-xs-8 push-xs-2">
-            
+          <Validation.components.Form method="POST" ref={c => { this.form = c; }} onSubmit={this.addUser} className="col-lg-4 push-lg-4 col-md-6 push-md-3 col-xs-8 push-xs-2">
+
               <div className="form-group row">
                 <label className="input-labels">Full Name</label>
                 <Validation.components.Input
                   onFocus={this.removeApiError}
                   className="form-control"
-                  name="fullName"
+                  name="nickname"
                   type="text"
-                  value=""
+                  value={this.state.nickname}
                   errorClassName="is-invalid-input"
                   placeholder={"Enter your full name here"}
-                  validations={['required','validName']}
+                  validations={['required', 'validName']}
                 />
               </div>
-            
+
              <div className="form-group row">
               <label className="input-labels">Student ID</label>
               <Validation.components.Input
@@ -62,10 +63,11 @@ export class UserRegistrationForm extends Component {
                 className="form-control"
                 name="studentId"
                 type="text"
-                value=""
+                value={this.state.studentId}
+                onChange={this.updateState}
                 errorClassName="is-invalid-input"
                 placeholder={"Enter your studentId here"}
-                validations={['required','studentId']}
+                validations={['required', 'studentId']}
               />
             </div>
 
@@ -76,13 +78,14 @@ export class UserRegistrationForm extends Component {
                 className="form-control"
                 name="email"
                 type="text"
-                value=""
+                value={this.state.email}
+                onChange={this.updateState}
                 errorClassName="is-invalid-input"
                 placeholder={"Enter your email here"}
-                validations={['required','email']}
+                validations={['required', 'email']}
               />
             </div>
-            
+
             <div className="form-group row">
               <label className="input-labels">password</label>
               <Validation.components.Input
@@ -90,7 +93,8 @@ export class UserRegistrationForm extends Component {
                 className="form-control"
                 name="password"
                 type="text"
-                value=""
+                value={this.state.password}
+                onChange={this.updateState}
                 errorClassName="is-invalid-input"
                 placeholder={"Enter your password here"}
                 validations={['required']}

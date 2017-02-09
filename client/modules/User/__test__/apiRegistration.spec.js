@@ -15,4 +15,3 @@ test('should return the correct type for addUser', actionTest(
 
 ));
 
-
