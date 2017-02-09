@@ -11,7 +11,7 @@ const UserReducer = (state = initialState, action) => {
       };
     case UPDATE_USER :
       return {
-        data: [action.user, ...state.data],
+        user: action.user,
       };
     case LOGIN_USER: {
       const user = (action.response.statusCode === 200) ? action.response.user : null;
