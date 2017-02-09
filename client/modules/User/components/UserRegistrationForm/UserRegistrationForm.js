@@ -50,6 +50,7 @@ export class UserRegistrationForm extends Component {
                   name="nickname"
                   type="text"
                   value={this.state.nickname}
+                  onChange={this.updateState}
                   errorClassName="is-invalid-input"
                   placeholder={"Enter your full name here"}
                   validations={['required', 'validName']}
