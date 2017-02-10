@@ -13,6 +13,9 @@ router.route('/:cuid').get(ensureAuthenticated, UserController.getUser);
 // Add a new User
 router.route('/').post(UserController.addUser);
 
+// Update User by cuid
+router.route('/:cuid').put(ensureAuthenticated, UserController.updateUser);
+
 // Delete User by cuid
 router.route('/:cuid').delete(UserController.deleteUser);
 
