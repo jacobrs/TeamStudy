@@ -1,7 +1,5 @@
 import React from 'react';
-
 import Validation from 'react-validation';
-
 import validator from 'validator';
 
 Object.assign(Validation.rules, {
@@ -19,7 +17,7 @@ Object.assign(Validation.rules, {
        // You may use current value to inject it in some way to the hint
 
     hint: value => {
-      return <span className="form-error is-visible">Required</span>;
+      return <span className="form-error is-visible">This field is required</span>;
     },
 
   },
@@ -31,7 +29,7 @@ Object.assign(Validation.rules, {
     },
 
     hint: value => {
-      return <span className="form-error is-visible">{value} is not a valid Email.</span>;
+      return <span className="form-error is-visible">{value} is not a valid email.</span>;
     },
 
   },
@@ -59,7 +57,7 @@ Object.assign(Validation.rules, {
     },
 
     hint: value => {
-      return <span className="form-error is-visible">{value} is not a valid Name.</span>;
+      return <span className="form-error is-visible">{value} is not a valid name.</span>;
     },
 
   },

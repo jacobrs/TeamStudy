@@ -9,14 +9,14 @@ import styles from './UserRegistrationForm.css';
 export class UserRegistrationForm extends Component {
   constructor(props) {
     super(props);
-    this.state = { nickname: '', studentId: '', email: '', password: '' };
+    this.state = {nickname: '', studentId: '', email: '', password: ''}
     this.addUser = this.addUser.bind(this);
     this.updateState = this.updateState.bind(this);
   }
 
-  updateState(event) {
+  updateState(event){
     this.setState({
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value
     });
   }
 
@@ -42,8 +42,8 @@ export class UserRegistrationForm extends Component {
           <div className="row">
           <Validation.components.Form method="POST" ref={c => { this.form = c; }} onSubmit={this.addUser} className="col-lg-4 push-lg-4 col-md-6 push-md-3 col-xs-8 push-xs-2">
 
-              <div className="form-group row">
-                <label className="input-labels">Full Name</label>
+              <div className="large-centered columns">
+                <label className="input-labels"> Full Name* 
                 <Validation.components.Input
                   onFocus={this.removeApiError}
                   className="form-control"
@@ -55,51 +55,55 @@ export class UserRegistrationForm extends Component {
                   placeholder={"Enter your full name here"}
                   validations={['required', 'validName']}
                 />
+                </label>
               </div>
 
-             <div className="form-group row">
-              <label className="input-labels">Student ID</label>
-              <Validation.components.Input
-                onFocus={this.removeApiError}
-                className="form-control"
-                name="studentId"
-                type="text"
-                value={this.state.studentId}
-                onChange={this.updateState}
-                errorClassName="is-invalid-input"
-                placeholder={"Enter your studentId here"}
-                validations={['required', 'studentId']}
-              />
+             <div className="large-centered columns">
+              <label className="input-labels"> Student ID*
+                <Validation.components.Input
+                  onFocus={this.removeApiError}
+                  className="form-control"
+                  name="studentId"
+                  type="text"
+                  value={this.state.studentId}
+                  onChange={this.updateState}
+                  errorClassName="is-invalid-input"
+                  placeholder={"Enter your studentId here"}
+                  validations={['required', 'studentId']}
+                />
+              </label>
             </div>
 
-            <div className="form-group row">
-              <label className="input-labels">Email</label>
-              <Validation.components.Input
-                onFocus={this.removeApiError}
-                className="form-control"
-                name="email"
-                type="text"
-                value={this.state.email}
-                onChange={this.updateState}
-                errorClassName="is-invalid-input"
-                placeholder={"Enter your email here"}
-                validations={['required', 'email']}
-              />
+            <div className="large-centered columns">
+              <label className="input-labels"> Email*
+                <Validation.components.Input
+                  onFocus={this.removeApiError}
+                  className="form-control"
+                  name="email"
+                  type="text"
+                  value={this.state.email}
+                  onChange={this.updateState}
+                  errorClassName="is-invalid-input"
+                  placeholder={"Enter your email here"}
+                  validations={['required', 'email']}
+                />
+              </label>
             </div>
 
-            <div className="form-group row">
-              <label className="input-labels">password</label>
-              <Validation.components.Input
-                onFocus={this.removeApiError}
-                className="form-control"
-                name="password"
-                type="text"
-                value={this.state.password}
-                onChange={this.updateState}
-                errorClassName="is-invalid-input"
-                placeholder={"Enter your password here"}
-                validations={['required']}
-              />
+            <div className="large-centered columns">
+              <label className="input-labels"> Password*
+                <Validation.components.Input
+                  onFocus={this.removeApiError}
+                  className="form-control"
+                  name="password"
+                  type="text"
+                  value={this.state.password}
+                  onChange={this.updateState}
+                  errorClassName="is-invalid-input"
+                  placeholder={"Enter your password here"}
+                  validations={['required']}
+                />
+               </label>
             </div>
 
             <div className={styles.center}>
