@@ -43,7 +43,7 @@ export class UserRegistrationForm extends Component {
           <Validation.components.Form method="POST" ref={c => { this.form = c; }} onSubmit={this.addUser} className="col-lg-4 push-lg-4 col-md-6 push-md-3 col-xs-8 push-xs-2">
 
               <div className="large-centered columns">
-                <label className="input-labels"> Full Name* 
+                <label className="col-xs-12 col-sm-6 col-md-8"> Full Name* 
                 <Validation.components.Input
                   onFocus={this.removeApiError}
                   className="form-control"
@@ -59,7 +59,7 @@ export class UserRegistrationForm extends Component {
               </div>
 
              <div className="large-centered columns">
-              <label className="input-labels"> Student ID*
+              <label className="col-xs-12 col-sm-6 col-md-8"> Student ID*
                 <Validation.components.Input
                   onFocus={this.removeApiError}
                   className="form-control"
@@ -75,7 +75,7 @@ export class UserRegistrationForm extends Component {
             </div>
 
             <div className="large-centered columns">
-              <label className="input-labels"> Email*
+              <label className="col-xs-12 col-sm-6 col-md-8"> Email*
                 <Validation.components.Input
                   onFocus={this.removeApiError}
                   className="form-control"
@@ -91,7 +91,7 @@ export class UserRegistrationForm extends Component {
             </div>
 
             <div className="large-centered columns">
-              <label className="input-labels"> Password*
+              <label className="col-xs-12 col-sm-6 col-md-8"> Password*
                 <Validation.components.Input
                   onFocus={this.removeApiError}
                   className="form-control"

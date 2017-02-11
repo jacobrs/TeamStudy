@@ -31,8 +31,3 @@ a:hover {
 .title{
   margin-bottom:.5em;
 }
-
-label, input{
-  vertical-align:middle;
-  width:50%;
-}
