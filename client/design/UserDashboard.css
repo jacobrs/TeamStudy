@@ -14,17 +14,64 @@ body{
   font-size: .75em;
 }
 
+/* Navbar related classes*/
 #navbar{
+  width: 100%;
   background-color: #446CB3;
+  color: #fff;
+  padding: 0;
+  height: auto;
 }
-#navbar ul a{
-  font-size: 1.33em;
-  margin: 0 10px 0 40px;
+#navbar ul li{
+  display: inline-block;
+  margin-right: 10px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 #navbar a{
+  color:  #90a9d5;
+  font-size: 1.25em;
+  text-transform: uppercase;
+  margin: 0;
+
+}
+#navbar a:hover{
   color: #fff;
 }
 
+.right{
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 0.75em
+}
+
+.navbar-brand span{
+  font-size: 1.5em;
+  margin: 0 40px 0 30px;
+  color: #fff;
+}
+
+/* Signout Button in Navbar*/
+#signout{
+  border-left: 1px solid #6b8dc7;
+  margin-left: 5px;
+  padding-left: 20px;
+}
+#signout a{
+  color: #fff;
+  border: 1px solid #fff;
+}
+#signout a:hover{
+  color: #90a9d5;
+}
+
+/* Inverting black vector icons in navbar*/
+.inverted {
+  filter: invert(100%);
+}
+
+/* Sidebar (profile) classes*/
 #sidebar{
   background-color: #fff;
   color: #555;
@@ -53,12 +100,15 @@ body{
   color: #fff;
 }
 
-.navbar-brand{
-  font-size: 2em;
-  margin-right: 40px;
-  float: left;
+/* Image class for circular image*/
+.img-circle{
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  margin-top: 30px;
 }
 
+/* Main content related classes*/
 #content{
   background-color: #fff;
   text-align: center;
@@ -92,18 +142,20 @@ body{
   border: 1px solid #f1f1f1;
 }
 
+.card{
+  margin-bottom: 10px;
+}
+
+.card-header{
+  background-color: #f1f1f1;
+}
+
+/*Right sidebar related classes*/
 #rightcontainer{
   background-color: #fff;
   text-align: center;
   color: #555;
   padding: 30px;
-}
-
-.img-circle{
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  margin-top: 30px;
 }
 
 #calendarlisting{
@@ -120,14 +172,6 @@ body{
 
 .calendarevent{
   padding-left: 20px;
-}
-
-.card{
-  margin-bottom: 10px;
-}
-
-.card-header{
-  background-color: #f1f1f1;
 }
 
 .btn-primary{
