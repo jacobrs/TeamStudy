@@ -14,6 +14,7 @@ export function getUsers(req, res) {
 }
 
 export function addUser(req, res) {
+  console.log(req.body);
   // Check for empty fields
   if (!req.body.user.firstName || !req.body.user.lastName || !req.body.user.email || !req.body.user.password ||
     !req.body.user.studentId) {
@@ -57,6 +58,25 @@ export function getUser(req, res) {
       return res.status(500).send(err);
     }
     return res.json({ user });
+  });
+}
+
+export function updateUser(req, res) {
+  console.log(req.body);
+  firstName = sanitizeHtml(req.body.user.firstName);
+  lastName = sanitizeHtml(req.body.user.lastName);
+  studentId = sanitizeHtml(req.body.user.studentId);
+  email = sanitizeHtml(req.body.user.email);
+  password = sha512(req.body.user.password).toString('hex');
+
+  let update = { firstName, lastName, studentId, email, password };
+
+  User.findOneAndUpdate({ cuid: req.params.cuid }, { $set: update }, function (err, updated) {
+    if (error) {
+      return res.status(500).send(err);
+    } else {
+      return res.json({ user: updated });
+    }
   });
 }
 
