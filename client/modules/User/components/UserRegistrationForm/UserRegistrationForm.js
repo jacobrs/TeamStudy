@@ -96,7 +96,7 @@ export class UserRegistrationForm extends Component {
                   onFocus={this.removeApiError}
                   className="form-control"
                   name="password"
-                  type="text"
+                  type="password"
                   value={this.state.password}
                   onChange={this.updateState}
                   errorClassName="is-invalid-input"
