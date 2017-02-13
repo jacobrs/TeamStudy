@@ -61,6 +61,27 @@ Object.assign(Validation.rules, {
     },
 
   },
+  password: {
+        // rule function can accept argument:
+        // components - components registered to Form mapped by name
+        rule: (value, components) => {
+            const password = components.password.state;
+            const passwordConfirm = components.passwordConfirm.state;
+            const isBothUsed = password
+                && passwordConfirm
+                && password.isUsed
+                && passwordConfirm.isUsed
+                && (typeof value !== 'undefined');
+            const isBothChanged = isBothUsed && password.isChanged && passwordConfirm.isChanged;
+
+            if (!isBothUsed || !isBothChanged) {
+                return true;
+            }
+
+            return password.value === passwordConfirm.value;
+        },
+        hint: () => <span className="form-error is-visible">Passwords should be equal.</span>
+    },
 
   api: {
 

@@ -9,7 +9,7 @@ import styles from './UserRegistrationForm.css';
 export class UserRegistrationForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {nickname: '', studentId: '', email: '', password: ''}
+    this.state = {nickname: '', studentId: '', email: '', password: '', passwordConfirm: ''}
     this.addUser = this.addUser.bind(this);
     this.updateState = this.updateState.bind(this);
   }
@@ -101,7 +101,23 @@ export class UserRegistrationForm extends Component {
                   onChange={this.updateState}
                   errorClassName="is-invalid-input"
                   placeholder={"Enter your password here"}
-                  validations={['required']}
+                  validations={['required','password']}
+                />
+               </label>
+            </div>
+
+             <div className="large-centered columns">
+              <label className="col-xs-12 col-sm-6 col-md-8"> Confirm Password*
+                <Validation.components.Input
+                  onFocus={this.removeApiError}
+                  className="form-control"
+                  name="passwordConfirm"
+                  type="password"
+                  value={this.state.passwordConfirm}
+                  onChange={this.updateState}
+                  errorClassName="is-invalid-input"
+                  placeholder={"Please confirm your password here"}
+                  validations={['required','password']}
                 />
                </label>
             </div>
