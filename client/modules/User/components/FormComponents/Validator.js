@@ -43,7 +43,7 @@ Object.assign(Validation.rules, {
     },
 
     hint: value => {
-      return <span className="form-error is-visible">{value} is not a valid ID.</span>;
+      return <span className="form-error is-visible">The ID should be composed of 8 digits.</span>;
     },
 
   },
@@ -57,7 +57,7 @@ Object.assign(Validation.rules, {
     },
 
     hint: value => {
-      return <span className="form-error is-visible">{value} is not a valid name.</span>;
+      return <span className="form-error is-visible">A valid full name must contain one space.</span>;
     },
 
   },
