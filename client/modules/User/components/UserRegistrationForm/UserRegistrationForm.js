@@ -20,12 +20,17 @@ export class UserRegistrationForm extends Component {
     });
   }
 
+  notifyUser(){
+    alert('Account successfuly created!');
+  }
+
   removeApiError = (event) => {
     const name = event.target.name;
     this.form.hideError(name);
   };
 
   addUser = () => {
+    this.notifyUser()
     console.log(this.state);
     if (this.state.nickname && this.state.studentId && this.state.email && this.state.password) {
       this.props.addUser(this.state.nickname, this.state.studentId, this.state.email, this.state.password);
