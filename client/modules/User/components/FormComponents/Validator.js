@@ -61,7 +61,7 @@ Object.assign(Validation.rules, {
     },
 
   },
-  password: {
+  passwordMatch: {
         // rule function can accept argument:
         // components - components registered to Form mapped by name
         rule: (value, components) => {
@@ -78,10 +78,23 @@ Object.assign(Validation.rules, {
                 return true;
             }
 
-            return password.value === passwordConfirm.value;
+            return password.value === passwordConfirm.value
+                   && re.test(password);
         },
         hint: () => <span className="form-error is-visible">Passwords should be equal.</span>
+    },      
+
+  password: {
+     rule: value => {
+      //one uppercase,one lowercase,one digit,8 characters
+      const re = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/;
+      return re.test(value);
     },
+
+    hint: value => {
+      return <span className="form-error is-visible">Password should contain at least 8 characters, 1 digit, 1 uppercase and 1 lowercase character.</span>;
+    },
+  },
 
   api: {
 

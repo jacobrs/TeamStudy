@@ -117,7 +117,7 @@ export class UserRegistrationForm extends Component {
                   onChange={this.updateState}
                   errorClassName="is-invalid-input"
                   placeholder={"Please confirm your password here"}
-                  validations={['required','password']}
+                  validations={['required','passwordMatch']}
                 />
                </label>
             </div>
