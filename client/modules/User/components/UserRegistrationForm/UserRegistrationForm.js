@@ -40,15 +40,14 @@ export class UserRegistrationForm extends Component {
 
   render() {
     return (
-      <div className={`${styles.formContainer} ${styles.center}`}>
+        <div className={`${styles.formContainer} ${styles.center}`}>
             <i className={`${styles.cap} fa fa-graduation-cap`} />
             <h1 className={styles.title}><FormattedMessage id="siteTitle" /></h1>
 
           <div className="row">
           <Validation.components.Form method="POST" ref={c => { this.form = c; }} onSubmit={this.addUser} className="col-lg-4 push-lg-4 col-md-6 push-md-3 col-xs-8 push-xs-2">
-
-              <div className="large-centered columns">
-                <label className="col-xs-12 col-sm-6 col-md-8"> Full Name* 
+     
+                <label className="input-labels"> Full Name* </label>
                 <Validation.components.Input
                   onFocus={this.removeApiError}
                   className="form-control"
@@ -60,11 +59,8 @@ export class UserRegistrationForm extends Component {
                   placeholder={"Enter your full name here"}
                   validations={['required', 'validName']}
                 />
-                </label>
-              </div>
-
-             <div className="large-centered columns">
-              <label className="col-xs-12 col-sm-6 col-md-8"> Student ID*
+                
+              <label className="input-labels"> Student ID* </label>
                 <Validation.components.Input
                   onFocus={this.removeApiError}
                   className="form-control"
@@ -76,11 +72,8 @@ export class UserRegistrationForm extends Component {
                   placeholder={"Enter your studentId here"}
                   validations={['required', 'studentId']}
                 />
-              </label>
-            </div>
-
-            <div className="large-centered columns">
-              <label className="col-xs-12 col-sm-6 col-md-8"> Email*
+            
+              <label className="input-labels"> Email*</label>
                 <Validation.components.Input
                   onFocus={this.removeApiError}
                   className="form-control"
@@ -92,11 +85,8 @@ export class UserRegistrationForm extends Component {
                   placeholder={"Enter your email here"}
                   validations={['required', 'email']}
                 />
-              </label>
-            </div>
-
-            <div className="large-centered columns">
-              <label className="col-xs-12 col-sm-6 col-md-8"> Password*
+               
+              <label className="input-labels"> Password* </label>
                 <Validation.components.Input
                   onFocus={this.removeApiError}
                   className="form-control"
@@ -108,11 +98,8 @@ export class UserRegistrationForm extends Component {
                   placeholder={"Enter your password here"}
                   validations={['required','password']}
                 />
-               </label>
-            </div>
-
-             <div className="large-centered columns">
-              <label className="col-xs-12 col-sm-6 col-md-8"> Confirm Password*
+                      
+              <label className="input-labels"> Confirm Password*</label>
                 <Validation.components.Input
                   onSelect={this.removeApiError}
                   className="form-control"
@@ -124,16 +111,12 @@ export class UserRegistrationForm extends Component {
                   placeholder={"Please confirm your password here"}
                   validations={['required','passwordMatch']}
                 />
-               </label>
-            </div>
 
-            <div className={styles.center}>
                <Validation.components.Button className={`${styles.btnOutlineSecondary} btn btn-outline-secondary  ${styles.signInButton}`}>
                Register and Start Studying!
                </Validation.components.Button><br /><br />
-                    <Link to="/profile"><button className="btn btn-info" type="button">Temp Button to Profile Page</button></Link><br /><br />
                     <Link to="/">Already have an account? Sign in Here</Link>
-            </div>
+                    
               </Validation.components.Form>
           </div>
       </div>
