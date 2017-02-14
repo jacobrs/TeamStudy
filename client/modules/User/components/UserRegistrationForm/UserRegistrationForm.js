@@ -114,7 +114,7 @@ export class UserRegistrationForm extends Component {
              <div className="large-centered columns">
               <label className="col-xs-12 col-sm-6 col-md-8"> Confirm Password*
                 <Validation.components.Input
-                  onFocus={this.removeApiError}
+                  onSelect={this.removeApiError}
                   className="form-control"
                   name="passwordConfirm"
                   type="password"
@@ -133,7 +133,7 @@ export class UserRegistrationForm extends Component {
                </Validation.components.Button><br /><br />
                     <Link to="/profile"><button className="btn btn-info" type="button">Temp Button to Profile Page</button></Link><br /><br />
                     <Link to="/">Already have an account? Sign in Here</Link>
-                  </div>
+            </div>
               </Validation.components.Form>
           </div>
       </div>

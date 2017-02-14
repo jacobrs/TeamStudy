@@ -78,8 +78,7 @@ Object.assign(Validation.rules, {
                 return true;
             }
 
-            return password.value === passwordConfirm.value
-                   && re.test(password);
+            return password.value === passwordConfirm.value;
         },
         hint: () => <span className="form-error is-visible">Passwords should be equal.</span>
     },      
