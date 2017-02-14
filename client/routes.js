@@ -2,7 +2,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import App from './modules/App/App';
-import UserDashboardPage from './modules/User/pages/UserRefactorPage/UserDashboardPage';
+import UserDashboardPage from './modules/User/pages/UserDashboardPage/UserDashboardPage';
 import UserRegistrationPage from './modules/User/pages/UserRegistrationPage/UserRegistrationPage';
 
 // require.ensure polyfill for node
