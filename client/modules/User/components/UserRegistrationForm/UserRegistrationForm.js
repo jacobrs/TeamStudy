@@ -56,9 +56,9 @@ export class UserRegistrationForm extends Component {
                   value={this.state.nickname}
                   onChange={this.updateState}
                   errorClassName="is-invalid-input"
-                  placeholder={"Enter your full name here"}
+                  placeholder={"Full Name"}
                   validations={['required', 'validName']}
-                />
+                /><br/>
                 
               <label className="input-labels"> Student ID* </label>
                 <Validation.components.Input
@@ -69,9 +69,9 @@ export class UserRegistrationForm extends Component {
                   value={this.state.studentId}
                   onChange={this.updateState}
                   errorClassName="is-invalid-input"
-                  placeholder={"Enter your studentId here"}
+                  placeholder={"Student ID"}
                   validations={['required', 'studentId']}
-                />
+                /><br/>
             
               <label className="input-labels"> Email*</label>
                 <Validation.components.Input
@@ -82,9 +82,9 @@ export class UserRegistrationForm extends Component {
                   value={this.state.email}
                   onChange={this.updateState}
                   errorClassName="is-invalid-input"
-                  placeholder={"Enter your email here"}
+                  placeholder={"Email"}
                   validations={['required', 'email']}
-                />
+                /><br/>
                
               <label className="input-labels"> Password* </label>
                 <Validation.components.Input
@@ -95,9 +95,9 @@ export class UserRegistrationForm extends Component {
                   value={this.state.password}
                   onChange={this.updateState}
                   errorClassName="is-invalid-input"
-                  placeholder={"Enter your password here"}
+                  placeholder={"Password"}
                   validations={['required','password']}
-                />
+                /><br/>
                       
               <label className="input-labels"> Confirm Password*</label>
                 <Validation.components.Input
@@ -108,15 +108,15 @@ export class UserRegistrationForm extends Component {
                   value={this.state.passwordConfirm}
                   onChange={this.updateState}
                   errorClassName="is-invalid-input"
-                  placeholder={"Please confirm your password here"}
+                  placeholder={"Confirm password"}
                   validations={['required','passwordMatch']}
-                />
+                /><br/>
 
                <Validation.components.Button className={`${styles.btnOutlineSecondary} btn btn-outline-secondary  ${styles.signInButton}`}>
                Register and Start Studying!
                </Validation.components.Button><br /><br />
                     <Link to="/">Already have an account? Sign in Here</Link>
-                    
+
               </Validation.components.Form>
           </div>
       </div>
