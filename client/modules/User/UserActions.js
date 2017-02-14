@@ -28,7 +28,6 @@ export function addUserRequest(user) {
 }
 
 export function loginUser(response) {
-  console.log(response);
   if (response.statusCode === 200) {
     browserHistory.replace('/profile');
   }

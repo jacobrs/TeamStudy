@@ -86,6 +86,7 @@ passport.use(new LocalStrategy({
       if (sha512(password).toString('hex') !== user.password) {
         return done(null, false, { message: 'Incorrect Login' });
       }
+      delete user.password;
       return done(null, user);
     });
   }
