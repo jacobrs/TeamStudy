@@ -9,18 +9,18 @@ import styles from './UserRegistrationForm.css';
 export class UserRegistrationForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {nickname: '', studentId: '', email: '', password: '', passwordConfirm: ''}
+    this.state = { nickname: '', studentId: '', email: '', password: '', passwordConfirm: '' };
     this.addUser = this.addUser.bind(this);
     this.updateState = this.updateState.bind(this);
   }
 
-  updateState(event){
+  updateState(event) {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   }
 
-  notifyUser(){
+  notifyUser() {
     alert('Account successfuly created!');
   }
 
@@ -30,7 +30,7 @@ export class UserRegistrationForm extends Component {
   };
 
   addUser = () => {
-    this.notifyUser()
+    this.notifyUser();
     console.log(this.state);
     if (this.state.nickname && this.state.studentId && this.state.email && this.state.password) {
       this.props.addUser(this.state.nickname, this.state.studentId, this.state.email, this.state.password);
@@ -46,7 +46,7 @@ export class UserRegistrationForm extends Component {
 
           <div className="row">
           <Validation.components.Form method="POST" ref={c => { this.form = c; }} onSubmit={this.addUser} className="col-lg-4 push-lg-4 col-md-6 push-md-3 col-xs-8 push-xs-2">
-     
+
                 <label className="input-labels"> Full Name* </label>
                 <Validation.components.Input
                   onFocus={this.removeApiError}
@@ -58,8 +58,8 @@ export class UserRegistrationForm extends Component {
                   errorClassName="is-invalid-input"
                   placeholder={"Full Name"}
                   validations={['required', 'validName']}
-                /><br/>
-                
+                /><br />
+
               <label className="input-labels"> Student ID* </label>
                 <Validation.components.Input
                   onFocus={this.removeApiError}
@@ -71,8 +71,8 @@ export class UserRegistrationForm extends Component {
                   errorClassName="is-invalid-input"
                   placeholder={"Student ID"}
                   validations={['required', 'studentId']}
-                /><br/>
-            
+                /><br />
+
               <label className="input-labels"> Email*</label>
                 <Validation.components.Input
                   onFocus={this.removeApiError}
@@ -84,8 +84,8 @@ export class UserRegistrationForm extends Component {
                   errorClassName="is-invalid-input"
                   placeholder={"Email"}
                   validations={['required', 'email']}
-                /><br/>
-               
+                /><br />
+
               <label className="input-labels"> Password* </label>
                 <Validation.components.Input
                   onFocus={this.removeApiError}
@@ -96,9 +96,9 @@ export class UserRegistrationForm extends Component {
                   onChange={this.updateState}
                   errorClassName="is-invalid-input"
                   placeholder={"Password"}
-                  validations={['required','password']}
-                /><br/>
-                      
+                  validations={['required', 'password']}
+                /><br />
+
               <label className="input-labels"> Confirm Password*</label>
                 <Validation.components.Input
                   onSelect={this.removeApiError}
@@ -109,8 +109,8 @@ export class UserRegistrationForm extends Component {
                   onChange={this.updateState}
                   errorClassName="is-invalid-input"
                   placeholder={"Confirm password"}
-                  validations={['required','passwordMatch']}
-                /><br/>
+                  validations={['required', 'passwordMatch']}
+                /><br />
 
                <Validation.components.Button className={`${styles.btnOutlineSecondary} btn btn-outline-secondary  ${styles.signInButton}`}>
                Register and Start Studying!

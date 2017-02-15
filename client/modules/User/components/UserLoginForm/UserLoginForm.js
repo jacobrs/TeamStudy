@@ -8,7 +8,7 @@ import styles from './UserLoginForm.css';
 export class UserLoginForm extends Component {
   constructor(props) {
     super(props);
-    this.state = { email: '', password: ''};
+    this.state = { email: '', password: '' };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.loginUser = this.loginUser.bind(this);
   }
@@ -19,20 +19,18 @@ export class UserLoginForm extends Component {
     });
   }
 
-  showError(divId){
+  showError(divId) {
     var elem = document.getElementById(divId);
-    elem.style.color = "Red";
+    elem.style.color = 'Red';
     $('#' + divId).show();
   }
 
   loginUser = () => {
-
     if (this.state.email && this.state.password) {
       this.props.loginUser(this.state.email, this.state.password);
       this.setState({ email: '', password: '' });
-    } 
-    console.log(this.props.logged);
-    if(!this.props.logged.user){
+    }
+    if(this.props.logged.user){
       this.showError('errorMessage');
     }
   };
@@ -58,9 +56,9 @@ export class UserLoginForm extends Component {
                 value={this.state.password} onChange={this.handleInputChange}
               />
             </div>
-            
+
             <div id="errorMessage" className="collapse">The account or password provided is invalid</div>
-            <br/>
+            <br />
 
             <div className={styles.center}>
               <button className={styles.btnOutlineSecondary + ' btn btn-outline-secondary ' + styles.logInButton}
