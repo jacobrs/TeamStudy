@@ -27,8 +27,8 @@ class UserLoginPage extends Component {
   }
 }
 
-//map Users from store to props
-function mapStateToProps({ users }){
+// map Users from store to props
+function mapStateToProps({ users }) {
   return { users };
 }
 

@@ -64,28 +64,28 @@ Object.assign(Validation.rules, {
   passwordMatch: {
         // rule function can accept argument:
         // components - components registered to Form mapped by name
-        rule: (value, components) => {
-            const password = components.password.state;
-            const passwordConfirm = components.passwordConfirm.state;
-            const isBothUsed = password
+    rule: (value, components) => {
+      const password = components.password.state;
+      const passwordConfirm = components.passwordConfirm.state;
+      const isBothUsed = password
                 && passwordConfirm
                 && password.isUsed
                 && passwordConfirm.isUsed
                 && (typeof value !== 'undefined');
-            const isBothChanged = isBothUsed && password.isChanged && passwordConfirm.isChanged;
+      const isBothChanged = isBothUsed && password.isChanged && passwordConfirm.isChanged;
 
-            if (!isBothUsed || !isBothChanged) {
-                return true;
-            }
+      if (!isBothUsed || !isBothChanged) {
+        return true;
+      }
 
-            return password.value === passwordConfirm.value;
-        },
-        hint: () => <span className="form-error is-visible">Passwords should be equal.</span>
-    },      
+      return password.value === passwordConfirm.value;
+    },
+    hint: () => <span className="form-error is-visible">Passwords should be equal.</span>,
+  },
 
   password: {
-     rule: value => {
-      //one uppercase,one lowercase,one digit,8 characters
+    rule: value => {
+      // one uppercase,one lowercase,one digit,8 characters
       const re = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/;
       return re.test(value);
     },
