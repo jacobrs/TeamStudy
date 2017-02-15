@@ -1,4 +1,4 @@
-# SOEN341 / TeamStudy
+# SOEN341 / TeamStudy [![Build Status](https://travis-ci.org/jacobrs/SOEN341.svg?branch=master)](https://travis-ci.org/jacobrs/SOEN341)
 E-Learning application repository for SOEN 341 team 5 tutorial A.
 
 ## URL
