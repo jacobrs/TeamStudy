@@ -1,13 +1,24 @@
 /*
   Global CSS file
 */
-*{
-	margin: 0;
-	padding: 0;
+
+/*Universal box sizing with inheritance - includes older browser versions*/
+html {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-	line-height: normal;
+}
+*, *:before, *:after {
+	margin: 0;
+	padding: 0;
+	-webkit-box-sizing: inherit;
+	-moz-box-sizing: inherit;
+	box-sizing: inherit;
+}
+
+body{
+	font-size: .75em;
+	background: #446CB3;
 }
 
 ::-webkit-input-placeholder {
@@ -25,9 +36,4 @@
 input:-moz-placeholder {
 	color:#aaa;
 	font-weight: 300;
-}
-body {
-	background: #446CB3;
-	font-family: 'Lato', sans-serif;
-	font-size: 16px;
 }
