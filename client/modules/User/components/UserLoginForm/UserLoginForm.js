@@ -19,13 +19,21 @@ export class UserLoginForm extends Component {
     });
   }
 
-  
+  showError(divId){
+    var elem = document.getElementById(divId);
+    elem.style.color = "Red";
+    $('#' + divId).show();
+  }
+
   loginUser = () => {
+
     if (this.state.email && this.state.password) {
       this.props.loginUser(this.state.email, this.state.password);
       this.setState({ email: '', password: '' });
+    } 
+    if(!this.props.logged.users){
+      this.showError('errorMessage');
     }
-    console.log(this.props.user);
   };
 
   // Display form
@@ -48,9 +56,10 @@ export class UserLoginForm extends Component {
               <input type="password" className="form-control" name="password" placeholder="Password"
                 value={this.state.password} onChange={this.handleInputChange}
               />
-              <span className="help-block">Testing help block</span>
             </div>
             
+            <div id="errorMessage" className="collapse">The account or password provided is invalid</div>
+            <br/>
 
             <div className={styles.center}>
               <button className={styles.btnOutlineSecondary + ' btn btn-outline-secondary ' + styles.logInButton}

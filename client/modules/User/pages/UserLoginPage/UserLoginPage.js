@@ -48,4 +48,4 @@ UserLoginPage.contextTypes = {
   router: React.PropTypes.object,
 };
 
-export default connect(null, mapDispatchToProps)(UserLoginPage);
+export default connect(mapStateToProps, mapDispatchToProps)(UserLoginPage);
