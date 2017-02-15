@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import path from 'path';
 import sha512 from 'sha512';
-import cookieParser from 'cookie-parser';
+//import cookieParser from 'cookie-parser';
 import IntlWrapper from '../client/modules/Intl/IntlWrapper';
 
 // Webpack Requirements
@@ -57,7 +57,7 @@ mongoose.connect(serverConfig.mongoURL, (error) => {
 // Apply body Parser and server public assets and routes
 app.use(compression());
 app.use(Express.static(path.resolve(__dirname, '../dist')));
-app.use(cookieParser());
+//app.use(cookieParser());
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: true }));
 
@@ -65,7 +65,9 @@ app.use(session({
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
   secret: serverConfig.secret,
   resave: true,
-  saveUninitialized: false,
+  cookie: { httpOnly: false },
+  saveUninitialized: true,
+  name: "teamstudy.sid",
 }));
 
 app.use(passport.initialize());
