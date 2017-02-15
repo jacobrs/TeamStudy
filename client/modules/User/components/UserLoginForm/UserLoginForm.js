@@ -31,7 +31,8 @@ export class UserLoginForm extends Component {
       this.props.loginUser(this.state.email, this.state.password);
       this.setState({ email: '', password: '' });
     } 
-    if(!this.props.logged.users){
+    console.log(this.props.logged);
+    if(!this.props.logged.user){
       this.showError('errorMessage');
     }
   };
