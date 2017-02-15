@@ -21,10 +21,15 @@ class UserLoginPage extends Component {
   render() {
     return (
       <div>
-        <LoginForm loginUser={this.handleLoginUser} />
+        <LoginForm loginUser={this.handleLoginUser} logged={this.props.users} />
       </div>
     );
   }
+}
+
+//map Users from store to props
+function mapStateToProps({ users }){
+  return { users };
 }
 
 // Bind actions to props

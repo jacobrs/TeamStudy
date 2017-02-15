@@ -8,7 +8,7 @@ import styles from './UserLoginForm.css';
 export class UserLoginForm extends Component {
   constructor(props) {
     super(props);
-    this.state = { email: '', password: '' };
+    this.state = { email: '', password: ''};
     this.handleInputChange = this.handleInputChange.bind(this);
     this.loginUser = this.loginUser.bind(this);
   }
@@ -19,11 +19,13 @@ export class UserLoginForm extends Component {
     });
   }
 
+  
   loginUser = () => {
     if (this.state.email && this.state.password) {
       this.props.loginUser(this.state.email, this.state.password);
       this.setState({ email: '', password: '' });
     }
+    console.log(this.props.user);
   };
 
   // Display form
@@ -46,7 +48,10 @@ export class UserLoginForm extends Component {
               <input type="password" className="form-control" name="password" placeholder="Password"
                 value={this.state.password} onChange={this.handleInputChange}
               />
+              <span className="help-block">Testing help block</span>
             </div>
+            
+
             <div className={styles.center}>
               <button className={styles.btnOutlineSecondary + ' btn btn-outline-secondary ' + styles.logInButton}
                 type="button" onClick={this.loginUser}
