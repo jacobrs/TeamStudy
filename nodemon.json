@@ -7,8 +7,7 @@
   "verbose": true,
   "watch": [
     "server",
-    "Intl",
-    "client/store"
+    "Intl"
   ],
   "env": {
     "NODE_ENV": "development"
