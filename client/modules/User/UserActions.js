@@ -5,6 +5,7 @@ import { browserHistory } from 'react-router';
 export const ADD_USER = 'ADD_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 export const LOGIN_USER = 'LOGIN_USER';
+export const AUTHENTICATE_SESSION = 'AUTHENTICATE_SESSION';
 
 // Export Actions
 export function addUser(user) {
@@ -66,5 +67,22 @@ export function loginUserRequest(user) {
       password: user.password,
       email: user.email,
     }).then(res => dispatch(loginUser(res)));
+  };
+}
+
+export function authenticateSession(response) {
+  // Failed to authenticate, redirect to landing page
+  if (response.statusCode !== 200) {
+    browserHistory.replace('/');
+  }
+  return {
+    type: AUTHENTICATE_SESSION,
+    response,
+  };
+}
+
+export function authenticateSessionRequest() {
+  return (dispatch) => {
+    return callApi('users/me').then(res => dispatch(authenticateSession(res)));
   };
 }
