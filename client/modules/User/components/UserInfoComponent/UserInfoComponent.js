@@ -8,7 +8,7 @@ function UserInfoComponent(props) {
     return (
       <div className="col-md-3" id={styles.sidebar}>
         <img className="img-circle" id={styles['circle-image']}src="https://static.independent.co.uk/s3fs-public/thumbnails/image/2015/06/15/09/jon-snow.jpg" />
-        <h3>{props.users.user.firstName}                      {props.users.user.lastName} </h3>
+        <h3>{props.users.user.firstName}                                {props.users.user.lastName} </h3>
         <p>{props.users.user.email} </p>
         <ul>
           <li><Link>Course 1</Link></li>
