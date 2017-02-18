@@ -86,7 +86,7 @@ passport.use(new LocalStrategy({
       if (sha512(password).toString('hex') !== user.password) {
         return done(null, false, { message: 'Incorrect Login' });
       }
-      delete user.password;
+      user.password = undefined;
       return done(null, user);
     });
   }
@@ -104,6 +104,7 @@ passport.serializeUser(function (user, done) {
 
 passport.deserializeUser(function (id, done) {
   User.findOne({ 'cuid': id }, function (err, user) {
+    user.password = undefined;
     done(err, user);
   });
 });
@@ -129,10 +130,10 @@ const renderFullPage = (html, initialState) => {
         ${head.script.toString()}
 
         ${process.env.NODE_ENV === 'production' ? `<link rel='stylesheet' href='${assetsManifest['/app.css']}' />` : ''}
-        <script src="https://use.fontawesome.com/20af296b85.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
         <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'/>
         <link rel="shortcut icon" href="http://res.cloudinary.com/hashnode/image/upload/v1455629445/static_imgs/mern/mern-favicon-circle-fill.png" type="image/png" />
+        <script src="https://use.fontawesome.com/20af296b85.js"></script>
       </head>
       <body>
         <div id="root">${process.env.NODE_ENV === 'production' ? html : `<div>${html}</div>`}</div>
