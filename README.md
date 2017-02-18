@@ -27,3 +27,5 @@ TeamStudy makes use of the MERN stack which inclindes but does not limit to
 * Redux
 
 Acceptance Tests are done using Travis
+
+[![Coverage Status](https://coveralls.io/repos/github/jacobrs/SOEN341/badge.svg?branch=master)](https://coveralls.io/github/jacobrs/SOEN341?branch=master)

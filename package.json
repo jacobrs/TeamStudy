@@ -89,6 +89,7 @@
     "eslint-plugin-react": "^5.1.1",
     "eventsource-polyfill": "^0.9.6",
     "extract-text-webpack-plugin": "^1.0.1",
+    "istanbul": "~0.2.4",
     "file-loader": "^0.8.5",
     "jsdom": "^9.2.1",
     "json-loader": "^0.5.4",
