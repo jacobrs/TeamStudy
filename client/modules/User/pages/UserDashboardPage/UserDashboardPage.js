@@ -6,8 +6,8 @@ import UserInfoComponent from '../../components/UserInfoComponent/UserInfoCompon
 
 class UserDashboardPage extends Component {
   render() {
-    console.log("UserDashboardPage")
-    console.log(this.props.users)
+    console.log('UserDashboardPage');
+    console.log(this.props.users);
     return (
       <div>
         <UserInfoComponent users={this.props.users} />
