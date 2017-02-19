@@ -1,4 +1,4 @@
-import { ADD_USER, UPDATE_USER, LOGIN_USER } from './UserActions';
+import { ADD_USER, UPDATE_USER, LOGIN_USER, AUTHENTICATE_SESSION } from './UserActions';
 
 // Initial State
 const initialState = { data: [], user: null };
@@ -14,6 +14,13 @@ const UserReducer = (state = initialState, action) => {
         user: action.user,
       };
     case LOGIN_USER: {
+      const user = (action.response.statusCode === 200) ? action.response.user : null;
+
+      return {
+        user,
+      };
+    }
+    case AUTHENTICATE_SESSION: {
       const user = (action.response.statusCode === 200) ? action.response.user : null;
 
       return {
