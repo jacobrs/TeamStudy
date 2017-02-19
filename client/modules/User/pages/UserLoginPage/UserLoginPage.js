@@ -6,12 +6,16 @@ import { bindActionCreators } from 'redux';
 import LoginForm from '../../components/UserLoginForm/UserLoginForm';
 
 // Import Actions
-import { loginUserRequest } from '../../UserActions';
+import { loginUserRequest, authenticateSessionRequest, LOGIN_PAGE } from '../../UserActions';
 
 class UserLoginPage extends Component {
   constructor(props) {
     super(props);
     this.handleLoginUser = this.handleLoginUser.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.authenticateSessionRequest(LOGIN_PAGE);
   }
 
   handleLoginUser = (email, password) => {
@@ -34,7 +38,7 @@ function mapStateToProps({ users }) {
 
 // Bind actions to props
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ loginUserRequest }, dispatch);
+  return bindActionCreators({ loginUserRequest, authenticateSessionRequest }, dispatch);
 }
 
 // Warning issued if prop not provided
@@ -42,6 +46,7 @@ UserLoginPage.propTypes = {
   email: PropTypes.string,
   password: PropTypes.string,
   loginUserRequest: PropTypes.func.isRequired,
+  authenticateSessionRequest: PropTypes.func.isRequired,
 };
 
 UserLoginPage.contextTypes = {

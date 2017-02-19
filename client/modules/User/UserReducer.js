@@ -1,4 +1,4 @@
-import { ADD_USER, UPDATE_USER, LOGIN_USER, AUTHENTICATE_SESSION } from './UserActions';
+import { ADD_USER, UPDATE_USER, LOGIN_USER, AUTHENTICATE_SESSION, FAILED_AUTHENTICATION } from './UserActions';
 
 // Initial State
 const initialState = { data: [], user: null };
@@ -25,6 +25,11 @@ const UserReducer = (state = initialState, action) => {
 
       return {
         user,
+      };
+    }
+    case FAILED_AUTHENTICATION: {
+      return {
+        user: null,
       };
     }
     default:

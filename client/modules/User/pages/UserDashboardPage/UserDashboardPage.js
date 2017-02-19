@@ -26,14 +26,7 @@ class UserDashboardPage extends Component {
       );
     }
 
-    return (
-      <div id={styles['loading-container']}>
-        <div id={styles['loading-icon']}>
-          <i className="fa fa-refresh fa-spin fa-5x fa-fw"></i>
-          <span className="sr-only">Loading...</span>
-        </div>
-      </div>
-    );
+    return null;
   }
 }
 
@@ -49,15 +42,11 @@ function mapStateToProps({ users }) {
 
 // Warning issued if prop not provided
 UserDashboardPage.propTypes = {
-  // email: PropTypes.string,
-  // password: PropTypes.string,
-  // loginUserRequest: PropTypes.func.isRequired,
   authenticateSessionRequest: PropTypes.func.isRequired,
   users: PropTypes.object,
 };
 
 UserDashboardPage.contextTypes = {
-  // router: React.PropTypes.object,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserDashboardPage);

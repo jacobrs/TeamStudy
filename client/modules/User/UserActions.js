@@ -6,6 +6,11 @@ export const ADD_USER = 'ADD_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 export const LOGIN_USER = 'LOGIN_USER';
 export const AUTHENTICATE_SESSION = 'AUTHENTICATE_SESSION';
+export const FAILED_AUTHENTICATION = 'FAILED_AUTHENTICATION';
+
+// Auth Pages
+export const DASHBOARD_PAGE = 'DASHBOARD_PAGE';
+export const LOGIN_PAGE = 'LOGIN_PAGE';
 
 // Export Actions
 export function addUser(user) {
@@ -70,19 +75,36 @@ export function loginUserRequest(user) {
   };
 }
 
-export function authenticateSession(response) {
+export function authenticateSession(response, page) {
   // Failed to authenticate, redirect to landing page
-  if (response.statusCode !== 200) {
-    browserHistory.replace('/');
+  switch (page) {
+    case DASHBOARD_PAGE:
+      if (response.statusCode !== 200) {
+        browserHistory.replace('/');
+      }
+      return {
+        type: AUTHENTICATE_SESSION,
+        response,
+      };
+      break;
+
+    case LOGIN_PAGE:
+      console.log(response);
+      if (response.statusCode === 200) {
+        browserHistory.replace('/profile');
+      }
+      return {
+        type: FAILED_AUTHENTICATION,
+        response,
+      };
+      break;
+    default:
+      break;
   }
-  return {
-    type: AUTHENTICATE_SESSION,
-    response,
-  };
 }
 
-export function authenticateSessionRequest() {
+export function authenticateSessionRequest(page = DASHBOARD_PAGE) {
   return (dispatch) => {
-    return callApi('users/me').then(res => dispatch(authenticateSession(res)));
+    return callApi('users/me').then(res => dispatch(authenticateSession(res, page)));
   };
 }
