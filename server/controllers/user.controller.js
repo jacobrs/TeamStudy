@@ -1,4 +1,5 @@
 import User from '../models/user';
+import StudyGroups from '../models/studyGroup';
 import cuid from 'cuid';
 import sha512 from 'sha512';
 import sanitizeHtml from 'sanitize-html';
@@ -94,4 +95,48 @@ export function deleteUser(req, res) {
 export function loginUser(req, res) {
   res.status(200);
   return res.json({ user: req.user, statusCode: 200 });
+}
+
+export function getUserStudyGroups(req, res) {
+  User.findOne({ cuid: req.params.cuid }).select('studyGroups').exec((err, studyGroups) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    return res.json({ studyGroups });
+  });
+}
+
+export function addUserStudyGroups(req, res) {
+  let groups =  sanitizeHtml(req.body.studyGroups);
+  User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    user.studyGroups.push(groups);
+    user.save((err, saved) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      return res.json({ user: saved });
+    });
+  });
+}
+
+export function deleteUserStudyGroups(req, res) {
+  let groups =  sanitizeHtml(req.body.studyGroups);
+  User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    for (var i=user.studyGroups.length-1; i>=0; i--) {
+      if (user.studyGroups[i] == groups)
+        user.studyGroups.splice(i, 1);
+    }
+    user.save((err, saved) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      return res.json({ user: saved });
+    });
+  });
 }
