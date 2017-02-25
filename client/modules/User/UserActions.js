@@ -6,6 +6,7 @@ export const ADD_USER = 'ADD_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 export const LOGIN_USER = 'LOGIN_USER';
 export const AUTHENTICATE_SESSION = 'AUTHENTICATE_SESSION';
+export const LOGOUT_USER = 'LOGOUT_USER';
 
 // Export Actions
 export function addUser(user) {
@@ -84,5 +85,23 @@ export function authenticateSession(response) {
 export function authenticateSessionRequest() {
   return (dispatch) => {
     return callApi('users/me').then(res => dispatch(authenticateSession(res)));
+  };
+}
+
+export function logoutUser(response) {
+  // We successfully logged out, redirect to the landing page
+  if (response.statusCode === 200) {
+    browserHistory.replace('/');
+  }
+  return {
+    type: LOGOUT_USER,
+    response,
+  };
+}
+
+// Will probably always succeed but let's keep it consistant
+export function logoutUserRequest() {
+  return (dispatch) => {
+    return callApi('users/logout').then(res => dispatch(logoutUser(res)));
   };
 }
