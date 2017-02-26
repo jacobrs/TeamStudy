@@ -1,4 +1,4 @@
-import { ADD_USER, UPDATE_USER, LOGIN_USER, AUTHENTICATE_SESSION } from './UserActions';
+import { ADD_USER, UPDATE_USER, LOGIN_USER, AUTHENTICATE_SESSION, LOGOUT_USER } from './UserActions';
 
 // Initial State
 const initialState = { data: [], user: null };
@@ -27,6 +27,10 @@ const UserReducer = (state = initialState, action) => {
         user,
       };
     }
+    case LOGOUT_USER:
+      return {
+        user: null,
+      };
     default:
       return state;
   }
