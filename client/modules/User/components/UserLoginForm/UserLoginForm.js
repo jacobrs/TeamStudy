@@ -62,7 +62,7 @@ export class UserLoginForm extends Component {
 
             <div className={styles.center}>
               <button className={styles.btnOutlineSecondary + ' btn btn-outline-secondary ' + styles.logInButton}
-                type="button" onClick={this.loginUser}
+                type="submit" onClick={this.loginUser}
               >
                 Log In!</button><br /><br />
               <Link className={styles.mainText} to="/register">Don't have an account yet? Register Here</Link>
