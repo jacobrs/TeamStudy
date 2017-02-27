@@ -110,6 +110,7 @@ passport.deserializeUser(function (id, done) {
 });
 
 app.use('/api/users', users);
+app.use('/static', Express.static('public'));
 
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
@@ -123,6 +124,9 @@ const renderFullPage = (html, initialState) => {
     <!doctype html>
     <html>
       <head>
+        <link rel="stylesheet" href="/static/style/font-awesome/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="/static/style/curtain.css"/>
+        <link rel="stylesheet" href="/static/style/animate.css"/>
         ${head.base.toString()}
         ${head.title.toString()}
         ${head.meta.toString()}
@@ -132,11 +136,15 @@ const renderFullPage = (html, initialState) => {
         ${process.env.NODE_ENV === 'production' ? `<link rel='stylesheet' href='${assetsManifest['/app.css']}' />` : ''}
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
         <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'/>
-        <link rel="shortcut icon" href="http://res.cloudinary.com/hashnode/image/upload/v1455629445/static_imgs/mern/mern-favicon-circle-fill.png" type="image/png" />
-        <script src="https://use.fontawesome.com/20af296b85.js"></script>
+        <link rel="shortcut icon" href="/static/images/fav.png" type="image/png" />
       </head>
       <body>
-        <div id="root">${process.env.NODE_ENV === 'production' ? html : `<div>${html}</div>`}</div>
+        <div id="curtain">
+          <i class="fa fa-circle-o-notch fa-spin fa-5x fa-fw" id="loading-icon" style="visibility:hidden;"></i>
+          <span class="sr-only loading-text">Generating Awesomeness</span>
+        </div>
+        <div id="root" class="hidden">${process.env.NODE_ENV === 'production' ? html : `<div>${html}</div>`}</div>
+        <script type="text/javascript" src="/static/js/loader.js"></script>
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
           ${process.env.NODE_ENV === 'production' ?
@@ -201,7 +209,7 @@ app.use((req, res, next) => {
 // start app
 app.listen(serverConfig.port, (error) => {
   if (!error) {
-    console.log(`Studee is up and running on port: ${serverConfig.port}! Happy Testing!`); // eslint-disable-line
+    console.log(`TeamStudy is up and running on port: ${serverConfig.port}! Happy Testing!`); // eslint-disable-line
   }
 });
 

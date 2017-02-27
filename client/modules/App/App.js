@@ -23,8 +23,8 @@ export class App extends Component {
       <div>
         <div>
           <Helmet
-            title="Studee"
-            titleTemplate="%s - eLearning"
+            title="TeamStudy"
+            titleTemplate="%s"
             meta={[
               { charset: 'utf-8' },
               {
