@@ -124,15 +124,15 @@ const renderFullPage = (html, initialState) => {
     <!doctype html>
     <html>
       <head>
+        <link rel="stylesheet" href="/static/style/font-awesome/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="/static/style/curtain.css"/>
+        <link rel="stylesheet" href="/static/style/animate.css"/>
         ${head.base.toString()}
         ${head.title.toString()}
         ${head.meta.toString()}
         ${head.link.toString()}
         ${head.script.toString()}
 
-        <link rel="stylesheet" href="/static/style/font-awesome/css/font-awesome.min.css"/>
-        <link rel="stylesheet" href="/static/style/curtain.css"/>
-        <link rel="stylesheet" href="/static/style/animate.css"/>
         ${process.env.NODE_ENV === 'production' ? `<link rel='stylesheet' href='${assetsManifest['/app.css']}' />` : ''}
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
         <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'/>
@@ -140,11 +140,11 @@ const renderFullPage = (html, initialState) => {
       </head>
       <body>
         <div id="curtain">
-          <i class="fa fa-circle-o-notch fa-spin fa-5x fa-fw" id="loading-icon" style="display:none;"></i>
+          <i class="fa fa-circle-o-notch fa-spin fa-5x fa-fw" id="loading-icon" style="visibility:hidden;"></i>
           <span class="sr-only loading-text">Generating Awesomeness</span>
         </div>
         <div id="root" class="hidden">${process.env.NODE_ENV === 'production' ? html : `<div>${html}</div>`}</div>
-        <script type="text/javascript">document.getElementById('loading-icon').style.display = 'block';</script>
+        <script type="text/javascript" src="/static/js/loader.js"></script>
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
           ${process.env.NODE_ENV === 'production' ?
@@ -157,10 +157,6 @@ const renderFullPage = (html, initialState) => {
         <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-        <script type="text/javascript">window.onload = function(){
-          document.getElementById('curtain').className = 'animated fadeOut';
-          document.getElementById('root').className = 'animated fadeIn';
-        }</script>
       </body>
     </html>
   `;
