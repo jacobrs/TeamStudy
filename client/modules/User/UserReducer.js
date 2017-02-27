@@ -31,10 +31,12 @@ const UserReducer = (state = initialState, action) => {
       return {
         user: null,
       };
-    case LOGOUT_USER:
+    }
+    case LOGOUT_USER: {
       return {
         user: null,
       };
+    }
     default:
       return state;
   }
