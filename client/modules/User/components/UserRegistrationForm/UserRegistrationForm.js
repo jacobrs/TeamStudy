@@ -44,7 +44,7 @@ export class UserRegistrationForm extends Component {
             <i className={`${styles.cap} fa fa-graduation-cap`} />
             <h1 className={styles.title}><FormattedMessage id="siteTitle" /></h1>
 
-          <div className="row">
+          <div className={styles.formLabel + ' row'}>
           <Validation.components.Form method="POST" ref={c => { this.form = c; }} onSubmit={this.addUser} className="col-lg-4 push-lg-4 col-md-6 push-md-3 col-xs-8 push-xs-2">
 
                 <label className="input-labels"> Full Name* </label>
@@ -115,7 +115,7 @@ export class UserRegistrationForm extends Component {
                <Validation.components.Button className={`${styles.btnOutlineSecondary} btn btn-outline-secondary  ${styles.signInButton}`}>
                Register and Start Studying!
                </Validation.components.Button><br /><br />
-                    <Link to="/">Already have an account? Sign in Here</Link>
+                    <Link className={styles.mainText} to="/">Already have an account? Sign in Here</Link>
 
               </Validation.components.Form>
           </div>

@@ -11,6 +11,7 @@ export const FAILED_AUTHENTICATION = 'FAILED_AUTHENTICATION';
 // Auth Pages
 export const DASHBOARD_PAGE = 'DASHBOARD_PAGE';
 export const LOGIN_PAGE = 'LOGIN_PAGE';
+export const LOGOUT_USER = 'LOGOUT_USER';
 
 // Export Actions
 export function addUser(user) {
@@ -106,5 +107,23 @@ export function authenticateSession(response, page) {
 export function authenticateSessionRequest(page = DASHBOARD_PAGE) {
   return (dispatch) => {
     return callApi('users/me').then(res => dispatch(authenticateSession(res, page)));
+  };
+}
+
+export function logoutUser(response) {
+  // We successfully logged out, redirect to the landing page
+  if (response.statusCode === 200) {
+    browserHistory.replace('/');
+  }
+  return {
+    type: LOGOUT_USER,
+    response,
+  };
+}
+
+// Will probably always succeed but let's keep it consistant
+export function logoutUserRequest() {
+  return (dispatch) => {
+    return callApi('users/logout').then(res => dispatch(logoutUser(res)));
   };
 }
