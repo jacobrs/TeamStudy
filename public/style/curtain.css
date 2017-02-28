@@ -1,0 +1,23 @@
+#curtain{
+	height:100%; 
+	width:100%;
+	color:#fff; 
+	position: absolute;
+	text-align:center;
+	top:0;
+	background:#446CB3;
+}
+
+#curtain i{
+	position: absolute;
+	top:calc(50% - 30px);
+	left:calc(50% - 38.57px);
+}
+
+.hidden{
+	display:none;
+}
+
+.row{
+	margin:0px !important;
+}
