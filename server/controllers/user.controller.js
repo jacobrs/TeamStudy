@@ -5,7 +5,6 @@ import sha512 from 'sha512';
 import sanitizeHtml from 'sanitize-html';
 
 export function getUsers(req, res) {
-  console.log((req.user == undefined) ? 'No user' : req.user.email);
   User.find().sort('-dateAdded').exec((err, users) => {
     if (err) {
       return res.status(500).send(err);
@@ -15,7 +14,6 @@ export function getUsers(req, res) {
 }
 
 export function addUser(req, res) {
-  console.log(req.body);
   // Check for empty fields
   if (!req.body.user.firstName || !req.body.user.lastName || !req.body.user.email || !req.body.user.password ||
     !req.body.user.studentId) {
@@ -58,8 +56,14 @@ export function getUser(req, res) {
     if (err) {
       return res.status(500).send(err);
     }
+    user.password = undefined;
     return res.json({ user });
   });
+}
+
+export function authenticateUser(req, res) {
+  res.status(200);
+  return res.json({ user: req.user, statusCode: 200 });
 }
 
 export function updateUser(req, res) {
@@ -95,6 +99,12 @@ export function deleteUser(req, res) {
 export function loginUser(req, res) {
   res.status(200);
   return res.json({ user: req.user, statusCode: 200 });
+}
+
+export function logoutUser(req, res) {
+  req.session.destroy(function (err) {
+    res.json({ user: null, statusCode: 200, message: 'User logged out successfully' });
+  });
 }
 
 export function getUserStudyGroups(req, res) {
@@ -138,5 +148,4 @@ export function deleteUserStudyGroups(req, res) {
       }
       return res.json({ user: saved });
     });
-  });
-}
+

@@ -1,0 +1,12 @@
+#loading-container {
+    height: 100vh;
+    font-size: 3em;
+}
+
+#loading-icon {
+    display: inline-block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

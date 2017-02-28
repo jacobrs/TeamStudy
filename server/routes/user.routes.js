@@ -5,7 +5,13 @@ const router = new Router();
 const passport = require('passport');
 
 // Get all Users
-router.route('/').get(UserController.getUsers);
+router.route('/').get(ensureAuthenticated, UserController.getUsers);
+
+// Refresh session
+router.route('/me').get(ensureAuthenticated, UserController.authenticateUser);
+
+// Log user out
+router.route('/logout').get(ensureAuthenticated, UserController.logoutUser);
 
 // Get User by cuid
 router.route('/:cuid').get(ensureAuthenticated, UserController.getUser);

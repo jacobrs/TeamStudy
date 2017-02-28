@@ -1,19 +1,38 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 // Import Components
 import UserInfoComponent from '../../components/UserInfoComponent/UserInfoComponent';
 
+import { authenticateSessionRequest } from '../../UserActions';
+
+import styles from './UserDashboardPage.css';
+
 class UserDashboardPage extends Component {
-  render() {
-    console.log("UserDashboardPage")
-    console.log(this.props.users)
-    return (
-      <div>
-        <UserInfoComponent users={this.props.users} />
-      </div>
-    );
+  componentWillMount() {
+    // If I do not have any user data attempt to authenticate using cookie
+    if (this.props.users.user == null) {
+      this.props.authenticateSessionRequest();
+    }
   }
+
+  render() {
+    if (this.props.users.user != null) {
+      return (
+        <div>
+          <UserInfoComponent users={this.props.users} />
+        </div>
+      );
+    }
+
+    return null;
+  }
+}
+
+// Bind actions to props
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ authenticateSessionRequest }, dispatch);
 }
 
 // map Users from store to Props
@@ -23,13 +42,11 @@ function mapStateToProps({ users }) {
 
 // Warning issued if prop not provided
 UserDashboardPage.propTypes = {
-  // email: PropTypes.string,
-  // password: PropTypes.string,
-  // loginUserRequest: PropTypes.func.isRequired,
+  authenticateSessionRequest: PropTypes.func.isRequired,
+  users: PropTypes.object,
 };
 
 UserDashboardPage.contextTypes = {
-  // router: React.PropTypes.object,
 };
 
-export default connect(mapStateToProps)(UserDashboardPage);
+export default connect(mapStateToProps, mapDispatchToProps)(UserDashboardPage);

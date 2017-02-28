@@ -1,9 +1,9 @@
 function ensureAuthenticated(req, res, next) {
-  console.log(req.session.passport);
-  if (req.isAuthenticated())
-    return next();
-  else
-    res.redirect('/');
+  if (req.isAuthenticated()) {
+    next();
+	} else {
+    res.json({ user: null, statusCode: 403, message: 'User not authenticated.' });
+	}
 }
 
 export default ensureAuthenticated;

@@ -1,4 +1,4 @@
-# SOEN341 / TeamStudy [![Build Status](https://travis-ci.org/jacobrs/SOEN341.svg?branch=master)](https://travis-ci.org/jacobrs/SOEN341)
+# SOEN341 / TeamStudy [![Build Status](https://travis-ci.org/jacobrs/SOEN341.svg?branch=master)](https://travis-ci.org/jacobrs/SOEN341) [![Coverage Status](https://coveralls.io/repos/github/jacobrs/SOEN341/badge.svg?branch=master)](https://coveralls.io/github/jacobrs/SOEN341?branch=master)
 E-Learning application repository for SOEN 341 team 5 tutorial A.
 
 ## URL
@@ -27,3 +27,4 @@ TeamStudy makes use of the MERN stack which inclindes but does not limit to
 * Redux
 
 Acceptance Tests are done using Travis
+

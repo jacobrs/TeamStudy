@@ -42,7 +42,7 @@ export class UserLoginForm extends Component {
         <i className={styles.cap + ' fa fa-graduation-cap'} />
         <h1 className={styles.title}><FormattedMessage id="siteTitle" /></h1>
 
-        <div className="row">
+        <div className={styles.formLabel + ' row'}>
           <form id="login" method="POST" className="col-lg-4 push-lg-4 col-md-6 push-md-3 col-xs-8 push-xs-2">
             <div className="form-group row">
               <label className="input-labels">Email</label>
@@ -65,7 +65,7 @@ export class UserLoginForm extends Component {
                 type="button" onClick={this.loginUser}
               >
                 Log In!</button><br /><br />
-              <Link to="/register">Don't have an account yet? Register Here</Link>
+              <Link className={styles.mainText} to="/register">Don't have an account yet? Register Here</Link>
             </div>
           </form>
         </div>
