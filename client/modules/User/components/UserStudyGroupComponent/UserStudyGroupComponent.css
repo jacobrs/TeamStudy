@@ -1,0 +1,27 @@
+.studyGroup {
+  background-color: #fff;
+  color: #555;
+  text-align: center;
+}
+
+.studyGroup ul{
+  list-style-type: none;
+  background-color: #fff;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.studyGroup ul li a{
+  display: block;
+  color: #a1a1a1;
+  background-color: #f1f1f1;
+  padding: 8px 16px;
+  margin-bottom: 10px;
+  text-decoration: none;
+}
+
+.studyGroup ul li a:hover{
+  background-color: #555;
+  color: #fff;
+}

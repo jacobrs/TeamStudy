@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 
 // Import Components
 import UserInfoComponent from '../../components/UserInfoComponent/UserInfoComponent';
+import UserStudyGroupComponent from '../../components/UserStudyGroupComponent/UserStudyGroupComponent';
 
 import { authenticateSessionRequest } from '../../UserActions';
 
@@ -22,6 +23,7 @@ class UserDashboardPage extends Component {
       return (
         <div>
           <UserInfoComponent users={this.props.users} />
+          <UserStudyGroupComponent users={this.props.users} />
         </div>
       );
     }

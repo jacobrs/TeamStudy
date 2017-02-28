@@ -12,10 +12,6 @@ function UserInfoComponent(props) {
         <p>{props.users.user.email} </p>
         <ul>
           <li><Link>Course 1</Link></li>
-          <li><Link>Course 2</Link></li>
-          <li><Link>Course 3</Link></li>
-          <li><Link>Course 4</Link></li>
-          <li><Link>Course 5</Link></li>
         </ul>
       </div>
     );
