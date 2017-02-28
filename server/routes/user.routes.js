@@ -28,4 +28,13 @@ router.route('/:cuid').delete(UserController.deleteUser);
 // Login User
 router.route('/login').post(passport.authenticate('local'), UserController.loginUser);
 
+//  Get User study groups
+router.route('/:cuid/studyGroups').get(UserController.getUserStudyGroups);
+
+//  Add User study group
+router.route('/:cuid/studyGroups').put(UserController.addUserStudyGroups);
+
+//  Delete User study groups
+router.route('/:cuid/studyGroups').delete(UserController.deleteUserStudyGroups);
+
 export default router;
