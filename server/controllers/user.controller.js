@@ -148,4 +148,6 @@ export function deleteUserStudyGroups(req, res) {
       }
       return res.json({ user: saved });
     });
+  });
+}
 
