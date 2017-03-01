@@ -3,6 +3,7 @@
   color: #555;
   height: 100%;
   text-align: center;
+  border-right:1px #CCC solid;
 }
 
 #sidebar ul{
