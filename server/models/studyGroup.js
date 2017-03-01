@@ -8,6 +8,7 @@ const studyGroupSchema = new Schema({
   teacher: { type: 'String', required: true },
   description: { type: 'String', required: true },
   dateAdded: { type: 'Date', default: Date.now, required: true },
+  chat: { type: 'Object', required: true },
 });
 
 export default mongoose.model('studyGroup', studyGroupSchema);
