@@ -21,3 +21,17 @@
 .row{
 	margin:0px !important;
 }
+
+#root{
+	height:100%;
+	width: 100%;
+	position:absolute;
+}
+
+[data-reactroot]{
+	height: 100% !important; 
+}
+
+[data-reactroot]>div {
+	height: 100%;
+}
