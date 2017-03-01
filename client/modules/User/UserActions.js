@@ -78,6 +78,7 @@ export function loginUserRequest(user) {
 
 export function authenticateSession(response, page) {
   // Failed to authenticate, redirect to landing page
+  console.log(browserHistory);
   switch (page) {
     case DASHBOARD_PAGE:
       if (response.statusCode !== 200) {
@@ -90,7 +91,6 @@ export function authenticateSession(response, page) {
       break;
 
     case LOGIN_PAGE:
-      console.log(response);
       if (response.statusCode === 200) {
         browserHistory.replace('/profile');
       }

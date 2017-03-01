@@ -1,6 +1,7 @@
 #sidebar{
   background-color: #fff;
   color: #555;
+  height: 100%;
   text-align: center;
 }
 
@@ -29,7 +30,8 @@
 
 #circle-image{
   border-radius: 50%;
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   margin-top: 30px;
+  margin-bottom: 10px;
 }

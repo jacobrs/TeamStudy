@@ -36,14 +36,6 @@ export class Header extends Component {
               <i className={`${styles['small-nav-icon']} fa fa-home`} aria-hidden="true"></i>
               <Link className={`nav-link ${styles['nav-links-inline']}`}>Home</Link>
             </li>
-            <li className="nav-item">
-              <i className={`${styles['small-nav-icon']} fa fa-calendar`} aria-hidden="true"></i>
-              <Link className={`nav-link ${styles['nav-links-inline']}`}>Calendar</Link>
-            </li>
-            <li className="nav-item">
-              <i className={`${styles['small-nav-icon']} fa fa-file-text`} aria-hidden="true"></i>
-              <Link className={`nav-link ${styles['nav-links-inline']}`}>Documents</Link>
-            </li>
             <li className="nav-item" id={styles.signout}>
               <Link onClick={this.handleLogout} className={`nav-link ${styles['nav-links-inline']}`}>Sign Out</Link>
             </li>
