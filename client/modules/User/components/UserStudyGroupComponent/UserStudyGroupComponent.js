@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
-//Import style
+// Import style
 import styles from './UserStudyGroupComponent.css';
 
 function UserStudyGroupComponent(props){
@@ -9,11 +9,14 @@ function UserStudyGroupComponent(props){
     return (
       <div className={styles.studyGroup}>
         <ul>
-          <li><Link href="">/*{props.users.user.studyGroups.groupName}*/TESTING</Link></li>
+          <li><Link href="">ENGR 233</Link></li>
+          <li><Link href="">SOEN 341</Link></li>
+          <li><Link href="">ELEC 275</Link></li>
         </ul>
       </div>
     );
   }
+
   return (
     <h1>Loading</h1>
   );

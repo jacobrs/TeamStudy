@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 
 // Import Components
 import UserInfoComponent from '../../components/UserInfoComponent/UserInfoComponent';
-import UserStudyGroupComponent from '../../components/UserStudyGroupComponent/UserStudyGroupComponent';
 
 import { authenticateSessionRequest } from '../../UserActions';
 
@@ -23,7 +22,6 @@ class UserDashboardPage extends Component {
       return (
         <div>
           <UserInfoComponent users={this.props.users} />
-          <UserStudyGroupComponent users={this.props.users} />
         </div>
       );
     }
@@ -51,9 +49,6 @@ function mapStateToProps({ users }) {
 
 // Warning issued if prop not provided
 UserDashboardPage.propTypes = {
-  // email: PropTypes.string,
-  // password: PropTypes.string,
-  // loginUserRequest: PropTypes.func.isRequired,
   authenticateSessionRequest: PropTypes.func.isRequired,
   users: PropTypes.object,
 };

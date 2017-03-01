@@ -1,5 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+
+import UserStudyGroupComponent from '../UserStudyGroupComponent/UserStudyGroupComponent';
+
 // Import Style
 import styles from './UserInfoComponent.css';
 
@@ -10,9 +13,7 @@ function UserInfoComponent(props) {
         <img className="img-circle" id={styles['circle-image']}src="https://static.independent.co.uk/s3fs-public/thumbnails/image/2015/06/15/09/jon-snow.jpg" />
         <h3>{props.users.user.firstName}                                          {props.users.user.lastName} </h3>
         <p>{props.users.user.email} </p>
-        <ul>
-          <li><Link>Course 1</Link></li>
-        </ul>
+        <UserStudyGroupComponent users={props.users} />
       </div>
     );
   }
