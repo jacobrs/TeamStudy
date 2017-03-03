@@ -20,20 +20,13 @@ class UserDashboardPage extends Component {
   render() {
     if (this.props.users.user != null) {
       return (
-        <div>
+        <div className={styles.dashboardContainer}>
           <UserInfoComponent users={this.props.users} />
         </div>
       );
     }
 
-    return (
-      <div id={styles['loading-container']}>
-        <div id={styles['loading-icon']}>
-          <i className="fa fa-refresh fa-spin fa-5x fa-fw"></i>
-          <span className="sr-only">Loading...</span>
-        </div>
-      </div>
-    );
+    return null;
   }
 }
 
@@ -54,7 +47,6 @@ UserDashboardPage.propTypes = {
 };
 
 UserDashboardPage.contextTypes = {
-  // router: React.PropTypes.object,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserDashboardPage);

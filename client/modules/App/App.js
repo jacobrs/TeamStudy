@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Header } from './components/Header/Header';
+import { bindActionCreators } from 'redux';
+import { logoutUserRequest } from '../User/UserActions';
 
 // Import Style
 import styles from './App.css';
@@ -15,14 +17,14 @@ export class App extends Component {
 
   render() {
     // Show nav bar only if user is logged in
-    const header = (this.props.users.user != null) ? <Header /> : null;
+    const header = (this.props.users.user != null) ? <Header logoutReq={this.props.logoutUserRequest} /> : null;
 
     return (
       <div>
         <div>
           <Helmet
-            title="Studee"
-            titleTemplate="%s - eLearning"
+            title="TeamStudy"
+            titleTemplate="%s"
             meta={[
               { charset: 'utf-8' },
               {
@@ -49,6 +51,7 @@ App.propTypes = {
   children: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
   users: PropTypes.object.isRequired,
+  logoutUserRequest: PropTypes.func.isRequired,
 };
 
 // Retrieve data from store as props
@@ -59,4 +62,9 @@ function mapStateToProps(store) {
   };
 }
 
-export default connect(mapStateToProps, {})(App);
+// Bind actions to props
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ logoutUserRequest }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

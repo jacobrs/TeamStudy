@@ -45,6 +45,7 @@
 }
 #navbar a:hover{
   color: #fff;
+  cursor: pointer;
 }
 
 .right{
@@ -75,4 +76,5 @@
 }
 #signout a:hover{
   color: #90a9d5;
+  cursor: pointer;
 }
