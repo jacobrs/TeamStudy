@@ -1,5 +1,4 @@
 import User from '../models/user';
-import StudyGroups from '../models/studyGroup';
 import cuid from 'cuid';
 import sha512 from 'sha512';
 import sanitizeHtml from 'sanitize-html';
@@ -117,7 +116,7 @@ export function getUserStudyGroups(req, res) {
 }
 
 export function addUserStudyGroups(req, res) {
-  let groups =  sanitizeHtml(req.body.studyGroups);
+  let groups = sanitizeHtml(req.body.studyGroups);
   User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
     if (err) {
       return res.status(500).send(err);
@@ -133,12 +132,12 @@ export function addUserStudyGroups(req, res) {
 }
 
 export function deleteUserStudyGroups(req, res) {
-  let groups =  sanitizeHtml(req.body.studyGroups);
+  let groups = sanitizeHtml(req.body.studyGroups);
   User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
     if (err) {
       return res.status(500).send(err);
     }
-    for (var i=user.studyGroups.length-1; i>=0; i--) {
+    for (var i = user.studyGroups.length - 1; i >= 0; i--) {
       if (user.studyGroups[i] == groups)
         user.studyGroups.splice(i, 1);
     }

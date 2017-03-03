@@ -40,6 +40,7 @@ import routes from '../client/routes';
 import { fetchComponentData } from './util/fetchData';
 import users from './routes/user.routes';
 import studyGroups from './routes/studyGroup.routes';
+import messages from './routes/messages.routes';
 import serverConfig from './config';
 const LocalStrategy = require('passport-local').Strategy;
 
@@ -112,6 +113,7 @@ passport.deserializeUser(function (id, done) {
 
 app.use('/api/users', users);
 app.use('/api/studyGroups', studyGroups);
+app.use('/api/messages', messages);
 app.use('/static', Express.static('public'));
 
 // Render Initial HTML

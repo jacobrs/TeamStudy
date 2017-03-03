@@ -1,4 +1,5 @@
 import StudyGroup from '../models/studyGroup';
+import Message from '../models/message';
 import cuid from 'cuid';
 import sanitizeHtml from 'sanitize-html';
 
@@ -26,7 +27,7 @@ export function createStudyGroup(req, res) {
   newStudyGroup.teacher = sanitizeHtml(newStudyGroup.teacher);
   newStudyGroup.description = sanitizeHtml(newStudyGroup.description);
 
-  newStudyGroup.guid = cuid();
+  newStudyGroup.guid = cuid(); // newStudyGroup.cuid? <-----------------------------------------
   newStudyGroup.save((err, saved) => {
     if (err) {
       return res.status(500).send(err);
@@ -54,3 +55,40 @@ export function deleteStudyGroup(req, res) {
     });
   });
 }
+
+
+
+
+
+export function getStudyGroupMessages(req, res) {
+  StudyGroup.findOne({cuid: req.params.cuid}).select('chatMessages').exec((err, chatMessages) =>
+  {
+    if (err) {
+      return res.status(500).send(err);
+    }
+
+    return res.json({chatMessages});
+  });
+}
+
+export function addMessagesToStudyGroup(req, res) {
+  let newMessages = sanitizeHtml(req.body.chatMessages);
+
+  StudyGroup.findOne({cuid: req.params.cuid}).exec((err, studyGroup) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+
+    studyGroup.chatMessages.push(newMessages);
+
+    studyGroup.save((err, saved) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+
+      return res.json({studyGroup: saved});
+    });
+  });
+}
+
+// delete study group messages?
