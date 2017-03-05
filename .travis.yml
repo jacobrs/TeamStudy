@@ -3,4 +3,4 @@ node_js:
   - '7'
 before_install: if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
 after_success:
-    - './node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls'
+    - 'npm install coveralls@2 && cat ./coverage/lcov.info | coveralls'

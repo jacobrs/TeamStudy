@@ -20,7 +20,7 @@ class UserDashboardPage extends Component {
   render() {
     if (this.props.users.user != null) {
       return (
-        <div>
+        <div className={styles.dashboardContainer}>
           <UserInfoComponent users={this.props.users} />
         </div>
       );
