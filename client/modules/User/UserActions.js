@@ -133,7 +133,7 @@ export function logoutUserRequest() {
 
 export function createStudyGroup(studyGroup) {
   console.log(studyGroup);
-  browserHistory.replace('/');
+  browserHistory.replace('/profile');
   return {
     type: CREATE_GROUP,
     studyGroup,

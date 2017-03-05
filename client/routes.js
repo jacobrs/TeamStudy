@@ -4,6 +4,7 @@ import { Route, IndexRoute } from 'react-router';
 import App from './modules/App/App';
 import UserDashboardPage from './modules/User/pages/UserDashboardPage/UserDashboardPage';
 import UserRegistrationPage from './modules/User/pages/UserRegistrationPage/UserRegistrationPage';
+import UserStudyGroupPage from './modules/User/pages/UserStudyGroupPage/UserStudyGroupPage';
 
 // require.ensure polyfill for node
 if (typeof require.ensure !== 'function') {
@@ -32,6 +33,7 @@ export default (
         });
       }}
     />
+    <Route path="/registerGroup" component={UserStudyGroupPage} />
     <Route path="/register" component={UserRegistrationPage} />
     <Route path="/profile" component={UserDashboardPage} />
   </Route>

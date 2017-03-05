@@ -3,7 +3,7 @@ import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import Validation from 'react-validation';
 
 import Valid from '../FormComponents/Validator';
-import styles from './UserRegistrationForm.css';
+import styles from './UserStudyGroupForm.css';
 
 export class UserStudyGroupForm extends Component {
   constructor(props) {

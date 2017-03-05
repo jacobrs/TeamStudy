@@ -32,9 +32,12 @@ export class Header extends Component {
         </div>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className={`nav navbar-nav ${styles.right}`}>
+          <li className="nav-item active">
+              <Link className={`nav-link ${styles['nav-links-inline']}`} to="/registerGroup">Create Study Group</Link>
+            </li>
             <li className="nav-item active">
               <i className={`${styles['small-nav-icon']} fa fa-home`} aria-hidden="true"></i>
-              <Link className={`nav-link ${styles['nav-links-inline']}`}>Home</Link>
+              <Link className={`nav-link ${styles['nav-links-inline']}`} to="/profile">Home</Link>
             </li>
             <li className="nav-item" id={styles.signout}>
               <Link onClick={this.handleLogout} className={`nav-link ${styles['nav-links-inline']}`}>Sign Out</Link>
