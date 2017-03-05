@@ -35,7 +35,6 @@ export class UserStudyGroupForm extends Component {
       console.log(this.state);
       this.setState({ groupName: '', course: '', teacher: '', description: '' });
       e.preventDefault();
-      return false;
     }
   };
 

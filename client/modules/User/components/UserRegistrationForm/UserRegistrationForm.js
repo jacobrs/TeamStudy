@@ -37,7 +37,6 @@ export class UserRegistrationForm extends Component {
       this.setState({ nickname: '', studentId: '', email: '', password: '' });
       //To stop the page from refreshing
       e.preventDefault();
-      return false;
     }
   };
 
