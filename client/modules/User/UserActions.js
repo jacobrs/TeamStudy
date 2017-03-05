@@ -7,6 +7,7 @@ export const UPDATE_USER = 'UPDATE_USER';
 export const LOGIN_USER = 'LOGIN_USER';
 export const AUTHENTICATE_SESSION = 'AUTHENTICATE_SESSION';
 export const FAILED_AUTHENTICATION = 'FAILED_AUTHENTICATION';
+export const CREATE_GROUP = 'CREATE_GROUP'
 
 // Auth Pages
 export const DASHBOARD_PAGE = 'DASHBOARD_PAGE';
@@ -125,5 +126,28 @@ export function logoutUser(response) {
 export function logoutUserRequest() {
   return (dispatch) => {
     return callApi('users/logout').then(res => dispatch(logoutUser(res)));
+  };
+}
+
+
+export function createStudyGroup(studyGroup) {
+  console.log(studyGroup);
+  browserHistory.replace('/');
+  return {
+    type: CREATE_GROUP,
+    studyGroup,
+  };
+}
+
+export function createStudyGroupRequest(studyGroup) {
+  return (dispatch) => {
+    return callApi('users', 'post', {
+      studyGroup: {
+        groupName: studyGroup.groupName,
+        course: studyGroup.course,
+        teacher: studyGroup.teacher,
+        description: studyGroup.description,
+      },
+    }).then(res => dispatch(createStudyGroup(res.studyGroup)));
   };
 }
