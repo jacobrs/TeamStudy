@@ -7,7 +7,7 @@ export const UPDATE_USER = 'UPDATE_USER';
 export const LOGIN_USER = 'LOGIN_USER';
 export const AUTHENTICATE_SESSION = 'AUTHENTICATE_SESSION';
 export const FAILED_AUTHENTICATION = 'FAILED_AUTHENTICATION';
-export const CREATE_GROUP = 'CREATE_GROUP'
+export const CREATE_GROUP = 'CREATE_GROUP';
 
 // Auth Pages
 export const DASHBOARD_PAGE = 'DASHBOARD_PAGE';
@@ -16,6 +16,7 @@ export const LOGOUT_USER = 'LOGOUT_USER';
 
 // Export Actions
 export function addUser(user) {
+  browserHistory.replace('/');
   return {
     type: ADD_USER,
     user,

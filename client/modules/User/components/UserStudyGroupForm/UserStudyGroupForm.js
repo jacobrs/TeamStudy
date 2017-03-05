@@ -8,7 +8,7 @@ import styles from './UserRegistrationForm.css';
 export class UserStudyGroupForm extends Component {
   constructor(props) {
     super(props);
-    this.state = { groupName: '', course: '', teacher: '', description: ''};
+    this.state = { groupName: '', course: '', teacher: '', description: '' };
     this.createStudyGroup = this.createStudyGroup.bind(this);
     this.updateState = this.updateState.bind(this);
   }
@@ -35,9 +35,8 @@ export class UserStudyGroupForm extends Component {
       console.log(this.state);
       this.setState({ groupName: '', course: '', teacher: '', description: '' });
       e.preventDefault();
+      return false;
     }
-    return false;
-
   };
 
   render() {
