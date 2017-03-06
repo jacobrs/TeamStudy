@@ -27,9 +27,9 @@ test('should return the correct type for authenticateSession', actionTest(
 
 ));
 
-test('should return the correct type for logoutUser', actionTest(
-  logoutUser,
-  response,
-   response.cuid
+// test('should return the correct type for logoutUser', actionTest(
+//   logoutUser,
+//   response,
+//    response.cuid
 
-));
+// ));
