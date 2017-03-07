@@ -29,14 +29,12 @@ export class UserRegistrationForm extends Component {
     this.form.hideError(name);
   };
 
-  addUser = (e) => {
+  addUser = () => {
     console.log(this.state);
     if (this.state.nickname && this.state.studentId && this.state.email && this.state.password) {
       this.notifyUser();
       this.props.addUser(this.state.nickname, this.state.studentId, this.state.email, this.state.password);
       this.setState({ nickname: '', studentId: '', email: '', password: '' });
-      //To stop the page from refreshing
-      e.preventDefault();
     }
   };
 
