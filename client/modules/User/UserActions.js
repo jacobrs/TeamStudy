@@ -16,7 +16,6 @@ export const LOGOUT_USER = 'LOGOUT_USER';
 
 // Export Actions
 export function addUser(user) {
-  browserHistory.replace('/');
   return {
     type: ADD_USER,
     user,
