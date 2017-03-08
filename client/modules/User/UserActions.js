@@ -141,7 +141,7 @@ export function createStudyGroup(studyGroup) {
 
 export function createStudyGroupRequest(studyGroup) {
   return (dispatch) => {
-    return callApi('users', 'post', {
+    return callApi('studyGroups', 'post', {
       studyGroup: {
         groupName: studyGroup.groupName,
         course: studyGroup.course,
