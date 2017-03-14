@@ -12,7 +12,6 @@ export function getStudyGroups(req, res) {
 }
 
 export function createStudyGroup(req, res) {
-  console.log(req.body.studyGroup);
   if (!req.body.studyGroup.groupName || !req.body.studyGroup.course || !req.body.studyGroup.teacher ||
     !req.body.studyGroup.description) {
     return res.status(403).end();
@@ -20,7 +19,6 @@ export function createStudyGroup(req, res) {
 
   const newStudyGroup = new StudyGroup(req.body.studyGroup);
 
-  // Let's sanitize inputs
   newStudyGroup.groupName = sanitizeHtml(newStudyGroup.groupName);
   newStudyGroup.course = sanitizeHtml(newStudyGroup.course);
   newStudyGroup.teacher = sanitizeHtml(newStudyGroup.teacher);
@@ -36,21 +34,66 @@ export function createStudyGroup(req, res) {
 }
 
 export function getStudyGroup(req, res) {
-  StudyGroup.findOne({ guid: req.params.guid }).exec((err, studyGroups) => {
+  StudyGroup.findOne({ guid: req.params.guid }).exec((err, studyGroup) => {
     if (err) {
       return res.status(500).send(err);
     }
-    return res.json({ studyGroups });
+    return res.json({ studyGroup });
   });
 }
 
 export function deleteStudyGroup(req, res) {
-  StudyGroup.findOne({ guid: req.params.guid }).exec((err, studyGroups) => {
+  StudyGroup.findOne({ guid: req.params.guid }).exec((err, studyGroup) => {
     if (err) {
       return res.status(500).send(err);
     }
-    studyGroups.remove(() => {
+    studyGroup.remove(() => {
       return res.status(200).end();
+    });
+  });
+}
+
+export function getStudyGroupMessages(req, res) {
+  StudyGroup.findOne({ guid: req.params.guid }).select('chatMessages').exec((err, chatMessages) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    return res.json({ chatMessages });
+  });
+}
+
+export function addMessageToStudyGroup(req, res) {
+  const newMessage = sanitizeHtml(req.body.chatMessage);
+
+  StudyGroup.findOne({ guid: req.params.guid }).exec((err, studyGroup) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+
+    studyGroup.chatMessages.push(newMessage);
+
+    studyGroup.save((err) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      return res.json({ studyGroup });
+    });
+  });
+}
+
+export function deleteStudyGroupMessages(req, res) {
+  StudyGroup.findOne({ guid: req.params.guid }).exec((err, studyGroup) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+
+    studyGroup.chatMessages = [];
+
+    studyGroup.save((err) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      return res.json({ studyGroup });
     });
   });
 }
