@@ -10,7 +10,7 @@ const userSchema = new Schema({
   email: { type: 'String', required: true },
   dateAdded: { type: 'Date', default: Date.now, required: true },
   lastLogin: { type: 'Date', default: null, required: false },
-  studyGroups: [{ type: 'String' }]
+  studyGroups: [{ type: 'String' }],
 });
 
 export default mongoose.model('user', userSchema);

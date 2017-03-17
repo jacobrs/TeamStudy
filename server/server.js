@@ -40,6 +40,7 @@ import routes from '../client/routes';
 import { fetchComponentData } from './util/fetchData';
 import users from './routes/user.routes';
 import studyGroups from './routes/studyGroup.routes';
+import message from './routes/message.routes';
 import serverConfig from './config';
 const LocalStrategy = require('passport-local').Strategy;
 
@@ -112,6 +113,7 @@ passport.deserializeUser(function (id, done) {
 
 app.use('/api/users', users);
 app.use('/api/studyGroups', studyGroups);
+app.use('/api/message', message);
 app.use('/static', Express.static('public'));
 
 // Render Initial HTML
@@ -208,11 +210,31 @@ app.use((req, res, next) => {
   });
 });
 
-// start app
-app.listen(serverConfig.port, (error) => {
+// Start app
+const server = app.listen(serverConfig.port, (error) => {
   if (!error) {
     console.log(`TeamStudy is up and running on port: ${serverConfig.port}! Happy Testing!`); // eslint-disable-line
   }
 });
+
+// Socket.io
+var io = require('socket.io').listen(server);
+
+// Import events and event handlers and attach to socket.io instance
+const socketEvents = require('./socketEvents')(io);
+
+// console.log(server);
+// console.log(__dirname);
+
+// HTML page for debugging
+app.get('/testchat', function (req, res) {
+  res.sendFile(__dirname + '/testChat.html');
+});
+
+/*
+// alternate method to create socket.io instance attached to server
+import SocketIO from 'socket.io';
+const io = new SocketIO(server, {path: '/api/chat'});
+*/
 
 export default app;

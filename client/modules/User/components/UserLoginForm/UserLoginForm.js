@@ -11,6 +11,7 @@ export class UserLoginForm extends Component {
     this.state = { email: '', password: '' };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.loginUser = this.loginUser.bind(this);
+    this.onHandleEnter = this.onHandleEnter.bind(this);
   }
 
   handleInputChange(event) {
@@ -23,6 +24,12 @@ export class UserLoginForm extends Component {
     var elem = document.getElementById(divId);
     elem.style.color = 'Red';
     $('#' + divId).show();
+  }
+
+  onHandleEnter(event){
+    if (event.keyCode === 13){
+      this.loginUser();
+    }
   }
 
   loginUser = () => {
@@ -38,7 +45,7 @@ export class UserLoginForm extends Component {
   // Display form
   render() {
     return (
-      <div className={styles.formContainer + ' ' + styles.center}>
+      <div className={styles.formContainer + ' ' + styles.center} onKeyDown={this.onHandleEnter}>
         <i className={styles.cap + ' fa fa-graduation-cap'} />
         <h1 className={styles.title}><FormattedMessage id="siteTitle" /></h1>
 

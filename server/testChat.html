@@ -1,0 +1,47 @@
+<html>
+<head>
+	<title>Test Chat</title>
+	<style>
+		#chat {
+			height:500px;
+		}
+	</style>
+</head>
+<body>
+	<div id="chat"></div>
+	<form id="send-message">
+		<input size="35" id="message"></input>
+		<input type="submit"></input>
+	</form>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+		jQuery(function($) {
+			var $messageForm = $('#send-message');
+			var $messageBox = $('#message');
+			var $chat = $('#chat');
+
+			// link server-side socket.io object to client-side
+			var socket = io.connect();
+
+			// jQuery event handler
+			$messageForm.submit(function(e) {
+				e.preventDefault();
+
+				// socket.io method
+				socket.emit('SendMessageToServerEvent', $messageBox.val());
+
+				// send a JSON object
+				// socket.emit('eventName', { name: "phil", msg: "hello" });
+
+				$messageBox.val('');
+			});
+
+			// socket.io method
+			socket.on('UpdateChatMessages', function(data) {
+				$chat.append(data + "<br/>");
+			});
+		});
+	</script>
+</body>
+</html>
