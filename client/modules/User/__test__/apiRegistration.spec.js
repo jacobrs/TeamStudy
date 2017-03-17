@@ -4,6 +4,8 @@ import { actionTest } from 'redux-ava';
 import {
   ADD_USER,
   addUser,
+  LOGIN_USER,
+  loginUser,
   AUTHENTICATE_SESSION,
   authenticateSession,
   LOGOUT_USER,
@@ -20,6 +22,12 @@ test('should return the correct type for addUser', actionTest(
 
 ));
 
+test('should return the correct type for loginUser', actionTest(
+  loginUser,
+  response ,
+  { type: LOGIN_USER, response }
+
+));
 test('should return the correct type for authenticateSession', actionTest(
   authenticateSession,
   response,
@@ -27,9 +35,9 @@ test('should return the correct type for authenticateSession', actionTest(
 
 ));
 
-// test('should return the correct type for logoutUser', actionTest(
-//   logoutUser,
-//   response,
-//    response.cuid
+test('should return the correct type for logoutUser', actionTest(
+  logoutUser,
+  response,
+   response.cuid
 
-// ));
+));
