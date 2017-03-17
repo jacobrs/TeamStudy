@@ -61,6 +61,7 @@
     "redux-thunk": "^2.1.0",
     "sanitize-html": "^1.11.4",
     "sha512": "0.0.1",
+    "socket.io": "^1.7.3",
     "validator": "^6.2.1"
   },
   "devDependencies": {

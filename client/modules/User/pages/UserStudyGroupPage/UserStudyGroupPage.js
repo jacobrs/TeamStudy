@@ -7,13 +7,13 @@ import callApi from '../../../../util/apiCaller';
 import StudyGroupForm from '../../components/UserStudyGroupForm/UserStudyGroupForm';
 
 // Import Actions
-import { createStudyGroupRequest } from '../../UserActions';
+import { createStudyGroupRequest, addUserStudyGroupsRequest } from '../../UserActions';
 
 class UserStudyGroupPage extends Component {
   constructor(props) {
     super(props);
-    this.createStudyGroup = this.createStudyGroup.bind(this);
     this.addUserStudyGroups = this.addUserStudyGroups.bind(this);
+    this.createStudyGroup = this.createStudyGroup.bind(this);
   }
 
   createStudyGroup = (groupName, course, teacher, description) => {
@@ -52,8 +52,9 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ createStudyGroupRequest, addUserStudyGroups }, dispatch);
 }
 
+
 UserStudyGroupPage.propTypes = {
-  studyGroups: PropTypes.arrayOf(PropTypes.shape({
+  studyGroup: PropTypes.arrayOf(PropTypes.shape({
     groupName: PropTypes.string.isRequired,
     course: PropTypes.string.isRequired,
     teacher: PropTypes.number.isRequired,
