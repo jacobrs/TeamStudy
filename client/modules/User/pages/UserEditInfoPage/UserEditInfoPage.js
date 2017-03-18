@@ -15,13 +15,17 @@ class UserEditInfoPage extends Component {
     this.updateUser = this.updateUser.bind(this);
   }
 
-  updateUser = (firstName, lastName, studentId, email, password) => {
+  updateUser = (firstName, lastName, studentId, email, password, cuid) => {
+    cuid = this.props.users.user.cuid;
+    console.log("infopage")
+    console.log(password)
     this.props.updateUserRequest({
       firstName,
       lastName,
       studentId,
       email,
       password,
+      cuid
     });
   };
 
@@ -39,6 +43,10 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ updateUserRequest }, dispatch);
 }
 
+function mapStateToProps({ users }) {
+  return { users };
+}
+
 UserEditInfoPage.propTypes = {
   users: PropTypes.arrayOf(PropTypes.shape({
     firstName: PropTypes.string.isRequired,
@@ -54,4 +62,4 @@ UserEditInfoPage.contextTypes = {
   router: React.PropTypes.object,
 };
 
-export default connect(null, mapDispatchToProps)(UserEditInfoPage);
+export default connect(mapStateToProps, mapDispatchToProps)(UserEditInfoPage);

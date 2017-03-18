@@ -10,6 +10,8 @@ const UserReducer = (state = initialState, action) => {
         data: [action.user, ...state.data],
       };
     case UPDATE_USER :
+      console.log("in reducer")
+      console.log(action.user)
       return {
         user: action.user,
       };

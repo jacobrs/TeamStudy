@@ -9,7 +9,7 @@ import styles from '../UserRegistrationForm/UserRegistrationForm.css';
 export class UserUpdateForm extends Component {
   constructor(props) {
     super(props);
-    this.state = { nickname: '', studentId: '', email: '', password: '', passwordConfirm: '' };
+    this.state = { nickname: '', studentId: '', email: '', password: '', passwordConfirm: '', cuid: '' };
     this.updateUser = this.updateUser.bind(this);
     this.updateState = this.updateState.bind(this);
   }
@@ -32,7 +32,7 @@ export class UserUpdateForm extends Component {
   updateUser = (e) => {
     if (this.state.nickname && this.state.studentId && this.state.email && this.state.password) {
       this.notifyUser();
-      this.props.updateUser(this.state.nickname, this.state.studentId, this.state.email, this.state.password);
+      this.props.updateUser(this.state.nickname, this.state.studentId, this.state.email, this.state.password, this.state.cuid);
       this.setState({ nickname: '', studentId: '', email: '', password: '', passwordConfirm: '' });
       //To stop the page from refreshing
       e.preventDefault();

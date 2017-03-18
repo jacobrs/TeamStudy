@@ -44,8 +44,11 @@ export function updateUser(user) {
 }
 
 export function updateUserRequest(user) {
+  let cuid = `users/${user.cuid}`;
+  console.log('action')
+  console.log(user)
   return (dispatch) => {
-    return callApi('/${user.cuid}', 'put', {
+    return callApi(cuid, 'put', {
       user: {
         firstName: user.firstName,
         lastName: user.lastName,
