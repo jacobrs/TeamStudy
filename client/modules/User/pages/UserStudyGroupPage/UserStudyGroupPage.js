@@ -7,26 +7,16 @@ import callApi from '../../../../util/apiCaller';
 import StudyGroupForm from '../../components/UserStudyGroupForm/UserStudyGroupForm';
 
 // Import Actions
-import { createStudyGroupRequest, addUserStudyGroupsRequest } from '../../UserActions';
+import { createStudyGroupRequest } from '../../UserActions';
 
 class UserStudyGroupPage extends Component {
   constructor(props) {
     super(props);
     this.createStudyGroup = this.createStudyGroup.bind(this);
-    this.addUserStudyGroups = this.addUserStudyGroups.bind(this);
   }
 
   createStudyGroup = (groupName, course, teacher, description) => {
-    this.props.createStudyGroupRequest({
-      groupName,
-      course,
-      teacher,
-      description,
-    });
-  };
-
-  addUserStudyGroups = (user, groupName, course, teacher, description) => {
-    this.props.addUserStudyGroupsRequest(this.props.users,{
+    this.props.createStudyGroupRequest(this.props.users,{
       groupName,
       course,
       teacher,
@@ -37,7 +27,7 @@ class UserStudyGroupPage extends Component {
   render() {
     return (
       <div>
-        <StudyGroupForm createStudyGroup={this.createStudyGroup} addUserStudyGroups={this.addUserStudyGroups} />
+        <StudyGroupForm createStudyGroup={this.createStudyGroup} />
       </div>
     );
   }
@@ -49,7 +39,7 @@ function mapStateToProps({ users }) {
 
 // Retrieve data from store as props
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ createStudyGroupRequest, addUserStudyGroupsRequest }, dispatch);
+  return bindActionCreators({ createStudyGroupRequest }, dispatch);
 }
 
 UserStudyGroupPage.propTypes = {
@@ -60,7 +50,6 @@ UserStudyGroupPage.propTypes = {
     description: PropTypes.string.isRequired,
   })),
   createStudyGroupRequest: PropTypes.func.isRequired,
-  addUserStudyGroupsRequest: PropTypes.func.isRequired,
 };
 
 UserStudyGroupPage.contextTypes = {

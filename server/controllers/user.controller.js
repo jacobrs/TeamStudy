@@ -116,8 +116,8 @@ export function getUserStudyGroups(req, res) {
 }
 
 export function addUserStudyGroups(req, res) {
-  let groups =  sanitizeHtml(req.body.cuid_studyGroup.studyGroups);
-  User.findOne({ cuid: req.body.cuid_studyGroup.cuid }).exec((err, user) => {
+  let groups =  sanitizeHtml(req.body.studyGroups);
+  User.findOne({ cuid: req.body.cuid }).exec((err, user) => {
     if (err) {
       return res.status(500).send(err);
     }

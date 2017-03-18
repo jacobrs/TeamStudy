@@ -32,7 +32,6 @@ export class UserStudyGroupForm extends Component {
     if (this.state.groupName && this.state.course && this.state.teacher && this.state.description) {
       this.notifyUser();
       this.props.createStudyGroup(this.state.groupName, this.state.course, this.state.teacher, this.state.description);
-      this.props.addUserStudyGroups(this.props.users,this.state.groupName, this.state.course, this.state.teacher, this.state.description);
       console.log(this.state);
       this.setState({ groupName: '', course: '', teacher: '', description: '' });
       e.preventDefault();
@@ -112,7 +111,6 @@ export class UserStudyGroupForm extends Component {
 
 UserStudyGroupForm.propTypes = {
   createStudyGroup: PropTypes.func.isRequired,
-  addUserStudyGroups: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
 };
 

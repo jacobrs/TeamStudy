@@ -1,4 +1,5 @@
 import StudyGroup from '../models/studyGroup';
+import User from '../models/user';
 import cuid from 'cuid';
 import sanitizeHtml from 'sanitize-html';
 
@@ -16,22 +17,31 @@ export function createStudyGroup(req, res) {
     !req.body.studyGroup.description) {
     return res.status(403).end();
   }
-
   const newStudyGroup = new StudyGroup(req.body.studyGroup);
-
   newStudyGroup.groupName = sanitizeHtml(newStudyGroup.groupName);
   newStudyGroup.course = sanitizeHtml(newStudyGroup.course);
   newStudyGroup.teacher = sanitizeHtml(newStudyGroup.teacher);
   newStudyGroup.description = sanitizeHtml(newStudyGroup.description);
-
   newStudyGroup.guid = cuid();
   newStudyGroup.save((err, saved) => {
     if (err) {
       return res.status(500).send(err);
     }
-    return res.json({ studyGroup: saved });
+    User.findOne({ cuid: req.body.cuid }).exec((err, user) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    user.studyGroups.push(newStudyGroup.guid);
+    user.save((err, saved) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      return res.json({ studyGroup: saved });
+    });
+  });
   });
 }
+
 
 export function getStudyGroup(req, res) {
   StudyGroup.findOne({ guid: req.params.guid }).exec((err, studyGroup) => {
