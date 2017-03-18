@@ -13,7 +13,7 @@ function UserInfoComponent(props) {
         <img className="img-circle" id={styles['circle-image']}src="/static/images/user.png" />
         <div className='btn-toolbar pull-right'>
           <div className='btn-group'>
-            <button type="button" className={`btn btn-primary ${styles['edit-button']}`} >Edit</button>
+            <Link type="button" className={`btn btn-primary ${styles['edit-button']}`} to="/editInfo">Edit</Link>
           </div>
         </div>
         <h3>{props.users.user.firstName}&nbsp;{props.users.user.lastName}</h3>
