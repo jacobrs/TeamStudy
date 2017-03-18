@@ -12,8 +12,8 @@ import { createStudyGroupRequest, addUserStudyGroupsRequest } from '../../UserAc
 class UserStudyGroupPage extends Component {
   constructor(props) {
     super(props);
-    this.addUserStudyGroups = this.addUserStudyGroups.bind(this);
     this.createStudyGroup = this.createStudyGroup.bind(this);
+    this.addUserStudyGroups = this.addUserStudyGroups.bind(this);
   }
 
   createStudyGroup = (groupName, course, teacher, description) => {
@@ -25,7 +25,7 @@ class UserStudyGroupPage extends Component {
     });
   };
 
-  addUserStudyGroups = (groupName, course, teacher, description) => {
+  addUserStudyGroups = (user, groupName, course, teacher, description) => {
     this.props.addUserStudyGroupsRequest(this.props.users,{
       groupName,
       course,
@@ -49,12 +49,11 @@ function mapStateToProps({ users }) {
 
 // Retrieve data from store as props
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ createStudyGroupRequest, addUserStudyGroups }, dispatch);
+  return bindActionCreators({ createStudyGroupRequest, addUserStudyGroupsRequest }, dispatch);
 }
 
-
 UserStudyGroupPage.propTypes = {
-  studyGroup: PropTypes.arrayOf(PropTypes.shape({
+  studyGroups: PropTypes.arrayOf(PropTypes.shape({
     groupName: PropTypes.string.isRequired,
     course: PropTypes.string.isRequired,
     teacher: PropTypes.number.isRequired,

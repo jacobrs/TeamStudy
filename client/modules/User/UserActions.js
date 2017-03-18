@@ -132,7 +132,6 @@ export function logoutUserRequest() {
 
 
 export function createStudyGroup(studyGroup) {
-  console.log(studyGroup);
   browserHistory.replace('/profile');
   return {
     type: CREATE_GROUP,
@@ -153,8 +152,7 @@ export function createStudyGroupRequest(studyGroup) {
   };
 }
 
-export function addUserStudyGroups(user,studyGroup) {
-  console.log("Assigning study group to user");
+export function addUserStudyGroups(user,studyGroups) {
   return {
     type: ASSIGN_STUDY_GROUP,
     user,
@@ -162,10 +160,15 @@ export function addUserStudyGroups(user,studyGroup) {
 }
 
 export function addUserStudyGroupsRequest(user,studyGroup){
+  console.log(user.user);
+  console.log(studyGroup);
   return (dispatch) => {
-    return callApi(`users/${user.cuid}/studyGroups`, 'put', {
-      cuid: user.cuid,
-      studyGroups: studyGroup,
-    }).then(res => dispatch(addUserStudyGroup(res.user,studyGroup)));
+    return callApi(`users/${user.user.cuid}/studyGroups`, 'put', {
+      cuid_studyGroup: {
+        cuid: user.user.cuid,
+        studyGroups: studyGroup,
+      }
+      
+    }).then(res => dispatch(addUserStudyGroup(res.user)));
   };
 }
