@@ -11,6 +11,11 @@ function UserInfoComponent(props) {
     return (
       <div className="col-md-3" id={styles.sidebar}>
         <img className="img-circle" id={styles['circle-image']}src="/static/images/user.png" />
+        <div className='btn-toolbar pull-right'>
+          <div className='btn-group'>
+            <button type="button" className={`btn btn-primary ${styles['edit-button']}`} >Edit</button>
+          </div>
+        </div>
         <h3>{props.users.user.firstName}&nbsp;{props.users.user.lastName}</h3>
         <p>{props.users.user.email} </p>
         <UserStudyGroupComponent users={props.users} />
