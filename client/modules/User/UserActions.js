@@ -45,7 +45,7 @@ export function updateUser(user) {
 
 export function updateUserRequest(user) {
   return (dispatch) => {
-    return callApi('users', 'put', {
+    return callApi('/${user.cuid}', 'put', {
       user: {
         firstName: user.firstName,
         lastName: user.lastName,
