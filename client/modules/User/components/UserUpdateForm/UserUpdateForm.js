@@ -9,7 +9,18 @@ import styles from '../UserRegistrationForm/UserRegistrationForm.css';
 export class UserUpdateForm extends Component {
   constructor(props) {
     super(props);
-    this.state = { nickname: '', studentId: '', email: '', password: '', passwordConfirm: '', cuid: '' };
+    if(props.user == undefined){
+      this.state = { nickname: '', studentId: '', email: '', password: '', passwordConfirm: '' };
+    }else{
+      this.state = { 
+        nickname: props.user.firstName + " " + props.user.lastName,
+        studentId: props.user.studentId,
+        email: props.user.email,
+        password: "",
+        passwordConfirm: ""
+      };
+    }
+    this.user = props.user;
     this.updateUser = this.updateUser.bind(this);
     this.updateState = this.updateState.bind(this);
   }
@@ -31,8 +42,11 @@ export class UserUpdateForm extends Component {
 
   updateUser = (e) => {
     if (this.state.nickname && this.state.studentId && this.state.email && this.state.password) {
+      const fullname = this.state.nickname.split(' ');
+      const firstName = fullname.shift();
+      const lastName = fullname.shift() || '';
+      this.props.updateUser(firstName, lastName, this.state.studentId, this.state.email, this.state.password, this.user.cuid);
       this.notifyUser();
-      this.props.updateUser(this.state.nickname, this.state.studentId, this.state.email, this.state.password, this.state.cuid);
       this.setState({ nickname: '', studentId: '', email: '', password: '', passwordConfirm: '' });
       //To stop the page from refreshing
       e.preventDefault();
@@ -42,11 +56,8 @@ export class UserUpdateForm extends Component {
   render() {
     return (
         <div className={`${styles.formContainer} ${styles.center}`}>
-            <i className={`${styles.cap} fa fa-graduation-cap`} />
-            <h1 className={styles.title}><FormattedMessage id="siteTitle" /></h1>
-
           <div className={styles.formLabel + ' row'}>
-          <Validation.components.Form method="POST" ref={c => { this.form = c; }} onSubmit={this.updateUser} className="col-lg-4 push-lg-4 col-md-6 push-md-3 col-xs-8 push-xs-2">
+          <Validation.components.Form ref={c => { this.form = c; }} onSubmit={this.updateUser} className="col-lg-4 push-lg-4 col-md-6 push-md-3 col-xs-8 push-xs-2">
 
                 <label className="input-labels"> Full Name* </label>
                 <Validation.components.Input
@@ -126,6 +137,7 @@ export class UserUpdateForm extends Component {
 }
 
 UserUpdateForm.propTypes = {
+  user: PropTypes.object,
   updateUser: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
 };

@@ -13,12 +13,10 @@ class UserEditInfoPage extends Component {
   constructor(props) {
     super(props);
     this.updateUser = this.updateUser.bind(this);
+    this.user = props.user;
   }
 
   updateUser = (firstName, lastName, studentId, email, password, cuid) => {
-    cuid = this.props.users.user.cuid;
-    console.log("infopage")
-    console.log(password)
     this.props.updateUserRequest({
       firstName,
       lastName,
@@ -32,7 +30,7 @@ class UserEditInfoPage extends Component {
   render() {
     return (
       <div>
-        <UserUpdateForm updateUser={this.updateUser} />
+        <UserUpdateForm updateUser={this.updateUser} user={this.user}/>
       </div>
     );
   }
@@ -44,17 +42,11 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps({ users }) {
-  return { users };
+  return users;
 }
 
 UserEditInfoPage.propTypes = {
-  users: PropTypes.arrayOf(PropTypes.shape({
-    firstName: PropTypes.string.isRequired,
-    lastName: PropTypes.string.isRequired,
-    studentId: PropTypes.number.isRequired,
-    email: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-  })),
+  users: PropTypes.object,
   updateUserRequest: PropTypes.func.isRequired,
 };
 

@@ -66,14 +66,15 @@ export function authenticateUser(req, res) {
 }
 
 export function updateUser(req, res) {
-  console.log(req.body)
+  console.log("UPDATE REQUESTED: ");
+  console.log(req.body);
   let firstName = sanitizeHtml(req.body.user.firstName);
   let lastName = sanitizeHtml(req.body.user.lastName);
   let studentId = sanitizeHtml(req.body.user.studentId);
   let email = sanitizeHtml(req.body.user.email);
   let password = sha512(req.body.user.password).toString('hex');
 
-  User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
+  User.findOne({ cuid: req.user.cuid }).exec((err, user) => {
     if (err) {
       return res.status(500).send(err);
     }

@@ -45,8 +45,7 @@ export function updateUser(user) {
 
 export function updateUserRequest(user) {
   let cuid = `users/${user.cuid}`;
-  console.log('action')
-  console.log(user)
+  console.log(user);
   return (dispatch) => {
     return callApi(cuid, 'put', {
       user: {
@@ -82,7 +81,6 @@ export function loginUserRequest(user) {
 
 export function authenticateSession(response, page) {
   // Failed to authenticate, redirect to landing page
-  console.log(browserHistory);
   switch (page) {
     case DASHBOARD_PAGE:
       if (response.statusCode !== 200) {
