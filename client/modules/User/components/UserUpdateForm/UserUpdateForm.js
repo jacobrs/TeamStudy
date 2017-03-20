@@ -127,7 +127,7 @@ export class UserUpdateForm extends Component {
                <Validation.components.Button className={`${styles.btnOutlineSecondary} btn btn-outline-secondary  ${styles.signInButton}`}>
                Update Information
                </Validation.components.Button><br /><br />
-                    <Link className={styles.mainText} to="/">Return to main menu</Link>
+                    <Link className={styles.mainText} to="/profile">Return to main menu</Link>
 
               </Validation.components.Form>
           </div>
