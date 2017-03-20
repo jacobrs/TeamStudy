@@ -61,5 +61,23 @@ test.serial('Should correctly create a new Study Group', async t => {
 //*************
 // Messages
 //*************
+test.serial('Should save a message to the database', async t => {
+  t.plan(4);
+
+  const response = await request(app)
+    .post('/api/message')
+    .send({ message: {
+      messageContent: 'content of message',
+      author: 'Bob',
+      studyGroup: 'Study Group 321' },
+    })
+    .set('Accept', 'application/json');
+
+  t.is(response.status, 200);
+  t.is(response.body.message.messageContent, 'content of message');
+  t.is(response.body.message.author, 'Bob');
+  t.is(response.body.message.studyGroup, 'Study Group 321');
+});
+
 
 
