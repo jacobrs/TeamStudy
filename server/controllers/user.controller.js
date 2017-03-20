@@ -41,6 +41,7 @@ export function addUser(req, res) {
   newUser.password = sha512(newUser.password).toString('hex');
 
   newUser.cuid = cuid();
+  
   newUser.save((err, saved) => {
     if (err) {
       return res.status(500).send(err);

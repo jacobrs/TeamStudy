@@ -29,12 +29,12 @@ router.route('/:cuid').delete(UserController.deleteUser);
 router.route('/login').post(passport.authenticate('local'), UserController.loginUser);
 
 //  Get User study groups
-router.route('/:cuid/studyGroups').get(UserController.getUserStudyGroups);
+router.route('/:cuid/studyGroups').get(ensureAuthenticated, UserController.getUserStudyGroups);
 
 //  Add User study group
-router.route('/:cuid/studyGroups').put(UserController.addUserStudyGroups);
+router.route('/:cuid/studyGroups').put(ensureAuthenticated, UserController.addUserStudyGroups);
 
 //  Delete User study groups
-router.route('/:cuid/studyGroups').delete(UserController.deleteUserStudyGroups);
+router.route('/:cuid/studyGroups').delete(ensureAuthenticated, UserController.deleteUserStudyGroups);
 
 export default router;

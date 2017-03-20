@@ -32,12 +32,12 @@ export function getAllMessages(req, res) {
   });
 }
 
-export function getMessagesByStudyGroup(req, res) {
-  Message.find({ studyGroup: req.params.studyGroup }).exec((err, messages) => {
+export function getMessagesFromStudyGroup(req, res) {
+  Message.find({ studyGroup: req.params.studyGroup }).exec((err, studyGroupMessages) => {
     if (err) {
       return res.status(500).send(err).end();
     }
-    return res.json({ messages }).end();
+    return res.json({ studyGroupMessages }).end();
   });
 }
 
@@ -50,7 +50,7 @@ export function deleteAllMessages(req, res) {
   });
 }
 
-export function deleteMessagesByStudyGroup(req, res) {
+export function deleteMessagesFromStudyGroup(req, res) {
   Message.remove({ studyGroup: req.params.studyGroup }).exec((err) => {
     if (err) {
       return res.status(500).send(err).end();
