@@ -1,4 +1,5 @@
 import User from '../models/user';
+import StudyGroup from '../models/studyGroup';
 import cuid from 'cuid';
 import sha512 from 'sha512';
 import sanitizeHtml from 'sanitize-html';
@@ -77,6 +78,10 @@ export function updateUser(req, res) {
   User.findOne({ cuid: req.user.cuid }).exec((err, user) => {
     if (err) {
       return res.status(500).send(err);
+
+    }
+    else {
+      return res.json({ user: updated });
     }
     user.firstName = firstName;
     user.lastName = lastName;
@@ -120,8 +125,14 @@ export function getUserStudyGroups(req, res) {
     if (err) {
       return res.status(500).send(err);
     }
-    return res.json({ studyGroups });
-  });
+    console.log(studyGroups)
+    StudyGroup.find({ guid: {$in: studyGroups.studyGroups }}).exec((err, foundGroups) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+        return res.json({ myGroups: foundGroups });
+      });
+    });
 }
 
 export function addUserStudyGroups(req, res) {
