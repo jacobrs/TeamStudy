@@ -67,21 +67,34 @@ export function authenticateUser(req, res) {
 }
 
 export function updateUser(req, res) {
-  firstName = sanitizeHtml(req.body.user.firstName);
-  lastName = sanitizeHtml(req.body.user.lastName);
-  studentId = sanitizeHtml(req.body.user.studentId);
-  email = sanitizeHtml(req.body.user.email);
-  password = sha512(req.body.user.password).toString('hex');
+  console.log("UPDATE REQUESTED: ");
+  console.log(req.body);
+  let firstName = sanitizeHtml(req.body.user.firstName);
+  let lastName = sanitizeHtml(req.body.user.lastName);
+  let studentId = sanitizeHtml(req.body.user.studentId);
+  let email = sanitizeHtml(req.body.user.email);
+  let password = sha512(req.body.user.password).toString('hex');
 
-  let update = { firstName, lastName, studentId, email, password };
-
-  User.findOneAndUpdate({ cuid: req.params.cuid }, { $set: update }, function (err, updated) {
+  User.findOne({ cuid: req.user.cuid }).exec((err, user) => {
     if (err) {
       return res.status(500).send(err);
+
     }
     else {
       return res.json({ user: updated });
     }
+    user.firstName = firstName;
+    user.lastName = lastName;
+    user.studentId = studentId;
+    user.email = email;
+    user.password = password;
+
+    user.save((err, saved) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      return res.json({ user: saved });
+    });
   });
 }
 
