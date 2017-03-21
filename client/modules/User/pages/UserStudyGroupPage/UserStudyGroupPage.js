@@ -16,7 +16,7 @@ class UserStudyGroupPage extends Component {
   }
 
   createStudyGroup = (groupName, course, teacher, description) => {
-    this.props.createStudyGroupRequest({
+    this.props.createStudyGroupRequest(this.props.users,{
       groupName,
       course,
       teacher,
@@ -33,13 +33,17 @@ class UserStudyGroupPage extends Component {
   }
 }
 
+function mapStateToProps({ users }) {
+  return { users };
+}
+
 // Retrieve data from store as props
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ createStudyGroupRequest }, dispatch);
 }
 
 UserStudyGroupPage.propTypes = {
-  users: PropTypes.arrayOf(PropTypes.shape({
+  studyGroups: PropTypes.arrayOf(PropTypes.shape({
     groupName: PropTypes.string.isRequired,
     course: PropTypes.string.isRequired,
     teacher: PropTypes.number.isRequired,
@@ -52,4 +56,4 @@ UserStudyGroupPage.contextTypes = {
   router: React.PropTypes.object,
 };
 
-export default connect(null, mapDispatchToProps)(UserStudyGroupPage);
+export default connect(mapStateToProps, mapDispatchToProps)(UserStudyGroupPage);

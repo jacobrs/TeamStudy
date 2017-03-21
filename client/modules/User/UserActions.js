@@ -132,7 +132,6 @@ export function logoutUserRequest() {
 
 
 export function createStudyGroup(studyGroup) {
-  console.log(studyGroup);
   browserHistory.replace('/profile');
   return {
     type: CREATE_GROUP,
@@ -140,15 +139,16 @@ export function createStudyGroup(studyGroup) {
   };
 }
 
-export function createStudyGroupRequest(studyGroup) {
+export function createStudyGroupRequest(user,studyGroup) {
   return (dispatch) => {
     return callApi('studyGroups', 'post', {
-      studyGroup: {
-        groupName: studyGroup.groupName,
-        course: studyGroup.course,
-        teacher: studyGroup.teacher,
-        description: studyGroup.description,
-      },
+        cuid: user.user.cuid,
+        studyGroup: {
+          groupName: studyGroup.groupName,
+          course: studyGroup.course,
+          teacher: studyGroup.teacher,
+          description: studyGroup.description,
+        },
     }).then(res => dispatch(createStudyGroup(res.studyGroup)));
   };
 }
