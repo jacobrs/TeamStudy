@@ -152,3 +152,11 @@ export function createStudyGroupRequest(user,studyGroup) {
     }).then(res => dispatch(createStudyGroup(res.studyGroup)));
   };
 }
+
+export function fetchUserGroups(user) {
+  const URL = `user/${user.cuid}/studyGroups`;
+  return (dispatch) => {
+    return callApi(URL)
+      .then(res => dispatch(getUserStudyGroups(res.myGroups)));
+  };
+}
