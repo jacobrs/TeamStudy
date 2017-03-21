@@ -16,6 +16,7 @@ const user = { '_id': '589201f691293665a65538df', 'cuid': 'piyn4gkh900002us7yyn1
 const user2 = { '_id': '589201f691293665a65538df', 'cuid': 'piyn4gkh900002us7yyn1nejq'};
 const response = { 'statusCode': 200};
 const user3 ={'cuid': 'piyn4gkh900002us7yyn1nejq'};
+var authenticate;
 
 test('should return the correct type for addUser', actionTest(
   addUser,
@@ -30,16 +31,16 @@ test('should return the correct type for loginUser', actionTest(
   { type: LOGIN_USER, response: [user2] },
 
 ));
-// test('should return the correct type for authenticateSession', actionTest(
-//   authenticateSession,
-//   response,
-//   { type: AUTHENTICATE_SESSION, response: user4},
+test('should return the correct type for authenticateSession', actionTest(
+  authenticateSession,
+  [user2],
+   authenticate,
 
-// ));
+));
 
-// test('should return the correct type for logoutUser', actionTest(
-//   logoutUser,
-//   response,
-//    response.cuid,
+test('should return the correct type for logoutUser', actionTest(
+  logoutUser,
+  [user2],
+   { type: LOGOUT_USER, response: [user2] },
 
-// ));
+));
