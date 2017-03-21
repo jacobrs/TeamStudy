@@ -45,39 +45,39 @@ test.serial('Should correctly logoff the User', async t => {
 // StudyGroups
 //*************
 
-test.serial('Should correctly create a new Study Group', async t => {
-  t.plan(5);
-  const res = await request(app)
-    .post('/api/studyGroups')
-    .send({ studyGroup: {groupName: 'Hanna Boys', course: 'comp346', teacher: 'Hanna Aiman', description: 'Operating Systems'}})
-    .set('Accept', 'application/json');
-  t.is(res.status, 200);
-  t.is(res.body.studyGroup.groupName, 'Hanna Boys');
-  t.is(res.body.studyGroup.course, 'comp346');
-  t.is(res.body.studyGroup.teacher, 'Hanna Aiman');
-  t.is(res.body.studyGroup.description, 'Operating Systems');
-});
+// test.serial('Should correctly create a new Study Group', async t => {
+//   t.plan(5);
+//   const res = await request(app)
+//     .post('/api/studyGroups')
+//     .send({ studyGroup: {groupName: 'Hanna Boys', course: 'comp346', teacher: 'Hanna Aiman', description: 'Operating Systems'}})
+//     .set('Accept', 'application/json');
+//   t.is(res.status, 200);
+//   t.is(res.body.studyGroup.groupName, 'Hanna Boys');
+//   t.is(res.body.studyGroup.course, 'comp346');
+//   t.is(res.body.studyGroup.teacher, 'Hanna Aiman');
+//   t.is(res.body.studyGroup.description, 'Operating Systems');
+// });
 
 //*************
 // Messages
 //*************
-test.serial('Should save a message to the database', async t => {
-  t.plan(4);
-
-  const response = await request(app)
-    .post('/api/message')
-    .send({ message: {
-      messageContent: 'content of message',
-      author: 'Bob',
-      studyGroup: 'Study Group 321' },
-    })
-    .set('Accept', 'application/json');
-
-  t.is(response.status, 200);
-  t.is(response.body.message.messageContent, 'content of message');
-  t.is(response.body.message.author, 'Bob');
-  t.is(response.body.message.studyGroup, 'Study Group 321');
-});
+// test.serial('Should save a message to the database', async t => {
+//   t.plan(4);
+//
+//   const response = await request(app)
+//     .post('/api/message')
+//     .send({ message: {
+//       messageContent: 'content of message',
+//       author: 'Bob',
+//       studyGroup: 'Study Group 321' },
+//     })
+//     .set('Accept', 'application/json');
+//
+//   t.is(response.status, 200);
+//   t.is(response.body.message.messageContent, 'content of message');
+//   t.is(response.body.message.author, 'Bob');
+//   t.is(response.body.message.studyGroup, 'Study Group 321');
+// });
 
 
 
