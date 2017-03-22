@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 
 // Import Components
 import UserInfoComponent from '../../components/UserInfoComponent/UserInfoComponent';
+import ChatComponent from '../../components/ChatComponent/ChatComponent';
 
 import { authenticateSessionRequest } from '../../UserActions';
 
@@ -20,8 +21,9 @@ class UserDashboardPage extends Component {
   render() {
     if (this.props.users.user != null) {
       return (
-        <div className={styles.dashboardContainer}>
+        <div className={`row ${styles.dashboardContainer}`}>
           <UserInfoComponent users={this.props.users} />
+          <ChatComponent users={this.props.users} />
         </div>
       );
     }

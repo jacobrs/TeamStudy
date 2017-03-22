@@ -8,6 +8,7 @@ export const LOGIN_USER = 'LOGIN_USER';
 export const AUTHENTICATE_SESSION = 'AUTHENTICATE_SESSION';
 export const FAILED_AUTHENTICATION = 'FAILED_AUTHENTICATION';
 export const CREATE_GROUP = 'CREATE_GROUP';
+export const SET_CURRENT_STUDY_GROUP = 'SET_CURRENT_STUDY_GROUP';
 
 // Auth Pages
 export const DASHBOARD_PAGE = 'DASHBOARD_PAGE';
@@ -150,5 +151,12 @@ export function createStudyGroupRequest(user,studyGroup) {
           description: studyGroup.description,
         },
     }).then(res => dispatch(createStudyGroup(res.studyGroup)));
+  };
+}
+
+export function setCurrentStudyGroup(studyGroup) {
+  return {
+    type: SET_CURRENT_STUDY_GROUP,
+    studyGroup,
   };
 }
