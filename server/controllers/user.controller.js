@@ -80,9 +80,6 @@ export function updateUser(req, res) {
       return res.status(500).send(err);
 
     }
-    else {
-      return res.json({ user: updated });
-    }
     user.firstName = firstName;
     user.lastName = lastName;
     user.studentId = studentId;
