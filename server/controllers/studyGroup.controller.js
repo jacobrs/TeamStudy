@@ -1,5 +1,5 @@
 import StudyGroup from '../models/studyGroup';
-import User from '../models/user';
+import Message from '../models/message';
 import cuid from 'cuid';
 import sanitizeHtml from 'sanitize-html';
 
@@ -17,31 +17,21 @@ export function createStudyGroup(req, res) {
     !req.body.studyGroup.description) {
     return res.status(403).end();
   }
+
   const newStudyGroup = new StudyGroup(req.body.studyGroup);
   newStudyGroup.groupName = sanitizeHtml(newStudyGroup.groupName);
   newStudyGroup.course = sanitizeHtml(newStudyGroup.course);
   newStudyGroup.teacher = sanitizeHtml(newStudyGroup.teacher);
   newStudyGroup.description = sanitizeHtml(newStudyGroup.description);
   newStudyGroup.guid = cuid();
+
   newStudyGroup.save((err, saved) => {
     if (err) {
       return res.status(500).send(err);
     }
-    User.findOne({ cuid: req.body.cuid }).exec((err, user) => {
-    if (err) {
-      return res.status(500).send(err);
-    }
-    user.studyGroups.push(newStudyGroup.guid);
-    user.save((err, saved) => {
-      if (err) {
-        return res.status(500).send(err);
-      }
-      return res.json({ studyGroup: saved });
-    });
-  });
+    return res.json(saved);
   });
 }
-
 
 export function getStudyGroup(req, res) {
   StudyGroup.findOne({ guid: req.params.guid }).exec((err, studyGroup) => {
@@ -64,30 +54,44 @@ export function deleteStudyGroup(req, res) {
 }
 
 export function getStudyGroupMessages(req, res) {
-  StudyGroup.findOne({ guid: req.params.guid }).select('chatMessages').exec((err, chatMessages) => {
+  StudyGroup.findOne({ guid: req.params.guid }).select('chatMessages').exec((err, messages) => {
     if (err) {
       return res.status(500).send(err);
     }
-    return res.json({ chatMessages });
+    return res.json(messages);
   });
 }
 
 export function addMessageToStudyGroup(req, res) {
-  const newMessage = sanitizeHtml(req.body.chatMessage);
-
   StudyGroup.findOne({ guid: req.params.guid }).exec((err, studyGroup) => {
     if (err) {
       return res.status(500).send(err);
-    }
+    }    
+    
+    let messageCuid = req.body.messageCuid;
+    let duplicate = false;
 
-    studyGroup.chatMessages.push(newMessage);
+    studyGroup.chatMessages.forEach(function(element) {
+      if (element.cuid = messageCuid) {
+        duplicate = true;       
+      }
+    });
 
-    studyGroup.save((err) => {
+    Message.findOne({ cuid: messageCuid }).exec((err, message) => {
       if (err) {
         return res.status(500).send(err);
       }
-      return res.json({ studyGroup });
-    });
+
+      if (!duplicate)
+        studyGroup.chatMessages.push(message);
+
+      studyGroup.save((err, saved) => {
+        if (err) {
+          return res.status(500).send(err);
+        }
+        return res.json({ studyGroup: saved });
+      }); 
+    });         
   });
 }
 

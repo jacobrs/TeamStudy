@@ -5,11 +5,11 @@ const router = new Router();
 // Get all Study Groups
 router.route('/').get(StudyGroupController.getStudyGroups);
 
-// Get Study Group by guid
-router.route('/:guid').get(StudyGroupController.getStudyGroup);
-
 // Create a new Study Group
 router.route('/').post(StudyGroupController.createStudyGroup);
+
+// Get Study Group by guid
+router.route('/:guid').get(StudyGroupController.getStudyGroup);
 
 // Delete Study Group by guid
 router.route('/:guid').delete(StudyGroupController.deleteStudyGroup);
