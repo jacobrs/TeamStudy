@@ -220,7 +220,7 @@ const server = app.listen(serverConfig.port, (error) => {
 // Socket.io
 var io = require('socket.io').listen(server);
 
-// Import events and event handlers and attach to socket.io instance
+// Import events and event handlers and attach them to the socket.io instance
 const socketEvents = require('./socketEvents')(io);
 
 // console.log(server);

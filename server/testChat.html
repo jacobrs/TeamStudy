@@ -24,22 +24,27 @@
 			// link server-side socket.io object to client-side
 			var socket = io.connect();
 
-			// jQuery event handler
+			// placeholder, need to fetch current logged in user
+			var user = 'userPlaceholder' + Math.floor(Math.random()*10);
+			socket.emit('UserSignedIn', user);
+
 			$messageForm.submit(function(e) {
 				e.preventDefault();
-
-				// socket.io method
-				socket.emit('SendMessageToServerEvent', $messageBox.val());
-
-				// send a JSON object
-				// socket.emit('eventName', { name: "phil", msg: "hello" });
-
+				let newMessage = $messageBox.val();
+				socket.emit('SaveMessage', { message: newMessage, studyGroup: 'studyGroupPlaceholder' });
 				$messageBox.val('');
 			});
 
-			// socket.io method
-			socket.on('UpdateChatMessages', function(data) {
-				$chat.append(data + "<br/>");
+			// fetch existing messages event handler
+			socket.on('FetchExistingMessages', function(messages) {
+				for(var i = messages.length-1; i >= 0; i--) {
+					$chat.append(messages[i].author + ": " + messages[i].messageContent + "<br/>");
+				}
+			});
+
+			// update chat with new message event handler
+			socket.on('UpdateMessages', function(data) {
+				$chat.append(data.user + ": " + data.message + "<br/>");
 			});
 		});
 	</script>
