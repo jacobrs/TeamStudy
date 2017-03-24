@@ -1,3 +1,4 @@
+import User from '../models/user'
 import StudyGroup from '../models/studyGroup';
 import Message from '../models/message';
 import cuid from 'cuid';
@@ -29,7 +30,18 @@ export function createStudyGroup(req, res) {
     if (err) {
       return res.status(500).send(err);
     }
-    return res.json(saved);
+    User.findOne({ cuid: req.body.cuid }).exec((err, user) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      user.studyGroups.push(newStudyGroup);
+      user.save((err, saved) => {
+        if (err) {
+          return res.status(500).send(err);
+        }
+        return res.json({ studyGroup: saved });
+      });
+    });
   });
 }
 
