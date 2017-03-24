@@ -37,7 +37,7 @@ Object.assign(Validation.rules, {
   studentId: {
 
     rule: value => {
-      const re = /[0-9]{8}/;
+      const re = /^[0-9]{8}$/;
 
       return re.test(value);
     },
