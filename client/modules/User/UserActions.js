@@ -152,3 +152,4 @@ export function createStudyGroupRequest(user,studyGroup) {
     }).then(res => dispatch(createStudyGroup(res.studyGroup)));
   };
 }
+
