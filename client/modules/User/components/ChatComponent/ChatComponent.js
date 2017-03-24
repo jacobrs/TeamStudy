@@ -21,39 +21,61 @@ const COLORS = [
 ];
 
 // Ensure we have a color for every user, if we are out of colors just wrap back around.
-function getColorFromUserIndex(index) {
+export function getColorFromUserIndex(index) {
   return COLORS[index % COLORS.length];
 }
 
 export class ChatComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { messages: [] };
-    this.populateMessages = this.populateMessages.bind(this);
+    this.state = { value: '' };
     this.socket = null;
+    this.sendMessage = this.sendMessage.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.onMessageReceive = this.onMessageReceive.bind(this);
   }
 
   componentWillMount() {
     console.log('Will Mount');
-    console.log(this.props.users);
     this.socket = io.connect();
-    this.populateMessages();
+    this.socket.emit('UserSignedIn', `${this.props.users.user.firstName} ${this.props.users.user.lastName}`);
+    this.socket.on('UpdateMessages', this.onMessageReceive);
+
+    this.props.setChat(0);
   }
 
   componentWillUpdate(nextProps, nextState) {
-    console.log('Will Update');
-    this.populateMessages();
+
   }
 
   componentWillUnmount() {
     console.log('Will Unmount');
+    this.socket.disconnect();
   }
 
-  populateMessages() {
-    this.state.messages = [];
-    // Test messages for now
-    for (let i = 0; i < 100; i++) {
-      this.state.messages.push(<div key={i} style={{ color: getColorFromUserIndex(i) }}>Hello</div>);
+  onMessageReceive(data) {
+    this.props.prepareChatMessage(data);
+  }
+
+  handleChange(event) {
+    this.setState({ value: event.target.value });
+  }
+
+  handleKeyDown(event) {
+    if (event.keyCode === 13 && !event.shiftKey) {
+      this.sendMessage();
+      event.preventDefault();
+    }
+  }
+
+  sendMessage() {
+    if (this.state.value !== '') {
+      this.socket.emit('SaveMessage', {
+        message: this.state.value,
+        studyGroup: this.props.users.user.studyGroups[this.props.users.currentStudyGroup].guid,
+      });
+      this.state.value = '';
     }
   }
 
@@ -63,11 +85,11 @@ export class ChatComponent extends Component {
     return (
       <div className="col-md-9">
         <div className="row-md-3 border rounded" id={styles['message-area']}>
-            {this.state.messages}
+            {this.props.users.chat.messages}
         </div>
         <div className="row">
-          <textarea className="col-md-11 form-control" rows="3"></textarea>
-          <button className="col-md-1 btn btn-primary">Send</button>
+          <textarea className="col-md-11 form-control" rows="3" value={this.state.value} onKeyDown={this.handleKeyDown} onChange={this.handleChange} ></textarea>
+          <button className="col-md-1 btn btn-primary" onClick={this.sendMessage}>Send</button>
         </div>
       </div>
     );

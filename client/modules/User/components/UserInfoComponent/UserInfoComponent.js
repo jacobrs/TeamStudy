@@ -7,7 +7,7 @@ import UserStudyGroupComponent from '../UserStudyGroupComponent/UserStudyGroupCo
 import styles from './UserInfoComponent.css';
 
 function UserInfoComponent(props) {
-  if (Object.keys(props.users).length === 1) { // wait props.users not to be null
+  if (props.users.user !== null) { // wait props.users not to be null
     return (
       <div className="col-md-3" id={styles.sidebar}>
         <img className="img-circle" id={styles['circle-image']}src="/static/images/user.png" />
