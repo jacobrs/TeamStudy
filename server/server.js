@@ -106,7 +106,9 @@ passport.serializeUser(function (user, done) {
 
 passport.deserializeUser(function (id, done) {
   User.findOne({ 'cuid': id }, function (err, user) {
-    user.password = undefined;
+    if (user != null) {
+      user.password = undefined;
+    }
     done(err, user);
   });
 });
