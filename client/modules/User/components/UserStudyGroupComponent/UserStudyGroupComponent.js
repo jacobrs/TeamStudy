@@ -28,7 +28,7 @@ export class UserStudyGroupComponent extends Component{
       );
     }
     return (
-      <h1>Loading</h1>
+      <h3>No study groups :(</h3>
     );
   }
 }
