@@ -42,7 +42,7 @@ export class ChatComponent extends Component {
     this.socket.emit('UserSignedIn', `${this.props.users.user.firstName} ${this.props.users.user.lastName}`);
     this.socket.on('UpdateMessages', this.onMessageReceive);
 
-    this.props.setChat(0);
+    //this.props.setChat(0);
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -81,7 +81,10 @@ export class ChatComponent extends Component {
 
   // Display form
   render() {
-    // TODO once currentStudyGroup is working check whether I should show the chat or not
+    if (this.props.users.currentStudyGroup <= -1) {
+      return null;
+    }
+
     return (
       <div className="col-md-9">
         <div className="row-md-3 border rounded" id={styles['message-area']}>
