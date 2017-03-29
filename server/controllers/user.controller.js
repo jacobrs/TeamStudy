@@ -40,8 +40,8 @@ export function addUser(req, res) {
   newUser.studentId = sanitizeHtml(newUser.studentId);
   newUser.email = sanitizeHtml(newUser.email);
   newUser.password = sha512(newUser.password).toString('hex');
-
   newUser.cuid = cuid();
+
   newUser.save((err, saved) => {
     if (err) {
       return res.status(500).send(err);
@@ -51,13 +51,14 @@ export function addUser(req, res) {
 }
 
 export function getUser(req, res) {
-  // just get the user information
   User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
     if (err) {
       return res.status(500).send(err);
     }
-    user.password = undefined;
-    return res.json({ user });
+    else {
+      user.password = undefined;
+      return res.json({ user });
+    }
   });
 }
 
@@ -67,8 +68,6 @@ export function authenticateUser(req, res) {
 }
 
 export function updateUser(req, res) {
-  console.log("UPDATE REQUESTED: ");
-  console.log(req.body);
   let firstName = sanitizeHtml(req.body.user.firstName);
   let lastName = sanitizeHtml(req.body.user.lastName);
   let studentId = sanitizeHtml(req.body.user.studentId);
@@ -122,49 +121,50 @@ export function getUserStudyGroups(req, res) {
     if (err) {
       return res.status(500).send(err);
     }
-    console.log(studyGroups)
-    StudyGroup.find({ guid: {$in: studyGroups.studyGroups }}).exec((err, foundGroups) => {
-      if (err) {
-        return res.status(500).send(err);
-      }
-        return res.json({ myGroups: foundGroups });
-      });
-    });
+    return res.json(studyGroups);
+  });
 }
 
-export function addUserStudyGroups(req, res) {
-  let groups =  sanitizeHtml(req.body.studyGroups);
-  User.findOne({ cuid: req.body.cuid }).exec((err, user) => {
+export function addStudyGroupToUser(req, res) {
+  User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
     if (err) {
       return res.status(500).send(err);
-    }
-    user.studyGroups.push(groups);
-    user.save((err, saved) => {
+    }    
+    
+    let studyGroupGuid = req.body.studyGroupReference;
+    let duplicate = false;
+
+    user.studyGroups.forEach(function(element) {
+      if (element.guid = studyGroupGuid) {
+        duplicate = true;       
+      }
+    });
+
+    StudyGroup.findOne({ guid: studyGroupGuid }).exec((err, studyGroup) => {
       if (err) {
         return res.status(500).send(err);
       }
-      return res.json({ user: saved });
-    });
+
+      if (!duplicate)
+        user.studyGroups.push(studyGroup);
+
+      user.save((err, saved) => {
+        if (err) {
+          return res.status(500).send(err);
+        }
+        return res.json({ user: saved });
+      }); 
+    });         
   });
 }
 
 export function deleteUserStudyGroups(req, res) {
-  let groups = sanitizeHtml(req.body.studyGroups);
-  User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
+  User.update({ cuid : req.params.cuid }, { $set: { 'studyGroups' : [] } }).exec((err, saved) => {
     if (err) {
       return res.status(500).send(err);
     }
-    for (var i = user.studyGroups.length - 1; i >= 0; i--) {
-      if (user.studyGroups[i] == groups) {
-        user.studyGroups.splice(i, 1);
-      }
-    }
-    user.save((err, saved) => {
-      if (err) {
-        return res.status(500).send(err);
-      }
-      return res.json({ user: saved });
-    });
+    return res.json(saved);
   });
 }
 
+// need: delete specific user study group

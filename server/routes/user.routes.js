@@ -31,8 +31,8 @@ router.route('/login').post(passport.authenticate('local'), UserController.login
 //  Get User study groups
 router.route('/:cuid/studyGroups').get(UserController.getUserStudyGroups);
 
-//  Add User study group
-router.route('/:cuid/studyGroups').put(UserController.addUserStudyGroups);
+//  Add a study group to a user. 
+router.route('/:cuid/studyGroups').put(UserController.addStudyGroupToUser);
 
 //  Delete User study groups
 router.route('/:cuid/studyGroups').delete(UserController.deleteUserStudyGroups);

@@ -8,6 +8,9 @@ export const LOGIN_USER = 'LOGIN_USER';
 export const AUTHENTICATE_SESSION = 'AUTHENTICATE_SESSION';
 export const FAILED_AUTHENTICATION = 'FAILED_AUTHENTICATION';
 export const CREATE_GROUP = 'CREATE_GROUP';
+export const SET_CURRENT_STUDY_GROUP = 'SET_CURRENT_STUDY_GROUP';
+export const PREPARE_CHAT_MESSAGES = 'PREPARE_CHAT_MESSAGES';
+export const PREPARE_CHAT_MESSAGE = 'PREPARE_CHAT_MESSAGE';
 
 // Auth Pages
 export const DASHBOARD_PAGE = 'DASHBOARD_PAGE';
@@ -153,3 +156,29 @@ export function createStudyGroupRequest(user,studyGroup) {
   };
 }
 
+export function setCurrentStudyGroup(studyGroupIndex) {
+  return {
+    type: SET_CURRENT_STUDY_GROUP,
+    studyGroupIndex,
+  };
+}
+
+export function prepareChatMessages(messages) {
+  return {
+    type: PREPARE_CHAT_MESSAGES,
+    messages,
+  };
+}
+
+export function prepareChatMessage(message) {
+  return {
+    type: PREPARE_CHAT_MESSAGE,
+    message,
+  };
+}
+
+export function switchChat(studyGroupIndex, studyGroup) {
+  return (dispatch) => {
+    return callApi(`message/${studyGroup.guid}`).then(res => dispatch(prepareChatMessages(res.messages)));
+  };
+}
