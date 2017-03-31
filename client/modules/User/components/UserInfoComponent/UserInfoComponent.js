@@ -18,7 +18,7 @@ function UserInfoComponent(props) {
         </div>
         <h3>{props.users.user.firstName}&nbsp;{props.users.user.lastName}</h3>
         <p>{props.users.user.email} </p>
-        <UserStudyGroupComponent users={props.users} />
+        <UserStudyGroupComponent users={props.users} setChat={props.setChat} />
       </div>
     );
   }
