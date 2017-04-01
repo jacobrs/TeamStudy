@@ -6,18 +6,18 @@ import io from 'socket.io-client';
 import styles from './ChatComponent.css';
 
 const COLORS = [
-  'Red',
+  'Black',
   // 'Maroon', ugly color
-  'Yellow',
+  //'Yellow',
   // 'Olive', also ugly color
-  'Lime',
-  'Green',
-  'Aqua',
-  'Teal',
-  'Blue',
-  'Navy',
-  'Fuchsia',
-  'Purple',
+  //'Lime',
+  //'Green',
+  //'Aqua',
+  //'Teal',
+  //'Blue',
+  //'Navy',
+  //'Fuchsia',
+  //'Purple',
 ];
 
 // Ensure we have a color for every user, if we are out of colors just wrap back around.
@@ -41,12 +41,10 @@ export class ChatComponent extends Component {
     this.socket = io.connect();
     this.socket.emit('UserSignedIn', `${this.props.users.user.firstName} ${this.props.users.user.lastName}`);
     this.socket.on('UpdateMessages', this.onMessageReceive);
-
-    //this.props.setChat(0);
   }
 
   componentWillUpdate(nextProps, nextState) {
-
+    this.chatTitle = (this.props.users.currentStudyGroup == -1)?"":this.props.users.user.studyGroups[this.props.users.currentStudyGroup].groupName;
   }
 
   componentWillUnmount() {
@@ -86,7 +84,10 @@ export class ChatComponent extends Component {
     }
 
     return (
-      <div className="col-md-9" id={styles['message-wrapper']}>
+      <div className="col-md-9 animated fadeInRight" id={styles['message-wrapper']}>
+        <div id={styles['chat-menu']}>
+          <span id={styles['chat-title']}>{this.chatTitle}</span>
+        </div>
         <div className="row-md-3 border rounded" id={styles['message-area']}>
             {this.props.users.chat.messages}
         </div>
