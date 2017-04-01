@@ -86,13 +86,14 @@ export class ChatComponent extends Component {
     }
 
     return (
-      <div className="col-md-9">
+      <div className="col-md-9" id={styles['message-wrapper']}>
         <div className="row-md-3 border rounded" id={styles['message-area']}>
             {this.props.users.chat.messages}
         </div>
-        <div className="row">
-          <textarea className="col-md-11 form-control" rows="3" value={this.state.value} onKeyDown={this.handleKeyDown} onChange={this.handleChange} ></textarea>
-          <button className="col-md-1 btn btn-primary" onClick={this.sendMessage}>Send</button>
+        <div className="row" id={styles['message-input']}>
+          <textarea className="col-md-9 form-control" rows="3" placeholder="Write a message to the group"
+          value={this.state.value} onKeyDown={this.handleKeyDown} onChange={this.handleChange} ></textarea>
+          <button className="col-md-3 btn btn-primary" onClick={this.sendMessage} id={styles['message-send']}>Send</button>
         </div>
       </div>
     );

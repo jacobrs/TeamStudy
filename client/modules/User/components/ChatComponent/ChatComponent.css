@@ -1,5 +1,17 @@
 #message-area {
-    background-color: white;
-    overflow-y:scroll;
-    height: 90%;
+  background-color: white;
+  overflow-y:scroll;
+  height: calc(100% - 40px);
+}
+
+#message-input {
+	height: 40px;
+}
+
+#message-wrapper {
+  height: 99%;
+}
+
+#message-send:hover{
+	cursor: pointer;
 }
