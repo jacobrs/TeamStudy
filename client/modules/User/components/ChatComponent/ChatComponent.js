@@ -38,6 +38,7 @@ export class ChatComponent extends Component {
 
   componentWillMount() {
     console.log('Will Mount');
+    this.chatTitle = (this.props.users.currentStudyGroup == -1)?"":this.props.users.user.studyGroups[this.props.users.currentStudyGroup].groupName;
     this.socket = io.connect();
     this.socket.emit('UserSignedIn', `${this.props.users.user.firstName} ${this.props.users.user.lastName}`);
     this.socket.on('UpdateMessages', this.onMessageReceive);
@@ -87,6 +88,7 @@ export class ChatComponent extends Component {
       <div className="col-md-9 animated fadeInRight" id={styles['message-wrapper']}>
         <div id={styles['chat-menu']}>
           <span id={styles['chat-title']}>{this.chatTitle}</span>
+          <span id={styles['add-link']}><i className="fa fa-plus"></i> Add Members</span>
         </div>
         <div className="row-md-3 border rounded" id={styles['message-area']}>
             {this.props.users.chat.messages}

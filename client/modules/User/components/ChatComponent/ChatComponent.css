@@ -34,3 +34,13 @@
 	padding-right:1em;
 	font-size: 12pt;
 }
+
+#add-link{
+	float:right;
+	padding:1.2em;
+}
+
+#add-link:hover{
+	cursor:pointer;
+	color:rgba(255,255,255,0.6);
+}
