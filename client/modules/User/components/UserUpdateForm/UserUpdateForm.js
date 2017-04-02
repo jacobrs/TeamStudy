@@ -4,13 +4,24 @@ import { Link } from 'react-router';
 import Validation from 'react-validation';
 
 import Valid from '../FormComponents/Validator';
-import styles from './UserRegistrationForm.css';
+import styles from '../UserRegistrationForm/UserRegistrationForm.css';
 
-export class UserRegistrationForm extends Component {
+export class UserUpdateForm extends Component {
   constructor(props) {
     super(props);
-    this.state = { nickname: '', studentId: '', email: '', password: '', passwordConfirm: '' };
-    this.addUser = this.addUser.bind(this);
+    if (props.user == undefined) {
+      this.state = { nickname: '', studentId: '', email: '', password: '', passwordConfirm: '' };
+    } else {
+      this.state = {
+        nickname: props.user.firstName + ' ' + props.user.lastName,
+        studentId: props.user.studentId,
+        email: props.user.email,
+        password: '',
+        passwordConfirm: '',
+      };
+    }
+    this.user = props.user;
+    this.updateUser = this.updateUser.bind(this);
     this.updateState = this.updateState.bind(this);
   }
 
@@ -21,7 +32,7 @@ export class UserRegistrationForm extends Component {
   }
 
   notifyUser() {
-    alert('Account successfuly created!');
+    alert('Account information succesfully updated!');
   }
 
   removeApiError = (event) => {
@@ -29,11 +40,13 @@ export class UserRegistrationForm extends Component {
     this.form.hideError(name);
   };
 
-  addUser = (e) => {
-    console.log(this.state);
+  updateUser = (e) => {
     if (this.state.nickname && this.state.studentId && this.state.email && this.state.password) {
+      const fullname = this.state.nickname.split(' ');
+      const firstName = fullname.shift();
+      const lastName = fullname.shift() || '';
+      this.props.updateUser(firstName, lastName, this.state.studentId, this.state.email, this.state.password, this.user.cuid);
       this.notifyUser();
-      this.props.addUser(this.state.nickname, this.state.studentId, this.state.email, this.state.password);
       this.setState({ nickname: '', studentId: '', email: '', password: '', passwordConfirm: '' });
       // To stop the page from refreshing
       e.preventDefault();
@@ -43,11 +56,8 @@ export class UserRegistrationForm extends Component {
   render() {
     return (
         <div className={`${styles.formContainer} ${styles.center}`}>
-            <i className={`${styles.cap} fa fa-graduation-cap`} />
-            <h1 className={styles.title}><FormattedMessage id="siteTitle" /></h1>
-
           <div className={styles.formLabel + ' row'}>
-          <Validation.components.Form method="POST" ref={c => { this.form = c; }} onSubmit={this.addUser} className="col-lg-4 push-lg-4 col-md-6 push-md-3 col-xs-8 push-xs-2">
+          <Validation.components.Form ref={c => { this.form = c; }} onSubmit={this.updateUser} className="col-lg-4 push-lg-4 col-md-6 push-md-3 col-xs-8 push-xs-2">
 
                 <label className="input-labels"> Full Name* </label>
                 <Validation.components.Input
@@ -115,9 +125,9 @@ export class UserRegistrationForm extends Component {
                 /><br />
 
                <Validation.components.Button className={`${styles.btnOutlineSecondary} btn btn-outline-secondary  ${styles.signInButton}`}>
-               Register and Start Studying!
+               Update Information
                </Validation.components.Button><br /><br />
-                    <Link className={styles.mainText} to="/">Already have an account? Sign in Here</Link>
+                    <Link className={styles.mainText} to="/profile">Return to main menu</Link>
 
               </Validation.components.Form>
           </div>
@@ -126,9 +136,10 @@ export class UserRegistrationForm extends Component {
   }
 }
 
-UserRegistrationForm.propTypes = {
-  addUser: PropTypes.func.isRequired,
+UserUpdateForm.propTypes = {
+  user: PropTypes.object,
+  updateUser: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
 };
 
-export default injectIntl(UserRegistrationForm);
+export default injectIntl(UserUpdateForm);

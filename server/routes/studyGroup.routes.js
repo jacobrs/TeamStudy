@@ -1,27 +1,26 @@
 import { Router } from 'express';
 import * as StudyGroupController from '../controllers/studyGroup.controller';
-import ensureAuthenticated from '../util/passportUtils';
 const router = new Router();
 
 // Get all Study Groups
-router.route('/').get(ensureAuthenticated, StudyGroupController.getStudyGroups);
-
-// Get Study Group by guid
-router.route('/:guid').get(ensureAuthenticated, StudyGroupController.getStudyGroup);
+router.route('/').get(StudyGroupController.getStudyGroups);
 
 // Create a new Study Group
-router.route('/').post(ensureAuthenticated, StudyGroupController.createStudyGroup);
+router.route('/').post(StudyGroupController.createStudyGroup);
+
+// Get Study Group by guid
+router.route('/:guid').get(StudyGroupController.getStudyGroup);
 
 // Delete Study Group by guid
-router.route('/:guid').delete(ensureAuthenticated, StudyGroupController.deleteStudyGroup);
+router.route('/:guid').delete(StudyGroupController.deleteStudyGroup);
 
 // Get a study group's messages
-router.route('/:guid/messages').get(ensureAuthenticated, StudyGroupController.getStudyGroupMessages);
+router.route('/:guid/messages').get(StudyGroupController.getStudyGroupMessages);
 
 // Add a message to a study group
-router.route('/:guid/addMessage').put(ensureAuthenticated, StudyGroupController.addMessageToStudyGroup);
+router.route('/:guid/addMessage').put(StudyGroupController.addMessageToStudyGroup);
 
 // Delete a study group's messages
-router.route('/:guid/deleteMessages').delete(ensureAuthenticated, StudyGroupController.deleteStudyGroupMessages);
+router.route('/:guid/deleteMessages').delete(StudyGroupController.deleteStudyGroupMessages);
 
 export default router;

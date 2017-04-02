@@ -1,0 +1,5 @@
+#message-area {
+    background-color: white;
+    overflow-y:scroll;
+    height: 90%;
+}

@@ -5,7 +5,7 @@ import App from './modules/App/App';
 import UserDashboardPage from './modules/User/pages/UserDashboardPage/UserDashboardPage';
 import UserRegistrationPage from './modules/User/pages/UserRegistrationPage/UserRegistrationPage';
 import UserStudyGroupPage from './modules/User/pages/UserStudyGroupPage/UserStudyGroupPage';
-
+import UserEditInfoPage from './modules/User/pages/UserEditInfoPage/UserEditInfoPage';
 // require.ensure polyfill for node
 if (typeof require.ensure !== 'function') {
   require.ensure = function requireModule(deps, callback) {
@@ -36,5 +36,6 @@ export default (
     <Route path="/registerGroup" component={UserStudyGroupPage} />
     <Route path="/register" component={UserRegistrationPage} />
     <Route path="/profile" component={UserDashboardPage} />
+    <Route path="/editInfo" component={UserEditInfoPage} />
   </Route>
 );

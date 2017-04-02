@@ -8,6 +8,9 @@ export const LOGIN_USER = 'LOGIN_USER';
 export const AUTHENTICATE_SESSION = 'AUTHENTICATE_SESSION';
 export const FAILED_AUTHENTICATION = 'FAILED_AUTHENTICATION';
 export const CREATE_GROUP = 'CREATE_GROUP';
+export const SET_CURRENT_STUDY_GROUP = 'SET_CURRENT_STUDY_GROUP';
+export const PREPARE_CHAT_MESSAGES = 'PREPARE_CHAT_MESSAGES';
+export const PREPARE_CHAT_MESSAGE = 'PREPARE_CHAT_MESSAGE';
 
 // Auth Pages
 export const DASHBOARD_PAGE = 'DASHBOARD_PAGE';
@@ -44,8 +47,10 @@ export function updateUser(user) {
 }
 
 export function updateUserRequest(user) {
+  let cuid = `users/${user.cuid}`;
+  console.log(user);
   return (dispatch) => {
-    return callApi('users', 'put', {
+    return callApi(cuid, 'put', {
       user: {
         firstName: user.firstName,
         lastName: user.lastName,
@@ -79,7 +84,6 @@ export function loginUserRequest(user) {
 
 export function authenticateSession(response, page) {
   // Failed to authenticate, redirect to landing page
-  console.log(browserHistory);
   switch (page) {
     case DASHBOARD_PAGE:
       if (response.statusCode !== 200) {
@@ -131,7 +135,6 @@ export function logoutUserRequest() {
 
 
 export function createStudyGroup(studyGroup) {
-  console.log(studyGroup);
   browserHistory.replace('/profile');
   return {
     type: CREATE_GROUP,
@@ -139,9 +142,10 @@ export function createStudyGroup(studyGroup) {
   };
 }
 
-export function createStudyGroupRequest(studyGroup) {
+export function createStudyGroupRequest(user, studyGroup) {
   return (dispatch) => {
     return callApi('studyGroups', 'post', {
+      cuid: user.user.cuid,
       studyGroup: {
         groupName: studyGroup.groupName,
         course: studyGroup.course,
@@ -149,5 +153,32 @@ export function createStudyGroupRequest(studyGroup) {
         description: studyGroup.description,
       },
     }).then(res => dispatch(createStudyGroup(res.studyGroup)));
+  };
+}
+
+export function setCurrentStudyGroup(studyGroupIndex) {
+  return {
+    type: SET_CURRENT_STUDY_GROUP,
+    studyGroupIndex,
+  };
+}
+
+export function prepareChatMessages(messages) {
+  return {
+    type: PREPARE_CHAT_MESSAGES,
+    messages,
+  };
+}
+
+export function prepareChatMessage(message) {
+  return {
+    type: PREPARE_CHAT_MESSAGE,
+    message,
+  };
+}
+
+export function switchChat(studyGroupIndex, studyGroup) {
+  return (dispatch) => {
+    return callApi(`message/${studyGroup.guid}`).then(res => dispatch(prepareChatMessages(res.messages)));
   };
 }

@@ -35,4 +35,10 @@
   height: 100px;
   margin-top: 30px;
   margin-bottom: 10px;
+  margin-left: 45px;
+}
+
+.edit-button{
+  color: #3366ff;
+  background-color: #ffffff;
 }

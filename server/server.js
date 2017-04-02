@@ -38,11 +38,13 @@ import Helmet from 'react-helmet';
 import User from './models/user';
 import routes from '../client/routes';
 import { fetchComponentData } from './util/fetchData';
+import serverConfig from './config';
+const LocalStrategy = require('passport-local').Strategy;
+
+// Import required routes
 import users from './routes/user.routes';
 import studyGroups from './routes/studyGroup.routes';
 import message from './routes/message.routes';
-import serverConfig from './config';
-const LocalStrategy = require('passport-local').Strategy;
 
 // Set native promises as mongoose promise
 mongoose.Promise = global.Promise;
@@ -61,6 +63,7 @@ app.use(Express.static(path.resolve(__dirname, '../dist')));
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: true }));
 
+// User session
 app.use(session({
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
   secret: serverConfig.secret,
@@ -73,6 +76,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// User Authentication
 passport.use(new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
@@ -106,11 +110,14 @@ passport.serializeUser(function (user, done) {
 
 passport.deserializeUser(function (id, done) {
   User.findOne({ 'cuid': id }, function (err, user) {
-    user.password = undefined;
+    if (user != null) {
+      user.password = undefined;
+    }
     done(err, user);
   });
 });
 
+// Apply API endpoints
 app.use('/api/users', users);
 app.use('/api/studyGroups', studyGroups);
 app.use('/api/message', message);
@@ -220,7 +227,7 @@ const server = app.listen(serverConfig.port, (error) => {
 // Socket.io
 var io = require('socket.io').listen(server);
 
-// Import events and event handlers and attach to socket.io instance
+// Import events and event handlers and attach them to the socket.io instance
 const socketEvents = require('./socketEvents')(io);
 
 // console.log(server);

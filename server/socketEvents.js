@@ -1,21 +1,44 @@
-exports = module.exports = function (io) {
-  /*
-    on() is an event handler
-    emit() sends and event
-    'connection' and 'disconnect' are predifined event types found in documentation
-  */
-  // io.on('connection', function(socket) {...});
-  io.sockets.on('connection', function (socket) {
-    console.log('A user has connected');
+import Message from './models/message';
+import cuid from 'cuid';
 
-    // Catch event from client-side
-    socket.on('SendMessageToServerEvent', function (data) {
-      // Send event to client-side
-      io.sockets.emit('UpdateChatMessages', data);
+exports = module.exports = function (io) {
+  io.sockets.on('connection', function (socket) {
+    let existingMessages = Message.find().sort('-dateSent');
+    existingMessages.limit(10).exec((err, messages) => {
+      if (err) {
+        throw err;
+      }
+      else {
+        socket.emit('FetchExistingMessages', messages);
+      }
     });
 
+    // user opens chat event handler
+    socket.on('UserSignedIn', function (user) {
+      socket.nickname = user;
+    });
+
+    // new message event handler
+    socket.on('SaveMessage', function (data) {
+      const newMessage = new Message();
+      newMessage.messageContent = data.message;
+      newMessage.author = socket.nickname;
+      newMessage.studyGroup = data.studyGroup;
+      newMessage.cuid = cuid();
+
+      newMessage.save(function (err) {
+        if (err) {
+          throw err;
+        }
+        else {
+          io.sockets.emit('UpdateMessages', { message: data.message, user: socket.nickname });
+        }
+      });
+    });
+
+    // disconnect event handler
     socket.on('disconnect', function () {
-      console.log('A user has disconnected');
+
     });
   });
 };

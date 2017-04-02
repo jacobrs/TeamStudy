@@ -2,15 +2,15 @@ import test from 'ava';
 import request from 'supertest';
 import app from '../../server';
 
-//*************
+//* ************
 // User
-//*************
+//* ************
 
 test.serial('Should correctly create a new User', async t => {
   t.plan(5);
   const res = await request(app)
     .post('/api/users')
-    .send({ user: {firstName: 'Naruto', lastName: 'Uzumaki', studentId: '77777777', email: 'naruto@gmail.com', password: 'f34gb2bh24b24b3'}})
+    .send({ user: { firstName: 'Naruto', lastName: 'Uzumaki', studentId: '77777777', email: 'naruto@gmail.com', password: 'f34gb2bh24b24b3' } })
     .set('Accept', 'application/json');
   t.is(res.status, 200);
   t.is(res.body.user.firstName, 'Naruto');
@@ -23,7 +23,7 @@ test.serial('Should correctly login the User', async t => {
   t.plan(5);
   const res = await request(app)
     .post('/api/users/login')
-    .send({email: 'naruto@gmail.com', password: 'f34gb2bh24b24b3'})
+    .send({ email: 'naruto@gmail.com', password: 'f34gb2bh24b24b3' })
     .set('Accept', 'application/json');
   t.is(res.status, 200);
   t.is(res.body.user.firstName, 'Naruto');
@@ -41,9 +41,9 @@ test.serial('Should correctly logoff the User', async t => {
   t.is(res.body.user, null);
 });
 
-//*************
+//* ************
 // StudyGroups
-//*************
+//* ************
 
 // test.serial('Should correctly create a new Study Group', async t => {
 //   t.plan(5);
@@ -58,9 +58,9 @@ test.serial('Should correctly logoff the User', async t => {
 //   t.is(res.body.studyGroup.description, 'Operating Systems');
 // });
 
-//*************
+//* ************
 // Messages
-//*************
+//* ************
 // test.serial('Should save a message to the database', async t => {
 //   t.plan(4);
 //
@@ -78,6 +78,4 @@ test.serial('Should correctly logoff the User', async t => {
 //   t.is(response.body.message.author, 'Bob');
 //   t.is(response.body.message.studyGroup, 'Study Group 321');
 // });
-
-
 

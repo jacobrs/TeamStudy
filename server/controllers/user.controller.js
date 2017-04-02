@@ -1,4 +1,5 @@
 import User from '../models/user';
+import StudyGroup from '../models/studyGroup';
 import cuid from 'cuid';
 import sha512 from 'sha512';
 import sanitizeHtml from 'sanitize-html';
@@ -39,9 +40,8 @@ export function addUser(req, res) {
   newUser.studentId = sanitizeHtml(newUser.studentId);
   newUser.email = sanitizeHtml(newUser.email);
   newUser.password = sha512(newUser.password).toString('hex');
-
   newUser.cuid = cuid();
-  
+
   newUser.save((err, saved) => {
     if (err) {
       return res.status(500).send(err);
@@ -51,13 +51,14 @@ export function addUser(req, res) {
 }
 
 export function getUser(req, res) {
-  // just get the user information
   User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
     if (err) {
       return res.status(500).send(err);
     }
-    user.password = undefined;
-    return res.json({ user });
+    else {
+      user.password = undefined;
+      return res.json({ user });
+    }
   });
 }
 
@@ -67,21 +68,28 @@ export function authenticateUser(req, res) {
 }
 
 export function updateUser(req, res) {
-  firstName = sanitizeHtml(req.body.user.firstName);
-  lastName = sanitizeHtml(req.body.user.lastName);
-  studentId = sanitizeHtml(req.body.user.studentId);
-  email = sanitizeHtml(req.body.user.email);
-  password = sha512(req.body.user.password).toString('hex');
+  let firstName = sanitizeHtml(req.body.user.firstName);
+  let lastName = sanitizeHtml(req.body.user.lastName);
+  let studentId = sanitizeHtml(req.body.user.studentId);
+  let email = sanitizeHtml(req.body.user.email);
+  let password = sha512(req.body.user.password).toString('hex');
 
-  let update = { firstName, lastName, studentId, email, password };
-
-  User.findOneAndUpdate({ cuid: req.params.cuid }, { $set: update }, function (err, updated) {
+  User.findOne({ cuid: req.user.cuid }).exec((err, user) => {
     if (err) {
       return res.status(500).send(err);
-    } 
-    else {
-      return res.json({ user: updated });
     }
+    user.firstName = firstName;
+    user.lastName = lastName;
+    user.studentId = studentId;
+    user.email = email;
+    user.password = password;
+
+    user.save((err, saved) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      return res.json({ user: saved });
+    });
   });
 }
 
@@ -112,43 +120,50 @@ export function getUserStudyGroups(req, res) {
     if (err) {
       return res.status(500).send(err);
     }
-    return res.json({ studyGroups });
+    return res.json(studyGroups);
   });
 }
 
-export function addUserStudyGroups(req, res) {
-  let groups = sanitizeHtml(req.body.studyGroups);
+export function addStudyGroupToUser(req, res) {
   User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
     if (err) {
       return res.status(500).send(err);
     }
-    user.studyGroups.push(groups);
-    user.save((err, saved) => {
+
+    let studyGroupGuid = req.body.studyGroupReference;
+    let duplicate = false;
+
+    user.studyGroups.forEach(function (element) {
+      if (element.guid = studyGroupGuid) {
+        duplicate = true;
+      }
+    });
+
+    StudyGroup.findOne({ guid: studyGroupGuid }).exec((err, studyGroup) => {
       if (err) {
         return res.status(500).send(err);
       }
-      return res.json({ user: saved });
+
+      if (!duplicate)
+        user.studyGroups.push(studyGroup);
+
+      user.save((err, saved) => {
+        if (err) {
+          return res.status(500).send(err);
+        }
+        return res.json({ user: saved });
+      });
     });
   });
 }
 
 export function deleteUserStudyGroups(req, res) {
-  let groups = sanitizeHtml(req.body.studyGroups);
-  User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
+  User.update({ cuid: req.params.cuid }, { $set: { 'studyGroups': [] } }).exec((err, saved) => {
     if (err) {
       return res.status(500).send(err);
     }
-    for (var i = user.studyGroups.length - 1; i >= 0; i--) {
-      if (user.studyGroups[i] == groups) {
-        user.studyGroups.splice(i, 1);
-      }
-    }
-    user.save((err, saved) => {
-      if (err) {
-        return res.status(500).send(err);
-      }
-      return res.json({ user: saved });
-    });
+    return res.json(saved);
   });
 }
 
+// need: delete specific user study group

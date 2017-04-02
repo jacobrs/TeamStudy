@@ -26,8 +26,8 @@ export class UserLoginForm extends Component {
     $('#' + divId).show();
   }
 
-  onHandleEnter(event){
-    if (event.keyCode === 13){
+  onHandleEnter(event) {
+    if (event.keyCode === 13) {
       this.loginUser();
     }
   }
