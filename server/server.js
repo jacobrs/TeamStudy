@@ -81,8 +81,8 @@ passport.use(new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
 },
-  function (email, password, done) {
-    findUser(email, function (err, user) {
+  (email, password, done) => {
+    findUser(email, (err, user) => {
       if (err) {
         return done(err);
       }
@@ -104,12 +104,12 @@ function findUser(email, callback) {
   });
 }
 
-passport.serializeUser(function (user, done) {
+passport.serializeUser((user, done) => {
   done(null, user.cuid);
 });
 
-passport.deserializeUser(function (id, done) {
-  User.findOne({ 'cuid': id }, function (err, user) {
+passport.deserializeUser((id, done) => {
+  User.findOne({ cuid: id }, (err, user) => {
     if (user != null) {
       user.password = undefined;
     }
@@ -145,7 +145,12 @@ const renderFullPage = (html, initialState) => {
         ${head.script.toString()}
 
         ${process.env.NODE_ENV === 'production' ? `<link rel='stylesheet' href='${assetsManifest['/app.css']}' />` : ''}
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <link 
+        rel="stylesheet" 
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" 
+        integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" 
+        crossorigin="anonymous"
+        >
         <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'/>
         <link rel="shortcut icon" href="/static/images/fav.png" type="image/png" />
       </head>
@@ -165,9 +170,21 @@ const renderFullPage = (html, initialState) => {
         </script>
         <script src='${process.env.NODE_ENV === 'production' ? assetsManifest['/vendor.js'] : '/vendor.js'}'></script>
         <script src='${process.env.NODE_ENV === 'production' ? assetsManifest['/app.js'] : '/app.js'}'></script>
-        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+        <script 
+        src="https://code.jquery.com/jquery-3.1.1.slim.min.js" 
+        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" 
+        crossorigin="anonymous">
+        </script>
+        <script 
+        src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" 
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous">
+        </script>
+        <script 
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" 
+        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" 
+        crossorigin="anonymous">
+        </script>
       </body>
     </html>
   `;
@@ -225,18 +242,16 @@ const server = app.listen(serverConfig.port, (error) => {
 });
 
 // Socket.io
-var io = require('socket.io').listen(server);
+const io = require('socket.io').listen(server);
 
 // Import events and event handlers and attach them to the socket.io instance
 const socketEvents = require('./socketEvents')(io);
 
-// console.log(server);
-// console.log(__dirname);
 
 // HTML page for debugging
-app.get('/testchat', function (req, res) {
-  res.sendFile(__dirname + '/testChat.html');
-});
+// app.get('/testchat', function (req, res) {
+//   res.sendFile(__dirname + '/testChat.html');
+// });
 
 /*
 // alternate method to create socket.io instance attached to server

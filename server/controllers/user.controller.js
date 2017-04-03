@@ -48,6 +48,7 @@ export function addUser(req, res) {
     }
     return res.json({ user: saved });
   });
+  return newUser; // ESlint
 }
 
 export function getUser(req, res) {
@@ -55,10 +56,8 @@ export function getUser(req, res) {
     if (err) {
       return res.status(500).send(err);
     }
-    else {
-      user.password = undefined;
-      return res.json({ user });
-    }
+    user.password = undefined;
+    return res.json({ user });
   });
 }
 
@@ -110,8 +109,8 @@ export function loginUser(req, res) {
 }
 
 export function logoutUser(req, res) {
-  req.session.destroy(function (err) {
-    res.json({ user: null, statusCode: 200, message: 'User logged out successfully' });
+  req.session.destroy((err) => {
+    return res.json({ user: null, statusCode: 200, message: 'User logged out successfully' });
   });
 }
 

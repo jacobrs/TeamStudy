@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import studyGroup from './studyGroup';
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
