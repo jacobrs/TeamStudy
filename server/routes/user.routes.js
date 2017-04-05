@@ -11,7 +11,7 @@ router.route('/').get(ensureAuthenticated, UserController.getUsers);
 router.route('/me').get(ensureAuthenticated, UserController.authenticateUser);
 
 // Search for user
-router.route('/search/:term').get(ensureAuthenticated, UserController.search);
+router.route('/search/:term?').get(ensureAuthenticated, UserController.search);
 
 // Log user out
 router.route('/logout').get(ensureAuthenticated, UserController.logoutUser);

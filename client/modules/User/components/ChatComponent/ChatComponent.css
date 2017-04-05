@@ -44,3 +44,17 @@
 	cursor:pointer;
 	color:rgba(255,255,255,0.6);
 }
+
+#table{
+	font-size:12pt;
+	margin-bottom:0px;
+	margin-top:1em;
+}
+
+#table tbody tr td:hover{
+	cursor: pointer;
+}
+
+[type=button]:hover{
+	cursor: pointer;
+}
