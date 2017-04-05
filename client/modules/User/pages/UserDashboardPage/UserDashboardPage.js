@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import UserInfoComponent from '../../components/UserInfoComponent/UserInfoComponent';
 import ChatComponent from '../../components/ChatComponent/ChatComponent';
 
-import { authenticateSessionRequest, switchChat, setCurrentStudyGroup, prepareChatMessage } from '../../UserActions';
+import { authenticateSessionRequest, switchChat, setCurrentStudyGroup, prepareChatMessage, getUsersByEmailRequest, addUserToChat } from '../../UserActions';
 
 import styles from './UserDashboardPage.css';
 
@@ -32,7 +32,7 @@ class UserDashboardPage extends Component {
       return (
         <div className={`row ${styles.dashboardContainer}`}>
           <UserInfoComponent users={this.props.users} setChat={this.setChat} />
-          <ChatComponent users={this.props.users} setChat={this.setChat} prepareChatMessage={this.props.prepareChatMessage} />
+          <ChatComponent users={this.props.users} setChat={this.setChat} prepareChatMessage={this.props.prepareChatMessage} getUsersByEmailRequest={this.props.getUsersByEmailRequest} addUserToChat={this.props.addUserToChat} />
         </div>
       );
     }
@@ -43,7 +43,7 @@ class UserDashboardPage extends Component {
 
 // Bind actions to props
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ authenticateSessionRequest, switchChat, setCurrentStudyGroup, prepareChatMessage }, dispatch);
+  return bindActionCreators({ authenticateSessionRequest, switchChat, setCurrentStudyGroup, prepareChatMessage, getUsersByEmailRequest, addUserToChat }, dispatch);
 }
 
 // map Users from store to Props
@@ -57,6 +57,7 @@ UserDashboardPage.propTypes = {
   setCurrentStudyGroup: PropTypes.func.isRequired,
   switchChat: PropTypes.func.isRequired,
   prepareChatMessage: PropTypes.func.isRequired,
+  getUsersByEmailRequest: PropTypes.func.isRequired,
   users: PropTypes.object,
 };
 

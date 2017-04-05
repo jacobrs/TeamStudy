@@ -8,6 +8,9 @@ router.route('/').get(StudyGroupController.getStudyGroups);
 // Create a new Study Group
 router.route('/').post(StudyGroupController.createStudyGroup);
 
+// Add a member to a Study Group
+router.route('/:guid/add/:cuid').get(StudyGroupController.addMember);
+
 // Get Study Group by guid
 router.route('/:guid').get(StudyGroupController.getStudyGroup);
 

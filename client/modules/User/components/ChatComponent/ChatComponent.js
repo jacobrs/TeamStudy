@@ -6,18 +6,7 @@ import io from 'socket.io-client';
 import styles from './ChatComponent.css';
 
 const COLORS = [
-  'Red',
-  // 'Maroon', ugly color
-  'Yellow',
-  // 'Olive', also ugly color
-  'Lime',
-  'Green',
-  'Aqua',
-  'Teal',
-  'Blue',
-  'Navy',
-  'Fuchsia',
-  'Purple',
+  'Black',
 ];
 
 // Ensure we have a color for every user, if we are out of colors just wrap back around.
@@ -30,6 +19,8 @@ export class ChatComponent extends Component {
     super(props);
     this.state = { value: '' };
     this.socket = null;
+    this.addUserToChat = this.addUserToChat.bind(this);
+    this.searchForUsers = this.searchForUsers.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
@@ -37,20 +28,17 @@ export class ChatComponent extends Component {
   }
 
   componentWillMount() {
-    console.log('Will Mount');
+    this.chatTitle = (this.props.users.currentStudyGroup == -1)?"":this.props.users.user.studyGroups[this.props.users.currentStudyGroup].groupName;
     this.socket = io.connect();
     this.socket.emit('UserSignedIn', `${this.props.users.user.firstName} ${this.props.users.user.lastName}`);
     this.socket.on('UpdateMessages', this.onMessageReceive);
-
-    //this.props.setChat(0);
   }
 
   componentWillUpdate(nextProps, nextState) {
-
+    this.chatTitle = (this.props.users.currentStudyGroup == -1)?"":this.props.users.user.studyGroups[this.props.users.currentStudyGroup].groupName;
   }
 
   componentWillUnmount() {
-    console.log('Will Unmount');
     this.socket.disconnect();
   }
 
@@ -79,20 +67,92 @@ export class ChatComponent extends Component {
     }
   }
 
+  showAddModal(){
+    $('#addModal').appendTo('body').modal('show');
+  }
+
+  closeAddModal(){
+    $('#addModal').modal('hide');
+  }
+
+  searchForUsers(){
+    this.props.getUsersByEmailRequest($("#search-term").val());
+  }
+
+  addUserToChat(uid){
+    let guid = this.props.users.user.studyGroups[this.props.users.currentStudyGroup].guid;
+    if(uid != undefined){
+      alert("User Added!");
+      this.props.addUserToChat(guid, uid);
+    }
+    this.closeAddModal();
+  }
+
   // Display form
   render() {
     if (this.props.users.currentStudyGroup <= -1) {
       return null;
     }
 
+    if(this.props.users.search.length < 1){
+      this.props.users.search.push({firstName:"N/A", lastName:"N/A", email:"N/A"});
+    }
+
     return (
-      <div className="col-md-9">
+      <div className="col-md-9 animated fadeInRight" id={styles['message-wrapper']}>
+        <div id={styles['chat-menu']}>
+          <span id={styles['chat-title']}>{this.chatTitle}</span>
+          <span id={styles['add-link']} onClick={this.showAddModal}><i className="fa fa-plus"></i> Add Members</span>
+        </div>
         <div className="row-md-3 border rounded" id={styles['message-area']}>
             {this.props.users.chat.messages}
         </div>
-        <div className="row">
-          <textarea className="col-md-11 form-control" rows="3" value={this.state.value} onKeyDown={this.handleKeyDown} onChange={this.handleChange} ></textarea>
-          <button className="col-md-1 btn btn-primary" onClick={this.sendMessage}>Send</button>
+        <div className="row" id={styles['message-input']}>
+          <textarea className="col-md-9 form-control" rows="3" placeholder="Write a message to the group"
+          value={this.state.value} onKeyDown={this.handleKeyDown} onChange={this.handleChange} ></textarea>
+          <button className="col-md-3 btn btn-primary" onClick={this.sendMessage} id={styles['message-send']}>Send</button>
+        </div>        
+
+        <div className="modal fade" id="addModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalLabel">Add a new member</h5>
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <form>
+                  <div className="form-group">
+                    <label htmlFor="recipient-name" className="form-control-label">Search by Email:</label>
+                    <input type="text" className="form-control" onChange={this.searchForUsers} placeholder="Type an email" id="search-term"/>
+                    
+                    <table className="table table-hover" id={styles['table']}>
+                      <thead>
+                        <tr>
+                          <th>First Name</th>
+                          <th>Last Name</th>
+                          <th>Email</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {  
+                        (this.props.users.search).map((u, i) => {
+                          return <tr onClick={() => this.addUserToChat(u.cuid)} key={i}><td>{u.firstName}</td><td>{u.lastName}</td><td>{u.email}</td></tr>;
+                        })
+                      }
+                      </tbody>
+                    </table>
+
+                  </div>
+                </form>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" onClick={this.closeAddModal}>Close</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
