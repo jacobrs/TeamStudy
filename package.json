@@ -1,7 +1,7 @@
 {
-  "name": "Team Study",
-  "version": "5.0.0",
-  "description": "Study Group Chat Rooms",
+  "name": "mern-starter",
+  "version": "2.0.0",
+  "description": "Boilerplate project for building Isomorphic apps using React and Redux",
   "scripts": {
     "test": "cross-env NODE_ENV=test PORT=8080 MONGO_URL=mongodb://27017/soen341 node_modules/.bin/nyc node node_modules/.bin/ava",
     "watch:test": "npm run test -- --watch",
