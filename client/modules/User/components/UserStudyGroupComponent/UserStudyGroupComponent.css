@@ -22,9 +22,10 @@
   text-decoration: none;
 }
 
-.studyGroup ul li a:hover{
+.studyGroup ul li:hover{
   background-color: #555;
   color: #fff;
+  cursor: pointer;
 }
 
 h4{

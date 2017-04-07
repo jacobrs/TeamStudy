@@ -45,6 +45,37 @@ export function createStudyGroup(req, res) {
   });
 }
 
+export function addMember(req, res){
+  if(!req.params.guid || !req.params.cuid){
+    return res.status(403).end();
+  }
+
+  StudyGroup.findOne({ guid: req.params.guid }).exec((err, studyGroup) => {
+    if (err) {
+      return res.status(400).send(err);
+    }
+
+    User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
+      if (err) {
+        return res.status(400).send(err);
+      }
+      for(var i = 0; i < user.studyGroups.length; i++){
+        if(user.studyGroups[i].guid == studyGroup.guid){
+          return res.status(200).end();
+        }
+      }
+      user.studyGroups.push(studyGroup);
+      user.save((err, saved) => {
+        if (err) {
+          return res.status(500).send(err);
+        }
+        return res.status(200).end();
+      });
+    });
+
+  });
+}
+
 export function getStudyGroup(req, res) {
   StudyGroup.findOne({ guid: req.params.guid }).exec((err, studyGroup) => {
     if (err) {

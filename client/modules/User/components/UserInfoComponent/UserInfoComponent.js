@@ -10,12 +10,12 @@ function UserInfoComponent(props) {
   if (props.users.user !== null) { // wait props.users not to be null
     return (
       <div className="col-md-3" id={styles.sidebar}>
-        <img className="img-circle" id={styles['circle-image']}src="/static/images/user.png" />
-        <div className="btn-toolbar pull-right">
-          <div className="btn-group">
-            <Link type="button" className={`btn btn-primary ${styles['edit-button']}`} to="/editInfo">Edit</Link>
-          </div>
+        <div className={styles.editButton}>
+          <Link to="/editInfo">
+            <i className="fa fa-wrench" aria-hidden="true"></i>
+          </Link>
         </div>
+        <img className="img-circle" id={styles['circle-image']}src="/static/images/user.png" />
         <h3>{props.users.user.firstName}&nbsp;{props.users.user.lastName}</h3>
         <p>{props.users.user.email} </p>
         <UserStudyGroupComponent users={props.users} setChat={props.setChat} />

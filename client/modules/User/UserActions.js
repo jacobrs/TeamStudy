@@ -11,6 +11,8 @@ export const CREATE_GROUP = 'CREATE_GROUP';
 export const SET_CURRENT_STUDY_GROUP = 'SET_CURRENT_STUDY_GROUP';
 export const PREPARE_CHAT_MESSAGES = 'PREPARE_CHAT_MESSAGES';
 export const PREPARE_CHAT_MESSAGE = 'PREPARE_CHAT_MESSAGE';
+export const SHOW_SEARCH_RESULTS = 'SHOW_SEARCH_RESULTS';
+export const ADD_USER_TO_CHAT = 'ADD_USER_TO_CHAT';
 
 // Auth Pages
 export const DASHBOARD_PAGE = 'DASHBOARD_PAGE';
@@ -167,6 +169,26 @@ export function prepareChatMessages(messages) {
   return {
     type: PREPARE_CHAT_MESSAGES,
     messages,
+  };
+}
+
+export function getUsersByEmailRequest(term){
+  let request = `users/search/${term}`;
+  return (dispatch) => {
+    return callApi(request).then(res => dispatch(showUsersByEmail(res.users)));
+  };
+}
+
+export function showUsersByEmail(users){
+  return {
+    type: SHOW_SEARCH_RESULTS,
+    users,
+  }
+}
+
+export function addUserToChat(guid, cuid){
+  return (dispatch) => {
+    return callApi(`studyGroups/${guid}/add/${cuid}`);
   };
 }
 

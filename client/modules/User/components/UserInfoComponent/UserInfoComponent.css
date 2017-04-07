@@ -33,12 +33,18 @@
   border-radius: 50%;
   width: 100px;
   height: 100px;
-  margin-top: 30px;
-  margin-bottom: 10px;
-  margin-left: 45px;
+  margin-top:.5em;
+  margin-bottom:.5em;
 }
 
-.edit-button{
-  color: #3366ff;
-  background-color: #ffffff;
+.editButton a:hover{
+  cursor:pointer;
+  color:#777;
+}
+
+.editButton, .editButton a{
+  font-size:18pt;
+  color:#555;
+  text-align:right;
+  padding:.5em;
 }

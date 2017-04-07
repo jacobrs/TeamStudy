@@ -1,5 +1,60 @@
 #message-area {
-    background-color: white;
-    overflow-y:scroll;
-    height: 90%;
+  background-color: white;
+  overflow-y:scroll;
+  height: calc(100% - 40px - 4em);
+	z-index: 10;
+	padding:1em;
+	font-size: 11pt;
+}
+
+#message-input {
+	height: 40px;
+}
+
+#message-wrapper {
+  height: 100%;
+  padding:0px;
+}
+
+#message-send:hover{
+	cursor: pointer;
+}
+
+#chat-menu{
+	background:#446CB3;
+	height:4em;
+	width:100%;
+	z-index: -5;
+  border-top:1px #FFF solid;
+}
+
+#chat-title{
+	line-height: 3em;
+	padding-left: 1em;
+	padding-right:1em;
+	font-size: 12pt;
+}
+
+#add-link{
+	float:right;
+	padding:1.2em;
+}
+
+#add-link:hover{
+	cursor:pointer;
+	color:rgba(255,255,255,0.6);
+}
+
+#table{
+	font-size:12pt;
+	margin-bottom:0px;
+	margin-top:1em;
+}
+
+#table tbody tr td:hover{
+	cursor: pointer;
+}
+
+[type=button]:hover{
+	cursor: pointer;
 }

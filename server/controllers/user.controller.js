@@ -165,4 +165,14 @@ export function deleteUserStudyGroups(req, res) {
   });
 }
 
+export function search(req, res){
+  User.find({"email" : { $regex: req.params.term, $options : 'i'} }).exec((err, users) => {
+    if (err) {
+      return res.json({users:[]});
+    }else{
+      return res.json({users: users});
+    }
+  });
+}
+
 // need: delete specific user study group
