@@ -7,6 +7,9 @@ const router = new Router();
 // Get all Study Groups
 router.route('/').get(ensureAuthenticated, StudyGroupController.getStudyGroups);
 
+// Add a member to a Study Group
+router.route('/:guid/add/:cuid').get(StudyGroupController.addMember);
+
 // Get Study Group by guid
 router.route('/:guid').get(ensureAuthenticated, StudyGroupController.getStudyGroup);
 

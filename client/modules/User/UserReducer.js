@@ -1,10 +1,21 @@
-import { ADD_USER, UPDATE_USER, LOGIN_USER, AUTHENTICATE_SESSION, FAILED_AUTHENTICATION, LOGOUT_USER, SET_CURRENT_STUDY_GROUP, PREPARE_CHAT_MESSAGES, PREPARE_CHAT_MESSAGE } from './UserActions';
+import { 
+  ADD_USER, 
+  UPDATE_USER, 
+  LOGIN_USER, 
+  AUTHENTICATE_SESSION, 
+  FAILED_AUTHENTICATION, 
+  LOGOUT_USER, 
+  SET_CURRENT_STUDY_GROUP, 
+  PREPARE_CHAT_MESSAGES, 
+  PREPARE_CHAT_MESSAGE,
+  SHOW_SEARCH_RESULTS
+  } from './UserActions';
 
 import { getColorFromUserIndex } from './components/ChatComponent/ChatComponent';
 import React from 'react';
 
 // Initial State
-const initialState = { data: [], user: null, currentStudyGroup: -1, chat: { messages: [] } };
+const initialState = { data: [], user: null, currentStudyGroup: -1, chat: { messages: [] }, search: [] };
 
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -17,6 +28,7 @@ const UserReducer = (state = initialState, action) => {
         user: action.user,
         currentStudyGroup: state.currentStudyGroup,
         chat: state.chat,
+        search: [],
       };
     case LOGIN_USER: {
       const user = (action.response.statusCode === 200) ? action.response.user : null;
@@ -25,6 +37,7 @@ const UserReducer = (state = initialState, action) => {
         user,
         currentStudyGroup: state.currentStudyGroup,
         chat: state.chat,
+        search: [],
       };
     }
     case AUTHENTICATE_SESSION: {
@@ -34,6 +47,7 @@ const UserReducer = (state = initialState, action) => {
         user,
         currentStudyGroup: state.currentStudyGroup,
         chat: state.chat,
+        search: [],
       };
     }
     case FAILED_AUTHENTICATION: {
@@ -41,6 +55,7 @@ const UserReducer = (state = initialState, action) => {
         user: null,
         currentStudyGroup: -1,
         chat: initialState.chat,
+        search: [],
       };
     }
     case LOGOUT_USER: {
@@ -48,6 +63,7 @@ const UserReducer = (state = initialState, action) => {
         user: null,
         currentStudyGroup: -1,
         chat: initialState.chat,
+        search: [],
       };
     }
     case SET_CURRENT_STUDY_GROUP: {
@@ -55,6 +71,7 @@ const UserReducer = (state = initialState, action) => {
         user: state.user, // Not sure if this is necessary
         currentStudyGroup: action.studyGroupIndex,
         chat: state.chat,
+        search: [],
       };
     }
     case PREPARE_CHAT_MESSAGES: {
@@ -68,6 +85,7 @@ const UserReducer = (state = initialState, action) => {
         user: state.user,
         currentStudyGroup: state.currentStudyGroup,
         chat: { messages },
+        search: [],
       };
     }
     case PREPARE_CHAT_MESSAGE: {
@@ -76,8 +94,21 @@ const UserReducer = (state = initialState, action) => {
         user: state.user,
         currentStudyGroup: state.currentStudyGroup,
         chat: state.chat,
+        search: [],
       };
     }
+    case SHOW_SEARCH_RESULTS: {
+      if(action.users == undefined){
+        action.users = [];
+      }
+      
+      return {
+        user: state.user,
+        currentStudyGroup: state.currentStudyGroup,
+        chat: state.chat,
+        search: action.users
+      };
+    } 
     default:
       return state;
   }
