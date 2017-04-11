@@ -26,6 +26,7 @@ export function addUser(user) {
 }
 
 export function addUserRequest(user) {
+
   return (dispatch) => {
     return callApi('users', 'post', {
       user: {
