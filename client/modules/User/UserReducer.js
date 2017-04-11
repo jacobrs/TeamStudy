@@ -91,7 +91,7 @@ const UserReducer = (state = initialState, action) => {
       return {
         user: state.user,
         currentStudyGroup: state.currentStudyGroup,
-        chat: { messages, usersInChat },
+        chat: { messages, users: usersInChat },
         search: [],
       };
     }
