@@ -49,7 +49,9 @@ export class ChatComponent extends Component {
   }
 
   onMessageReceive(data) {
-    this.props.prepareChatMessage(data);
+    if (this.props.users.user.studyGroups[this.props.users.currentStudyGroup].guid == data.studyGroup) {
+      this.props.prepareChatMessage(data);      
+    }
   }
 
   handleChange(event) {

@@ -31,7 +31,7 @@ exports = module.exports = function (io) {
           throw err;
         }
         else {
-          io.sockets.emit('UpdateMessages', { message: data.message, user: socket.nickname });
+          io.sockets.emit('UpdateMessages', { message: data.message, user: socket.nickname, studyGroup: data.studyGroup });
         }
       });
     });

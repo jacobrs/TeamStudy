@@ -97,12 +97,14 @@ const UserReducer = (state = initialState, action) => {
     }
     case PREPARE_CHAT_MESSAGE: {
       let userIndex = state.chat.users.indexOf(action.message.user);
+
       if (userIndex === -1) {
         state.chat.users.push(action.message.user);
         userIndex = state.chat.users.length - 1;
       }
 
       state.chat.messages.push(<div key={state.chat.messages.length + 1} style={{ color: getColorFromUserIndex(userIndex) }}>{`${action.message.user}: ${action.message.message}`}</div>);
+      
       return {
         user: state.user,
         currentStudyGroup: state.currentStudyGroup,
