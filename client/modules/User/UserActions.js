@@ -155,7 +155,8 @@ export function createStudyGroupRequest(user,studyGroup) {
           teacher: studyGroup.teacher,
           description: studyGroup.description,
         },
-    }).then(res => dispatch(createStudyGroup(res.studyGroup)));
+    }).then(res => dispatch(createStudyGroup(res.studyGroup)))
+    .then(res => dispatch(authenticateSessionRequest()));
   };
 }
 
