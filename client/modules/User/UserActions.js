@@ -148,14 +148,16 @@ export function createStudyGroup(studyGroup) {
 export function createStudyGroupRequest(user, studyGroup) {
   return (dispatch) => {
     return callApi('studyGroups', 'post', {
-      cuid: user.user.cuid,
-      studyGroup: {
-        groupName: studyGroup.groupName,
-        course: studyGroup.course,
-        teacher: studyGroup.teacher,
-        description: studyGroup.description,
-      },
-    }).then(res => dispatch(createStudyGroup(res.studyGroup)));
+
+        cuid: user.user.cuid,
+        studyGroup: {
+          groupName: studyGroup.groupName,
+          course: studyGroup.course,
+          teacher: studyGroup.teacher,
+          description: studyGroup.description,
+        },
+    }).then(res => dispatch(createStudyGroup(res.studyGroup)))
+    .then(res => dispatch(authenticateSessionRequest()));
   };
 }
 

@@ -5,7 +5,7 @@
 	position: absolute;
 	text-align:center;
 	top:0;
-	background:#446CB3;
+	background:#29b6f6;
 }
 
 #curtain i{
@@ -18,14 +18,29 @@
 	display:none;
 }
 
-.row{
-	margin:0px !important;
-}
-
 #root{
 	height:100%;
 	width: 100%;
 	position:absolute;
+}
+
+.error-input{
+	color:red;
+}
+
+.input-group .form-control{
+  width:100% !important;
+}
+
+.form-group{
+	width:100% !important;
+}
+
+body{
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: right top !important;
+  background-attachment: fixed !important;
 }
 
 [data-reactroot]{

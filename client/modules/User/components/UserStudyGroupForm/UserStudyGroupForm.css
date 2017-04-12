@@ -20,7 +20,6 @@ a:hover {
 .btnOutlineSecondary:hover, .btnOutlineSecondary {
   border-color: #FFF;
   color: #FFF;
-  cursor: pointer;
 }
 .signInButton{
   margin-top:.25em;
@@ -36,4 +35,8 @@ a:hover {
 }
 .mainText{
   font-size: 0.8em;
+}
+.inputs{
+  margin:1em;
+  margin-right:2em;
 }
