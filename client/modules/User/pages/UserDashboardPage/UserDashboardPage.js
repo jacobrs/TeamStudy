@@ -27,6 +27,17 @@ class UserDashboardPage extends Component {
     this.props.switchChat(studyGroupIndex, this.props.users.user.studyGroups[studyGroupIndex]);
   }
 
+  componentDidMount() {
+    document.body.style.backgroundImage = null;
+    if(window.jQuery){
+      $.material.init();
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    $.material.init();
+  }
+
   render() {
     if (this.props.users.user != null) {
       return (
