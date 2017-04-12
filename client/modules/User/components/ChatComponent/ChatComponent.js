@@ -112,25 +112,24 @@ export class ChatComponent extends Component {
           <span id={styles['chat-title']}>{this.chatTitle}</span>
           <span id={styles['add-link']} onClick={this.showAddModal}><i className="fa fa-plus"></i> Add Members</span>
         </div>
-        <div className="row-md-3 border rounded" id={styles['message-area']}>
+        <div className="border rounded" id={styles['message-area']}>
             {this.props.users.chat.messages}
         </div>
         <div className="row" id={styles['message-input']}>
-          <textarea className="col-md-9 form-control" rows="3" placeholder="Write a message to the group"
+          <textarea className="col-md-9 form-control" rows="3" placeholder="Write a message to the group..."
           value={this.state.value} onKeyDown={this.handleKeyDown} onChange={this.handleChange} ></textarea>
-          <button className="col-md-3 btn btn-primary" onClick={this.sendMessage} id={styles['message-send']}>Send</button>
         </div>        
 
         <div className="modal fade" id="addModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
-              <div className="modal-header">
+              <div className="modal-header" id={styles['modal-header']}>
                 <h5 className="modal-title" id="exampleModalLabel">Add a new member</h5>
                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div className="modal-body">
+              <div className="modal-body" id={styles['modal-body']}>
                 <form>
                   <div className="form-group">
                     <label htmlFor="recipient-name" className="form-control-label">Search by Email:</label>

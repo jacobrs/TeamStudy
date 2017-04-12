@@ -20,6 +20,14 @@ export class UserLoginForm extends Component {
     });
   }
 
+  componentDidMount() {
+    document.body.style.backgroundImage = "url('http://" + location.host + "/static/material-ui/img/bg-landing.jpeg')";
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    $.material.init();
+  }
+
   showError(divId) {
     var elem = document.getElementById(divId);
     elem.style.color = 'Red';
@@ -45,38 +53,44 @@ export class UserLoginForm extends Component {
   // Display form
   render() {
     return (
-      <div className={styles.formContainer + ' ' + styles.center} onKeyDown={this.onHandleEnter}>
-        <i className={styles.cap + ' fa fa-graduation-cap'} />
-        <h1 className={styles.title}><FormattedMessage id="siteTitle" /></h1>
+      <div className={"row " + styles.formContainer} onKeyDown={this.onHandleEnter}>
+        <div className="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+          <div className="card card-signup">
+            <form className="login" method="POST">
+              <div className="header header-info text-center">
+                <div className={styles.title}><i className={styles.cap + ' fa fa-graduation-cap'} />&nbsp;&nbsp;<FormattedMessage id="siteTitle" /></div>
+              </div>
+              <p className={"text-divider " + styles.textDivider}>Sign into the system</p><br/><br/>
+              <div className="content">
 
-        <div className={styles.formLabel + ' row'}>
-          <form id="login" method="POST" className="col-lg-4 push-lg-4 col-md-6 push-md-3 col-xs-8 push-xs-2">
-            <div className="form-group row">
-              <label className="input-labels">Email</label>
-              <input type="email" className="form-control" name="email" placeholder="Email" value={this.state.email}
-                onChange={this.handleInputChange}
-              />
-            </div>
-            <div className="form-group row">
-              <label className="input-labels">Password</label>
-              <input type="password" className="form-control" name="password" placeholder="Password"
-                value={this.state.password} onChange={this.handleInputChange}
-              />
-            </div>
+                <div className="input-group">
+                  <span className="input-group-addon">
+                    <i className="material-icons">email</i>
+                  </span>
+                  <input type="email" className="form-control" name="email" placeholder="Email..." value={this.state.email}
+                        onChange={this.handleInputChange} autoComplete="off"/>
+                </div>
 
-            <div id="errorMessage" className="collapse">The account or password provided is invalid</div>
-            <br />
-
-            <div className={styles.center}>
-              <button className={styles.btnOutlineSecondary + ' btn btn-outline-secondary ' + styles.logInButton}
-                type="button" onClick={this.loginUser}
-              >
-                Log In!</button><br /><br />
-              <Link className={styles.mainText} to="/register">Don't have an account yet? Register Here</Link>
-            </div>
-          </form>
+                <div className="input-group">
+                  <span className="input-group-addon">
+                    <i className="material-icons">lock_outline</i>
+                  </span>
+                  <input type="password" className="form-control" name="password" placeholder="Password..."
+                        value={this.state.password} onChange={this.handleInputChange} autoComplete="off"
+                      />
+                </div>
+              </div>
+              <div className="footer text-center">
+                <div id="errorMessage" className="collapse">The account or password provided is invalid</div><br/>
+                <a className="btn btn-simple btn-primary btn-lg" onClick={this.loginUser}>Sign in</a>
+                <p className={styles.textDivider + " " + styles.noTopDivider + " text-divider"}>Don&apos;t have an account?</p>
+                <Link to="/register" className="btn btn-simple btn-primary btn-lg">Create an account</Link><br/><br/>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
+      
     );
   }
 }

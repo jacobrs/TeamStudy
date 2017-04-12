@@ -15,7 +15,7 @@ function UserInfoComponent(props) {
             <i className="fa fa-wrench" aria-hidden="true"></i>
           </Link>
         </div>
-        <img className="img-circle" id={styles['circle-image']}src="/static/images/user.png" />
+        <img id={styles['profile-image']}src="/static/images/user.png" />
         <h3>{props.users.user.firstName}&nbsp;{props.users.user.lastName}</h3>
         <p>{props.users.user.email} </p>
         <UserStudyGroupComponent users={props.users} setChat={props.setChat} />

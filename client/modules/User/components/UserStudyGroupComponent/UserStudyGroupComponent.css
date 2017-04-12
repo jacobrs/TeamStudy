@@ -3,37 +3,18 @@
   color: #555;
   text-align: center;
   margin-top:40px;
+  padding:1em;
+  height:initial;
 }
 
-.studyGroup ul{
-  list-style-type: none;
-  background-color: #fff;
-  width: 100%;
-  margin: 0;
-  padding: 0;
+.chatLink{
+  width:100%;
 }
 
-.studyGroup ul li{
-  display: block;
-  color: #a1a1a1;
-  background-color: #f1f1f1;
-  padding: 8px 16px;
-  margin-bottom: 10px;
-  text-decoration: none;
-}
-
-.studyGroup ul li:hover{
-  background-color: #555;
-  color: #fff;
-  cursor: pointer;
-}
-
-h4{
-  font-size: 2em;
-  text-align: left;
-  margin: 20px 0 10px 0;
-  padding-left: 10px;
-  border-left: 5px solid #6b8dc7;
+.title{
+  font-size: 1em;
+  text-align: center;
+  margin: 20px 10px 10px 10px;
   border-bottom: 1px solid #a1a1a1;
 }
 
