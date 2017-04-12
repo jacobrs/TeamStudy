@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import Validation from 'react-validation';
+import { browserHistory } from 'react-router';
 
 import Valid from '../FormComponents/Validator';
 import styles from './UserStudyGroupForm.css';
@@ -35,6 +36,7 @@ export class UserStudyGroupForm extends Component {
       console.log(this.state);
       this.setState({ groupName: '', course: '', teacher: '', description: '' });
       e.preventDefault();
+      browserHistory.push('/profile');
     }
   };
 

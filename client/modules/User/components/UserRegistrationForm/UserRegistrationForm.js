@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import Validation from 'react-validation';
 
 import Valid from '../FormComponents/Validator';
@@ -37,6 +37,7 @@ export class UserRegistrationForm extends Component {
       this.setState({ nickname: '', studentId: '', email: '', password: '', passwordConfirm: '' });
       // To stop the page from refreshing
       e.preventDefault();
+      browserHistory.push('/');
     }
   };
 

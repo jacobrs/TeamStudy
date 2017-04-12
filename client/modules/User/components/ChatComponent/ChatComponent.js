@@ -6,7 +6,13 @@ import io from 'socket.io-client';
 import styles from './ChatComponent.css';
 
 const COLORS = [
-  'Black',
+  'DodgerBlue',
+  'Crimson',
+  'LimeGreen',
+  'DarkOrange',
+  'DarkOrchid',
+  'Gold',
+  'Navy',
 ];
 
 // Ensure we have a color for every user, if we are out of colors just wrap back around.
@@ -43,7 +49,9 @@ export class ChatComponent extends Component {
   }
 
   onMessageReceive(data) {
-    this.props.prepareChatMessage(data);
+    if (this.props.users.user.studyGroups[this.props.users.currentStudyGroup].guid == data.studyGroup) {
+      this.props.prepareChatMessage(data);      
+    }
   }
 
   handleChange(event) {

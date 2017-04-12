@@ -15,7 +15,7 @@ import { getColorFromUserIndex } from './components/ChatComponent/ChatComponent'
 import React from 'react';
 
 // Initial State
-const initialState = { data: [], user: null, currentStudyGroup: -1, chat: { messages: [] }, search: [] };
+const initialState = { data: [], user: null, currentStudyGroup: -1, chat: { messages: [], users: [] }, search: [] };
 
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -76,20 +76,35 @@ const UserReducer = (state = initialState, action) => {
     }
     case PREPARE_CHAT_MESSAGES: {
       const messages = [];
+      const usersInChat = [];
 
       for (let i = 0; i < action.messages.length; i++) {
-        messages.push(<div key={i} style={{ color: getColorFromUserIndex(i) }}>{`${action.messages[i].author}: ${action.messages[i].messageContent}`}</div>);
+        let userIndex = usersInChat.indexOf(action.messages[i].author);
+        if (userIndex === -1) {
+          usersInChat.push(action.messages[i].author);
+          userIndex = usersInChat.length - 1;
+        }
+
+        messages.push(<div key={i} style={{ color: getColorFromUserIndex(userIndex) }}>{`${action.messages[i].author}: ${action.messages[i].messageContent}`}</div>);
       }
 
       return {
         user: state.user,
         currentStudyGroup: state.currentStudyGroup,
-        chat: { messages },
+        chat: { messages, users: usersInChat },
         search: [],
       };
     }
     case PREPARE_CHAT_MESSAGE: {
-      state.chat.messages.push(<div key={state.chat.messages.length + 1} style={{ color: getColorFromUserIndex(0) }}>{`${action.message.user}: ${action.message.message}`}</div>);
+      let userIndex = state.chat.users.indexOf(action.message.user);
+
+      if (userIndex === -1) {
+        state.chat.users.push(action.message.user);
+        userIndex = state.chat.users.length - 1;
+      }
+
+      state.chat.messages.push(<div key={state.chat.messages.length + 1} style={{ color: getColorFromUserIndex(userIndex) }}>{`${action.message.user}: ${action.message.message}`}</div>);
+      
       return {
         user: state.user,
         currentStudyGroup: state.currentStudyGroup,
