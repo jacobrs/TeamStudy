@@ -55,7 +55,7 @@
     "react-intl": "^2.1.2",
     "react-redux": "^4.4.5",
     "react-router": "^2.4.1",
-    "react-validation": "github:lesha-spr/react-validation#master",
+    "react-validation": "github:jacobrs/react-validation",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
     "sanitize-html": "^1.11.4",
