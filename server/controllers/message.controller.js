@@ -33,11 +33,11 @@ export function getAllMessages(req, res) {
 }
 
 export function getMessagesFromStudyGroup(req, res) {
-  Message.find({ studyGroup: req.params.studyGroup }).exec((err, studyGroupMessages) => {
+  Message.find({ studyGroup: req.params.studyGroup }).exec((err, messages) => {
     if (err) {
       return res.status(500).send(err).end();
     }
-    return res.json({ studyGroupMessages }).end();
+    return res.json({ messages }).end();
   });
 }
 
