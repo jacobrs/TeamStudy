@@ -52,6 +52,18 @@ export class ChatComponent extends Component {
     if (this.props.users.user.studyGroups[this.props.users.currentStudyGroup].guid == data.studyGroup) {
       this.props.prepareChatMessage(data);      
     }
+    this.scrollSmoothToBottom(styles["message-area"]);
+  }
+
+  scrollSmoothToBottom(id){
+    var div = document.getElementById(id);
+    $('#' + id).animate({
+      scrollTop: div.scrollHeight - div.clientHeight
+    }, 100);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    this.scrollSmoothToBottom(styles["message-area"]);
   }
 
   handleChange(event) {
