@@ -3,7 +3,7 @@ import mockgoose from 'mockgoose';
 
 export function connectDB(t, done) {
   mockgoose(mongoose).then(() => {
-    mongoose.createConnection('mongodb://localhost:27017/mern-test', err => {
+    mongoose.createConnection('mongodb://127.0.0.1:27017/soen341-test', err => {
       if (err) t.fail('Unable to connect to test database');
       done();
     });

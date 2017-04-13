@@ -12,7 +12,7 @@ exports = module.exports = function (io) {
         socket.emit('FetchExistingMessages', messages);
       }
     });
-    
+
     // user opens chat event handler
     socket.on('UserSignedIn', function (user) {
       socket.nickname = user;
@@ -26,7 +26,7 @@ exports = module.exports = function (io) {
       newMessage.studyGroup = data.studyGroup;
       newMessage.cuid = cuid();
 
-      newMessage.save(function(err) {
+      newMessage.save(function (err) {
         if (err) {
           throw err;
         }
@@ -40,6 +40,5 @@ exports = module.exports = function (io) {
     socket.on('disconnect', function () {
 
     });
-
   });
 };

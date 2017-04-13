@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import message from './message';
 const Schema = mongoose.Schema;
 
 const studyGroupSchema = new Schema({
@@ -9,7 +8,7 @@ const studyGroupSchema = new Schema({
   teacher: { type: 'String', required: true },
   description: { type: 'String', required: true },
   dateAdded: { type: 'Date', default: Date.now, required: true },
-  chatMessages: ['message']
+  chatMessages: ['message'],
 });
 
 export default mongoose.model('studyGroup', studyGroupSchema);

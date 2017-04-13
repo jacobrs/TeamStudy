@@ -46,7 +46,7 @@ export class UserRegistrationForm extends Component {
       this.notifyUser();
       this.props.addUser(this.state.nickname, this.state.studentId, this.state.email, this.state.password);
       this.setState({ nickname: '', studentId: '', email: '', password: '', passwordConfirm: '' });
-      //To stop the page from refreshing
+      // To stop the page from refreshing
       e.preventDefault();
       browserHistory.push('/');
     }

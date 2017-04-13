@@ -38,11 +38,13 @@ import Helmet from 'react-helmet';
 import User from './models/user';
 import routes from '../client/routes';
 import { fetchComponentData } from './util/fetchData';
+import serverConfig from './config';
+const LocalStrategy = require('passport-local').Strategy;
+
+// Import required routes
 import users from './routes/user.routes';
 import studyGroups from './routes/studyGroup.routes';
 import message from './routes/message.routes';
-import serverConfig from './config';
-const LocalStrategy = require('passport-local').Strategy;
 
 // Set native promises as mongoose promise
 mongoose.Promise = global.Promise;
@@ -61,6 +63,7 @@ app.use(Express.static(path.resolve(__dirname, '../dist')));
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: true }));
 
+// User session
 app.use(session({
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
   secret: serverConfig.secret,
@@ -73,12 +76,13 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// User Authentication
 passport.use(new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
 },
-  function (email, password, done) {
-    findUser(email, function (err, user) {
+  (email, password, done) => {
+    findUser(email, (err, user) => {
       if (err) {
         return done(err);
       }
@@ -100,12 +104,12 @@ function findUser(email, callback) {
   });
 }
 
-passport.serializeUser(function (user, done) {
+passport.serializeUser((user, done) => {
   done(null, user.cuid);
 });
 
-passport.deserializeUser(function (id, done) {
-  User.findOne({ 'cuid': id }, function (err, user) {
+passport.deserializeUser((id, done) => {
+  User.findOne({ cuid: id }, (err, user) => {
     if (user != null) {
       user.password = undefined;
     }
@@ -113,6 +117,7 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
+// Apply API endpoints
 app.use('/api/users', users);
 app.use('/api/studyGroups', studyGroups);
 app.use('/api/message', message);
@@ -223,18 +228,16 @@ const server = app.listen(serverConfig.port, (error) => {
 });
 
 // Socket.io
-var io = require('socket.io').listen(server);
+const io = require('socket.io').listen(server);
 
 // Import events and event handlers and attach them to the socket.io instance
 const socketEvents = require('./socketEvents')(io);
 
-// console.log(server);
-// console.log(__dirname);
 
 // HTML page for debugging
-app.get('/testchat', function (req, res) {
-  res.sendFile(__dirname + '/testChat.html');
-});
+// app.get('/testchat', function (req, res) {
+//   res.sendFile(__dirname + '/testChat.html');
+// });
 
 /*
 // alternate method to create socket.io instance attached to server

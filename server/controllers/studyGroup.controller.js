@@ -1,4 +1,4 @@
-import User from '../models/user'
+import User from '../models/user';
 import StudyGroup from '../models/studyGroup';
 import Message from '../models/message';
 import cuid from 'cuid';
@@ -109,14 +109,14 @@ export function addMessageToStudyGroup(req, res) {
   StudyGroup.findOne({ guid: req.params.guid }).exec((err, studyGroup) => {
     if (err) {
       return res.status(500).send(err);
-    }    
-    
+    }
+
     let messageCuid = req.body.messageCuid;
     let duplicate = false;
 
-    studyGroup.chatMessages.forEach(function(element) {
+    studyGroup.chatMessages.forEach(function (element) {
       if (element.cuid = messageCuid) {
-        duplicate = true;       
+        duplicate = true;
       }
     });
 
@@ -133,8 +133,8 @@ export function addMessageToStudyGroup(req, res) {
           return res.status(500).send(err);
         }
         return res.json({ studyGroup: saved });
-      }); 
-    });         
+      });
+    });
   });
 }
 

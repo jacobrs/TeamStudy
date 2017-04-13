@@ -16,7 +16,7 @@ class UserStudyGroupPage extends Component {
   }
 
   createStudyGroup = (groupName, course, teacher, description) => {
-    this.props.createStudyGroupRequest(this.props.users,{
+    this.props.createStudyGroupRequest(this.props.users, {
       groupName,
       course,
       teacher,

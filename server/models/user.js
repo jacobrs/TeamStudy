@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import studyGroup from './studyGroup';
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -11,7 +10,7 @@ const userSchema = new Schema({
   email: { type: 'String', required: true },
   dateAdded: { type: 'Date', default: Date.now, required: true },
   lastLogin: { type: 'Date', default: null, required: false },
-  studyGroups: ['studyGroup']
+  studyGroups: ['studyGroup'],
 });
 
 export default mongoose.model('user', userSchema);

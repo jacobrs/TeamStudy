@@ -10,15 +10,15 @@ import CustomValidatorInput from '../FormComponents/CustomValidatorInput';
 export class UserUpdateForm extends Component {
   constructor(props) {
     super(props);
-    if(props.user == undefined){
+    if (props.user == undefined) {
       this.state = { nickname: '', studentId: '', email: '', password: '', passwordConfirm: '' };
-    }else{
-      this.state = { 
-        nickname: props.user.firstName + " " + props.user.lastName,
+    } else {
+      this.state = {
+        nickname: props.user.firstName + ' ' + props.user.lastName,
         studentId: props.user.studentId,
         email: props.user.email,
-        password: "",
-        passwordConfirm: ""
+        password: '',
+        passwordConfirm: '',
       };
     }
     this.user = props.user;
@@ -49,7 +49,7 @@ export class UserUpdateForm extends Component {
       this.props.updateUser(firstName, lastName, this.state.studentId, this.state.email, this.state.password, this.user.cuid);
       this.notifyUser();
       this.setState({ nickname: '', studentId: '', email: '', password: '', passwordConfirm: '' });
-      //To stop the page from refreshing
+      // To stop the page from refreshing
       e.preventDefault();
     }
   };

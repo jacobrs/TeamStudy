@@ -1,20 +1,20 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import { fetchUserGroups } from '../../UserActions'
+import { fetchUserGroups } from '../../UserActions';
 
 // Import style
 import styles from './UserStudyGroupComponent.css';
 
-export class UserStudyGroupComponent extends Component{
-  constructor(props){
+export class UserStudyGroupComponent extends Component {
+  constructor(props) {
     super(props);
   }
 
-  handleClick (i, event){
+  handleClick(i, event) {
     this.props.setChat(i);
   }
 
-  render(){
+  render() {
     if ((this.props.users.user.studyGroups).length !== 0) {
       return (
         <div className={styles.studyGroup}>
