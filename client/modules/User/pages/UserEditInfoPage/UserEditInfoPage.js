@@ -23,14 +23,14 @@ class UserEditInfoPage extends Component {
       studentId,
       email,
       password,
-      cuid
+      cuid,
     });
   };
 
   render() {
     return (
       <div>
-        <UserUpdateForm updateUser={this.updateUser} user={this.user}/>
+        <UserUpdateForm updateUser={this.updateUser} user={this.user} />
       </div>
     );
   }

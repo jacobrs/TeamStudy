@@ -48,6 +48,7 @@ export function addUser(req, res) {
     }
     return res.json({ user: saved });
   });
+  return newUser; // ESlint
 }
 
 export function getUser(req, res) {
@@ -55,10 +56,8 @@ export function getUser(req, res) {
     if (err) {
       return res.status(500).send(err);
     }
-    else {
-      user.password = undefined;
-      return res.json({ user });
-    }
+    user.password = undefined;
+    return res.json({ user });
   });
 }
 
@@ -77,7 +76,6 @@ export function updateUser(req, res) {
   User.findOne({ cuid: req.user.cuid }).exec((err, user) => {
     if (err) {
       return res.status(500).send(err);
-
     }
     user.firstName = firstName;
     user.lastName = lastName;
@@ -111,8 +109,8 @@ export function loginUser(req, res) {
 }
 
 export function logoutUser(req, res) {
-  req.session.destroy(function (err) {
-    res.json({ user: null, statusCode: 200, message: 'User logged out successfully' });
+  req.session.destroy((err) => {
+    return res.json({ user: null, statusCode: 200, message: 'User logged out successfully' });
   });
 }
 
@@ -129,14 +127,14 @@ export function addStudyGroupToUser(req, res) {
   User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
     if (err) {
       return res.status(500).send(err);
-    }    
-    
+    }
+
     let studyGroupGuid = req.body.studyGroupReference;
     let duplicate = false;
 
-    user.studyGroups.forEach(function(element) {
+    user.studyGroups.forEach(function (element) {
       if (element.guid = studyGroupGuid) {
-        duplicate = true;       
+        duplicate = true;
       }
     });
 
@@ -153,13 +151,13 @@ export function addStudyGroupToUser(req, res) {
           return res.status(500).send(err);
         }
         return res.json({ user: saved });
-      }); 
-    });         
+      });
+    });
   });
 }
 
 export function deleteUserStudyGroups(req, res) {
-  User.update({ cuid : req.params.cuid }, { $set: { 'studyGroups' : [] } }).exec((err, saved) => {
+  User.update({ cuid: req.params.cuid }, { $set: { 'studyGroups': [] } }).exec((err, saved) => {
     if (err) {
       return res.status(500).send(err);
     }
