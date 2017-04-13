@@ -18,12 +18,12 @@ export class UserStudyGroupComponent extends Component {
     if ((this.props.users.user.studyGroups).length !== 0) {
       return (
         <div className={styles.studyGroup}>
-          <h4>Study Groups</h4>
-          <ul>
-            {(this.props.users.user.studyGroups).map((group, i) => {
-              return <li key={i} onClick={this.handleClick.bind(this, i)}>{group.groupName}</li>;
-            })}
-          </ul>
+          <h3 className={styles.title}>Study Groups</h3>
+          {(this.props.users.user.studyGroups).map((group, i) => {
+            return <button key={i} onClick={this.handleClick.bind(this, i)} className={"btn btn-info btn-round " + styles.chatLink}>
+              <i className="material-icons">people</i> {group.groupName}
+            </button>;
+          })}
         </div>
       );
     }

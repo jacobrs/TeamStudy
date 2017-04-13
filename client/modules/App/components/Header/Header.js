@@ -14,35 +14,43 @@ export class Header extends Component {
     this.props.logoutReq();
   }
 
+  componentDidMount() {
+    if(window.jQuery){
+      $.material.init();
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    $.material.init();
+  }
+
   render() {
     return (
-      <nav className="navbar navbar-toggleable-md navbar-light bg-faded" id={styles.navbar}>
-        <div className="navbar-header">
-          <div className="navbar-brand pull-left" id={styles.brand}><span><i className={`${styles.cap} fa fa-graduation-cap`} aria-hidden="true"></i>TeamStudy</span></div>
-          <button
-            className="navbar-toggler navbar-toggler-right"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false" aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-        </div>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className={`nav navbar-nav ${styles.right}`}>
-          <li className="nav-item active">
-              <Link className={`nav-link ${styles['nav-links-inline']}`} to="/registerGroup">Create Study Group</Link>
-            </li>
-            <li className="nav-item active">
-              <i className={`${styles['small-nav-icon']} fa fa-home`} aria-hidden="true"></i>
-              <Link className={`nav-link ${styles['nav-links-inline']}`} to="/profile">Home</Link>
-            </li>
-            <li className="nav-item" id={styles.signout}>
-              <Link onClick={this.handleLogout} className={`nav-link ${styles['nav-links-inline']}`}>Sign Out</Link>
-            </li>
-          </ul>
+      <nav className="navbar navbar-default" role="navigation" id={styles.navbar}>
+        <div className="container-fluid">
+          <div className="navbar-header">
+            <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#col-menu">
+                    <span className="sr-only">Toggle navigation</span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+            </button>
+            <Link to="/profile" className="navbar-brand" href="#"><i className="fa fa-graduation-cap"/>&nbsp;&nbsp;TeamStudy</Link>
+          </div>
+
+          <div className="collapse navbar-collapse navbar-right" id="col-menu">
+            <ul className="nav navbar-nav">
+              <li><Link to="/registerGroup"><i className="fa fa-users"/>&nbsp;&nbsp;Create study group</Link></li>
+              <li></li>
+              <li className="dropdown">
+                <a href="#" className="dropdown-toggle" data-toggle="dropdown">Profile <b className="caret"></b></a>
+                <ul className="dropdown-menu">
+                  <li><Link to="/profile">Dashboard</Link></li>
+                  <li><Link onClick={this.handleLogout}>Sign out</Link></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
       </nav>
     );

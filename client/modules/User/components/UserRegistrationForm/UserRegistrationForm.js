@@ -4,6 +4,7 @@ import { Link, browserHistory } from 'react-router';
 import Validation from 'react-validation';
 
 import Valid from '../FormComponents/Validator';
+import CustomValidatorInput from '../FormComponents/CustomValidatorInput';
 import styles from './UserRegistrationForm.css';
 
 export class UserRegistrationForm extends Component {
@@ -20,6 +21,17 @@ export class UserRegistrationForm extends Component {
     });
   }
 
+  componentDidMount() {
+    document.body.style.backgroundImage = "url('http://" + location.host + "/static/material-ui/img/bg-landing.jpeg')";
+    if(window.jQuery){
+      $.material.init();
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    $.material.init();
+  }
+
   notifyUser() {
     alert('Account successfuly created!');
   }
@@ -30,7 +42,6 @@ export class UserRegistrationForm extends Component {
   };
 
   addUser = (e) => {
-    console.log(this.state);
     if (this.state.nickname && this.state.studentId && this.state.email && this.state.password) {
       this.notifyUser();
       this.props.addUser(this.state.nickname, this.state.studentId, this.state.email, this.state.password);
@@ -43,85 +54,91 @@ export class UserRegistrationForm extends Component {
 
   render() {
     return (
-        <div className={`${styles.formContainer} ${styles.center}`}>
-            <i className={`${styles.cap} fa fa-graduation-cap`} />
-            <h1 className={styles.title}><FormattedMessage id="siteTitle" /></h1>
+      <div className={"row " + styles.formContainer}>
+        <div className="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+          <div className="card card-signup">
+            <Validation.components.Form method="POST" ref={c => { this.form = c; }} onSubmit={this.addUser}>
+              <div className="header header-info text-center">
+                <div className={styles.title}><i className={styles.cap + ' fa fa-graduation-cap'} />&nbsp;&nbsp;<FormattedMessage id="siteTitle" /></div>
+              </div>
+              <p className={"text-divider " + styles.textDivider}>Create a new account</p><br/><br/>
 
-          <div className={styles.formLabel + ' row'}>
-          <Validation.components.Form method="POST" ref={c => { this.form = c; }} onSubmit={this.addUser} className="col-lg-4 push-lg-4 col-md-6 push-md-3 col-xs-8 push-xs-2">
+              <div className={"content " + styles.center}>
 
-                <label className="input-labels"> Full Name* </label>
-                <Validation.components.Input
-                  onFocus={this.removeApiError}
-                  className="form-control"
-                  name="nickname"
-                  type="text"
-                  value={this.state.nickname}
-                  onChange={this.updateState}
-                  errorClassName="is-invalid-input"
-                  placeholder={"Full Name"}
-                  validations={['required', 'validName']}
-                /><br />
+                  <CustomValidatorInput
+                      onFocus={this.removeApiError}
+                      className="form-control"
+                      name="nickname"
+                      type="text"
+                      icon="face"
+                      value={this.state.nickname}
+                      onChange={this.updateState}
+                      errorClassName="has-error"
+                      placeholder={"Full Name..."}
+                      validations={['required', 'validName']}
+                    />
 
-              <label className="input-labels"> Student ID* </label>
-                <Validation.components.Input
-                  onFocus={this.removeApiError}
-                  className="form-control"
-                  name="studentId"
-                  type="text"
-                  value={this.state.studentId}
-                  onChange={this.updateState}
-                  errorClassName="is-invalid-input"
-                  placeholder={"Student ID"}
-                  validations={['required', 'studentId']}
-                /><br />
+                  <CustomValidatorInput
+                      onFocus={this.removeApiError}
+                      className="form-control"
+                      name="studentId"
+                      type="text"
+                      icon="recent_actors"
+                      value={this.state.studentId}
+                      onChange={this.updateState}
+                      errorClassName="has-error"
+                      placeholder={"Student ID..."}
+                      validations={['required', 'studentId']}
+                    />
 
-              <label className="input-labels"> Email*</label>
-                <Validation.components.Input
-                  onFocus={this.removeApiError}
-                  className="form-control"
-                  name="email"
-                  type="text"
-                  value={this.state.email}
-                  onChange={this.updateState}
-                  errorClassName="is-invalid-input"
-                  placeholder={"Email"}
-                  validations={['required', 'email']}
-                /><br />
+                  <CustomValidatorInput
+                      onFocus={this.removeApiError}
+                      className="form-control"
+                      name="email"
+                      type="email"
+                      icon="email"
+                      value={this.state.email}
+                      onChange={this.updateState}
+                      errorClassName="is-invalid-input"
+                      placeholder={"Email"}
+                      validations={['required', 'email']}
+                    />
 
-              <label className="input-labels"> Password* </label>
-                <Validation.components.Input
-                  onFocus={this.removeApiError}
-                  className="form-control"
-                  name="password"
-                  type="password"
-                  value={this.state.password}
-                  onChange={this.updateState}
-                  errorClassName="is-invalid-input"
-                  placeholder={"Password"}
-                  validations={['required', 'password']}
-                /><br />
+                  <CustomValidatorInput
+                      onFocus={this.removeApiError}
+                      className="form-control"
+                      name="password"
+                      type="password"
+                      icon="lock"
+                      value={this.state.password}
+                      onChange={this.updateState}
+                      errorClassName="is-invalid-input"
+                      placeholder={"Password..."}
+                      validations={['required', 'password']}
+                    />   
 
-              <label className="input-labels"> Confirm Password*</label>
-                <Validation.components.Input
-                  onSelect={this.removeApiError}
-                  className="form-control"
-                  name="passwordConfirm"
-                  type="password"
-                  value={this.state.passwordConfirm}
-                  onChange={this.updateState}
-                  errorClassName="is-invalid-input"
-                  placeholder={"Confirm password"}
-                  validations={['required', 'passwordMatch']}
-                /><br />
+                  <CustomValidatorInput
+                      onSelect={this.removeApiError}
+                      className="form-control"
+                      name="passwordConfirm"
+                      type="password"
+                      icon="lock_outline"
+                      value={this.state.passwordConfirm}
+                      onChange={this.updateState}
+                      errorClassName="is-invalid-input"
+                      placeholder={"Confirm password..."}
+                      validations={['required', 'passwordMatch']}
+                    />               
 
-               <Validation.components.Button className={`${styles.btnOutlineSecondary} btn btn-outline-secondary  ${styles.signInButton}`}>
-               Register and Start Studying!
-               </Validation.components.Button><br /><br />
-                    <Link className={styles.mainText} to="/">Already have an account? Sign in Here</Link>
-
-              </Validation.components.Form>
+                   <Validation.components.Button className='btn btn-simple btn-primary btn-lg'>
+                      Register and join your peers
+                   </Validation.components.Button>
+                   <p className={styles.textDivider + " " + styles.noTopDivider + " text-divider"}>Already have an account?</p>
+                <Link className={styles.mainText + " btn btn-simple btn-primary btn-lg"} to="/">Sign in Here</Link>
+              </div>
+            </Validation.components.Form>
           </div>
+        </div>
       </div>
     );
   }

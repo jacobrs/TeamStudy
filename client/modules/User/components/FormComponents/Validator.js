@@ -105,3 +105,5 @@ Object.assign(Validation.rules, {
   },
 
 });
+
+export default Validation.rules;

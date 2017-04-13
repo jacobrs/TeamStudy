@@ -1,19 +1,30 @@
 #message-area {
   background-color: white;
   overflow-y:scroll;
-  height: calc(100% - 40px - 4em);
+  height: calc(100% - 100px - 6em);
 	z-index: 10;
 	padding:1em;
+	line-height: 2em;
+	width:100%;
 	font-size: 11pt;
 }
 
 #message-input {
-	height: 40px;
+	height: 100px;
+	margin:0;
+	background-color:#ffffff;
+}
+
+#message-input textarea{
+	margin:1em;
+	margin-right:2em;
+	width:90%;
 }
 
 #message-wrapper {
   height: 100%;
   padding:0px;
+  background-color:#ffffff;
 }
 
 #message-send:hover{
@@ -21,8 +32,8 @@
 }
 
 #chat-menu{
-	background:#446CB3;
-	height:4em;
+	background:#29b6f6;
+	height:6em;
 	width:100%;
 	z-index: -5;
   border-top:1px #FFF solid;
@@ -37,6 +48,7 @@
 
 #add-link{
 	float:right;
+	font-size:10pt;
 	padding:1.2em;
 }
 
@@ -57,4 +69,20 @@
 
 [type=button]:hover{
 	cursor: pointer;
+}
+
+#modal-header{
+	font-size:10pt;
+}
+
+#modal-header h5{
+	float:left;
+}
+
+#modal-header button span{
+	font-size:16pt;
+}
+
+#modal-body{
+	padding-top:0;
 }
