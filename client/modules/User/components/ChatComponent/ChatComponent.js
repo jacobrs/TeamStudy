@@ -59,7 +59,7 @@ export class ChatComponent extends Component {
     var div = document.getElementById(id);
     $('#' + id).animate({
       scrollTop: div.scrollHeight - div.clientHeight
-    }, 600);
+    }, 100);
   }
 
   componentDidUpdate(prevProps, prevState) {
