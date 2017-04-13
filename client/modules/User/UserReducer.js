@@ -85,7 +85,7 @@ const UserReducer = (state = initialState, action) => {
           userIndex = usersInChat.length - 1;
         }
 
-        messages.push(<div key={i} style={{ color: getColorFromUserIndex(userIndex) }}>{`${action.messages[i].author}: ${action.messages[i].messageContent}`}</div>);
+        messages.push(<div key={i} style={{ color: getColorFromUserIndex(userIndex) }}><strong>{`${action.messages[i].author}`}:</strong> {`${action.messages[i].messageContent}`}</div>);
       }
 
       return {
@@ -103,7 +103,7 @@ const UserReducer = (state = initialState, action) => {
         userIndex = state.chat.users.length - 1;
       }
 
-      state.chat.messages.push(<div key={state.chat.messages.length + 1} style={{ color: getColorFromUserIndex(userIndex) }}>{`${action.message.user}: ${action.message.message}`}</div>);
+      state.chat.messages.push(<div key={state.chat.messages.length + 1} style={{ color: getColorFromUserIndex(userIndex) }}><strong>{`${action.message.user}`}:</strong> {`${action.message.message}`}</div>);
       
       return {
         user: state.user,
